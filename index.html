@@ -19,6 +19,7 @@
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+    <!-- AOS CSS (Animation Library) -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <style>
@@ -34,18 +35,19 @@
             --bg-color-secondary: #1f2937;
             --bg-color-tertiary: #374151;
             --border-color: #4b5563;
-            --gradient-start: #a7b2f5;
-            --gradient-end: #c8a8e4;
+            --gradient-start: #a7b2f5; /* Indigo Light */
+            --gradient-end: #c8a8e4;   /* Violet Light */
             --gradient-start-hover: #b8c1f8;
             --gradient-end-hover: #d8bcf0;
-            --primary-accent: #818cf8;
-            --primary-accent-darker: #6366f1;
-            --primary-accent-darkest: #4f46e5;
-            --link-glow-bright: rgba(199, 210, 254, 0.7);
-            --link-glow-active: #c8a8e4;
+            --primary-accent: #818cf8; /* Indigo 400 */
+            --primary-accent-darker: #6366f1; /* Indigo 500 */
+            --primary-accent-darkest: #4f46e5; /* Indigo 600 */
+            --link-glow-bright: rgba(199, 210, 254, 0.7); /* Indigo 200 Light */
+            --link-glow-active: #c8a8e4; /* Violet Light */
             --scroll-padding-top: calc(var(--navbar-height-initial) + 1rem);
         }
 
+        /* --- Base & Accessibility Styles --- */
         html {
             scroll-padding-top: var(--scroll-padding-top);
             scroll-behavior: smooth;
@@ -70,7 +72,7 @@
             --gradient-end: #ffffff;
             --gradient-start-hover: #ffffff;
             --gradient-end-hover: #ffffff;
-            --primary-accent: #00ffff;
+            --primary-accent: #00ffff; /* Cyan for high contrast */
             --primary-accent-darker: #00e5e5;
             --primary-accent-darkest: #00cccc;
             --link-glow-bright: none;
@@ -146,15 +148,14 @@
         html.high-contrast .fa, html.high-contrast .fas, html.high-contrast .fab {
              color: var(--primary-accent) !important;
         }
-         html.high-contrast #hero-video-container { display: none; }
-
+         html.high-contrast #hero-video-container { display: none; } /* Hide video in high contrast */
 
         html.grayscale { filter: grayscale(100%); }
 
+        /* --- Body & Layout --- */
         body {
             font-family: 'Exo 2', sans-serif;
-            /* Keep original background image as requested */
-            background-image: url('https://images.unsplash.com/photo-1531306728370-e2ebd9d7bb99?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-image: url('https://images.unsplash.com/photo-1531306728370-e2ebd9d7bb99?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80'); /* Keep requested body background */
             background-size: cover;
             background-position: center center;
             background-repeat: no-repeat;
@@ -162,13 +163,14 @@
             background-color: var(--bg-color-primary);
             background-blend-mode: multiply;
             color: var(--text-color-base);
-            overflow-x: hidden;
+            overflow-x: hidden; /* Prevent horizontal scroll often caused by animations */
         }
-
         body.modal-open { overflow: hidden; }
         section { padding: 5rem 1rem; }
         @media (min-width: 768px) { section { padding: 6rem 2rem; } }
         .container { max-width: 1400px; margin-left: auto; margin-right: auto; width: 100%; }
+
+        /* --- Typography & Text Styles --- */
         h1, h2, h3, h4, h5, h6, .font-orbitron { font-family: 'Orbitron', sans-serif; }
         .gradient-text {
             background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
@@ -176,8 +178,9 @@
             color: transparent; -webkit-text-fill-color: transparent;
         }
         .leading-relaxed { line-height: 1.625; }
-        .text-red-400 { color: #f87171; }
+        .text-red-400 { color: #f87171; } /* For form validation errors */
 
+        /* --- Navbar Styles --- */
         #navbar {
             position: fixed; top: 0; left: 0; right: 0; z-index: 50;
             background-color: transparent; color: white;
@@ -191,7 +194,7 @@
             margin-left: auto; margin-right: auto;
             border-radius: 0.75rem;
             height: var(--navbar-height-scrolled);
-            background-color: rgba(31, 41, 55, 0.9);
+            background-color: rgba(31, 41, 55, 0.9); /* Darker gray with opacity */
             backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
             box-shadow: 0 6px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 8px -4px rgba(0, 0, 0, 0.15);
         }
@@ -224,102 +227,138 @@
         }
          #nav-links-mobile a.nav-link {
              color: var(--text-color-base); padding: 0.75rem 1rem;
+             transition: background-color 0.2s ease, color 0.2s ease; /* Add transition */
              &::after { display: none; }
          }
          #nav-links-mobile a.nav-link:hover { background-color: rgba(55, 65, 81, 0.5); }
-         #nav-links-mobile a.nav-link.active { color: var(--primary-accent); font-weight: 700; }
+         #nav-links-mobile a.nav-link.active { color: var(--primary-accent); font-weight: 700; background-color: rgba(99, 102, 241, 0.1); }
 
-        /* Keep home background image section as per request */
+
+        /* --- Hero Section (#home) --- */
         #home {
-            background-color: transparent !important;
+            /* Keeping specific background as requested in original */
+            background-color: transparent !important; /* Ensure override */
             background-image: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
             background-size: cover;
             background-position: center center;
             background-repeat: no-repeat;
             background-blend-mode: overlay;
+            min-height: 100vh; /* Ensure it takes full viewport height */
+            display: flex; /* Use flex for centering */
+            align-items: center; /* Center vertically */
+            justify-content: center; /* Center horizontally */
+            text-align: center;
+            padding: 0; /* Remove default section padding */
+            position: relative; /* For overlay and video positioning */
+            overflow: hidden; /* Prevent content spill */
         }
         #hero-video-container { position: absolute; inset: 0; width: 100%; height: 100%; overflow: hidden; z-index: -1; }
-        #hero-video { min-width: 100%; min-height: 100%; width: auto; height: auto; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); object-fit: cover; opacity: 0.7; }
+        #hero-video { min-width: 100%; min-height: 100%; width: auto; height: auto; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); object-fit: cover; opacity: 0.6; /* Slightly reduced opacity */ }
         #hero-overlay {
             position: absolute; inset: 0; width: 100%; height: 100%;
-            background: linear-gradient(rgba(17, 24, 39, 0.75), rgba(49, 46, 129, 0.85));
+            /* Slightly darker gradient for better text contrast */
+            background: linear-gradient(rgba(17, 24, 39, 0.85), rgba(49, 46, 129, 0.9));
             z-index: 0;
         }
         #hero-content { position: relative; z-index: 1; }
 
+        /* --- Timeline (About Section) --- */
+        .timeline-container { position: relative; padding-left: 1rem; /* Base padding */ }
         .timeline-container::before {
-            content: ''; position: absolute; left: calc(1rem + 0.375rem);
+            content: ''; position: absolute; left: calc(1rem + 0.375rem - 1px); /* Adjusted position based on marker */
             top: 0.25rem; bottom: 0; width: 2px;
             background-color: var(--primary-accent); opacity: 0.5; z-index: 0;
         }
         .timeline-item { position: relative; padding-left: 2.5rem; z-index: 1; }
         .timeline-marker {
-            position: absolute; left: calc(1rem - (0.75rem / 2) + 0.375rem);
-            top: 0.25rem; width: 0.75rem; height: 0.75rem;
+            position: absolute; left: calc(1rem - (0.75rem / 2) + 0.375rem); /* Centered on the line */
+            top: 0.25rem; /* Align with text top */
+            width: 0.75rem; height: 0.75rem;
             background-color: var(--primary-accent-darker); border-radius: 50%;
             border: 2px solid var(--bg-color-secondary); z-index: 2;
+            transition: transform 0.3s ease; /* Add subtle hover effect */
         }
-        .timeline-item p:first-of-type { color: var(--primary-accent); font-weight: 600; }
-        .timeline-item p { color: var(--text-color-muted); }
+        .timeline-item:hover .timeline-marker { transform: scale(1.3); }
+        .timeline-item p:first-of-type { color: var(--primary-accent); font-weight: 600; margin-bottom: 0.25rem; }
+        .timeline-item p { color: var(--text-color-muted); font-size: 0.95em; }
 
+        /* --- Buttons --- */
         .btn { display: inline-block; font-weight: 600; padding: 0.75rem 1.5rem; border-radius: 0.5rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); transition: all 0.3s ease; text-align: center; cursor: pointer; border: 1px solid transparent; text-decoration: none; }
         .btn-sm { padding: 0.5rem 1rem; font-size: 0.875em; }
         .btn-lg { padding: 0.875rem 1.75rem; font-size: 1.125em; }
-        .btn-gradient { background-image: linear-gradient(to right, var(--primary-accent-darker), var(--primary-accent-darkest)); color: white; }
-        .btn-gradient:hover { background-image: linear-gradient(to right, var(--primary-accent-darkest), var(--primary-accent-darker)); filter: brightness(1.1); transform: translateY(-3px); box-shadow: 0 8px 15px -3px rgba(99, 102, 241, 0.35), 0 4px 8px -2px rgba(139, 92, 246, 0.25); }
+        .btn-gradient { background-image: linear-gradient(to right, var(--primary-accent-darker), var(--primary-accent-darkest)); color: white; text-shadow: 1px 1px 2px rgba(0,0,0,0.2); }
+        .btn-gradient:hover { background-image: linear-gradient(to right, var(--primary-accent-darkest), var(--primary-accent-darker)); filter: brightness(1.1); transform: translateY(-3px) scale(1.03); box-shadow: 0 8px 15px -3px rgba(99, 102, 241, 0.35), 0 4px 8px -2px rgba(139, 92, 246, 0.25); }
         .btn-outline { border-color: var(--primary-accent); color: var(--primary-accent); background-color: transparent; }
-        .btn-outline:hover { background-color: rgba(129, 140, 248, 0.15); color: var(--text-color-base); border-color: var(--primary-accent-darker); transform: translateY(-3px); box-shadow: 0 8px 15px -3px rgba(129, 140, 248, 0.2), 0 4px 8px -2px rgba(129, 140, 248, 0.15); }
+        .btn-outline:hover { background-color: rgba(129, 140, 248, 0.15); color: var(--text-color-base); border-color: var(--primary-accent-darker); transform: translateY(-3px) scale(1.03); box-shadow: 0 8px 15px -3px rgba(129, 140, 248, 0.2), 0 4px 8px -2px rgba(129, 140, 248, 0.15); }
 
+        /* --- Cards (Interactive & Project Showcase) --- */
         .interactive-card, .project-showcase-card {
             border: 1px solid transparent;
             transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease, background-color 0.35s ease;
             overflow: hidden; background-color: var(--bg-color-secondary);
-            border-radius: 0.5rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+            border-radius: 0.75rem; /* Slightly rounder */
+            box-shadow: 0 4px 10px -2px rgba(0, 0, 0, 0.1), 0 2px 6px -2px rgba(0, 0, 0, 0.08);
             color: var(--text-color-muted);
             display: flex; flex-direction: column;
+            height: 100%; /* Ensure cards in a grid take equal height */
         }
-        .interactive-card h4, .project-showcase-card h5 { color: var(--text-color-base); }
+        .interactive-card h4, .project-showcase-card h5 { color: var(--text-color-base); transition: color 0.3s ease; }
         .interactive-card:hover, .project-showcase-card:hover {
-            transform: translateY(-6px) scale(1.02);
+            transform: translateY(-8px) scale(1.03); /* Enhanced lift and scale */
             border-color: var(--primary-accent);
-            box-shadow: 0 15px 25px -5px rgba(129, 140, 248, 0.2), 0 10px 15px -6px rgba(129, 140, 248, 0.15);
+            box-shadow: 0 18px 30px -8px rgba(129, 140, 248, 0.25), 0 12px 18px -8px rgba(129, 140, 248, 0.2);
             background-color: var(--bg-color-tertiary);
         }
+        .interactive-card:hover h4, .project-showcase-card:hover h5 { color: var(--primary-accent); }
         .interactive-card img, .project-showcase-card img {
             transition: transform 0.4s ease, opacity 0.4s ease;
             width: 100%; height: auto; object-fit: cover;
+            aspect-ratio: 16 / 10; /* Control image aspect ratio */
         }
         .interactive-card:hover img, .project-showcase-card:hover img {
-            transform: scale(1.06); opacity: 0.95;
+            transform: scale(1.08); opacity: 0.9;
         }
-        .project-showcase-card { padding: 1rem; }
-        .project-showcase-card h5 { color: var(--primary-accent); }
-        .project-showcase-card p { color: var(--text-color-darker); }
-        .interactive-card p { color: var(--text-color-muted); }
+        .interactive-card .card-content, .project-showcase-card .card-content {
+             padding: 1.5rem;
+             flex-grow: 1; /* Allow content to fill space */
+             display: flex; flex-direction: column;
+        }
+        .interactive-card p, .project-showcase-card p {
+            color: var(--text-color-muted);
+            flex-grow: 1; /* Push actions (if any) to bottom */
+            margin-bottom: 1rem; /* Space before potential button */
+        }
+        .project-showcase-card h5 { color: var(--primary-accent); margin-bottom: 0.5rem; }
+        .project-showcase-card p { color: var(--text-color-darker); font-size: 0.9em; }
+        .interactive-card i.fa-3x { margin-bottom: 1rem; } /* Space below icons in icon cards */
 
-        .form-input { display: block; width: 100%; background-color: var(--bg-color-tertiary); border: 1px solid var(--border-color); border-radius: 0.375rem; box-shadow: inset 0 1px 2px 0 rgba(0, 0, 0, 0.05); padding: 0.625rem 0.75rem; color: var(--text-color-base); outline: none; transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out; color-scheme: dark; }
+
+        /* --- Forms --- */
+        .form-input { display: block; width: 100%; background-color: var(--bg-color-tertiary); border: 1px solid var(--border-color); border-radius: 0.375rem; box-shadow: inset 0 1px 2px 0 rgba(0, 0, 0, 0.05); padding: 0.625rem 0.75rem; color: var(--text-color-base); outline: none; transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out, background-color 0.2s ease; color-scheme: dark; }
         .form-input::placeholder { color: var(--text-color-darker); opacity: 0.8; }
-        .form-input:focus { border-color: var(--primary-accent-darker); box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3); }
+        .form-input:focus { border-color: var(--primary-accent-darker); background-color: var(--bg-color-secondary); box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3); }
         .form-input:required:invalid { border-color: #f87171; }
         .form-input:required:focus:invalid { box-shadow: 0 0 0 3px rgba(248, 113, 129, 0.3); }
         .form-input[type="file"] { padding: 0.3rem 0.75rem; cursor: pointer; }
         .form-input[type="file"]::-webkit-file-upload-button, .form-input[type="file"]::-moz-file-upload-button { margin-right: 1rem; padding: 0.5rem 1rem; border-radius: 9999px; border-width: 0px; font-size: 0.875em; font-weight: 600; background-color: #e0e7ff; color: #4338ca; cursor: pointer; transition: background-color 0.2s ease; }
         .form-input[type="file"]:hover::-webkit-file-upload-button, .form-input[type="file"]:hover::-moz-file-upload-button { background-color: #c7d2fe; }
         select.form-input { appearance: none; background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%239ca3af' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e"); background-position: right 0.5rem center; background-repeat: no-repeat; background-size: 1.5em 1.5em; padding-right: 2.5rem; }
-        label { cursor: pointer; display: inline-block; margin-bottom: 0.25rem; color: var(--text-color-muted); }
+        label { cursor: pointer; display: inline-block; margin-bottom: 0.35rem; font-weight: 500; color: var(--text-color-muted); font-size: 0.95em; }
         label span.text-red-400 { margin-left: 0.125rem; }
-        fieldset { border-width: 1px; padding: 1rem; border-radius: 0.375rem; border-color: var(--border-color); margin-bottom: 1.5rem; }
-        legend { font-size: 1.25rem; font-family: 'Orbitron', sans-serif; font-weight: 600; margin-bottom: 1rem; padding-left: 0.5rem; padding-right: 0.5rem; color: var(--text-color-base); }
-        #form-feedback, #application-feedback { min-height: 1.5em; transition: color 0.3s ease; }
+        fieldset { border-width: 1px; padding: 1.5rem; border-radius: 0.5rem; border-color: var(--border-color); margin-bottom: 1.75rem; background-color: rgba(0,0,0,0.1); /* Subtle background */ }
+        legend { font-size: 1.25rem; font-family: 'Orbitron', sans-serif; font-weight: 600; margin-bottom: 1.25rem; padding: 0 0.75rem; color: var(--text-color-base); }
+        #form-feedback, #application-feedback { min-height: 1.5em; transition: color 0.3s ease, opacity 0.3s ease; opacity: 0; font-weight: 500; }
+        #form-feedback.visible, #application-feedback.visible { opacity: 1; }
 
-        #scroll-to-top { position: fixed; bottom: 1.25rem; right: 1.25rem; background-image: linear-gradient(to right, var(--primary-accent-darker), var(--primary-accent-darkest)); color: white; padding: 0.75rem; border-radius: 9999px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease, background-image 0.3s ease; opacity: 0; visibility: hidden; z-index: 60; cursor: pointer; border: none; }
+        /* --- Scroll To Top Button --- */
+        #scroll-to-top { position: fixed; bottom: 1.25rem; right: 1.25rem; background-image: linear-gradient(to right, var(--primary-accent-darker), var(--primary-accent-darkest)); color: white; padding: 0.75rem; border-radius: 9999px; box-shadow: 0 4px 10px -2px rgba(0, 0, 0, 0.2); transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease, background-image 0.3s ease; opacity: 0; visibility: hidden; z-index: 60; cursor: pointer; border: none; }
         #scroll-to-top.visible { opacity: 1; visibility: visible; }
         #scroll-to-top:hover { background-image: linear-gradient(to right, var(--primary-accent-darkest), var(--primary-accent-darker)); transform: scale(1.1); }
 
+        /* --- Modal (Application Form) --- */
         #modal-overlay {
-            position: fixed; inset: 0; background-color: rgba(17, 24, 39, 0.8);
-            backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
+            position: fixed; inset: 0; background-color: rgba(17, 24, 39, 0.85); /* Slightly darker overlay */
+            backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
             display: flex; align-items: center; justify-content: center;
             z-index: 100; opacity: 0; visibility: hidden;
             transition: opacity 0.3s ease-out, visibility 0s linear 0.3s; padding: 1rem;
@@ -327,38 +366,54 @@
         #modal-overlay.modal-active { opacity: 1; visibility: visible; transition: opacity 0.3s ease-out, visibility 0s linear 0s; }
         #modal-overlay>div#application-form-container {
             background-color: var(--bg-color-secondary); border-radius: 0.75rem;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            padding: 2rem; max-width: 56rem; width: 100%; max-height: 90vh; overflow-y: auto;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.3); /* Softer shadow */
+            padding: 2rem 2.5rem; max-width: 56rem; width: 100%; max-height: 90vh; overflow-y: auto;
             position: relative; transform: scale(0.95) translateY(-20px);
-            transition: transform 0.3s ease-out, background-color 0.3s ease, border-color 0.3s ease;
+            transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), background-color 0.3s ease, border-color 0.3s ease; /* Smooth cubic transition */
         }
         #modal-overlay.modal-active>div#application-form-container { transform: scale(1) translateY(0); }
-        #modal-close-button { position: absolute; top: 0.75rem; right: 0.75rem; background-color: rgba(55, 65, 81, 0.6); color: var(--text-color-muted); border-radius: 9999px; width: 2rem; height: 2rem; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background-color 0.2s ease, color 0.2s ease; border: none; z-index: 110; }
-        #modal-close-button:hover { background-color: rgba(75, 85, 99, 0.8); color: var(--text-color-base); }
+        #modal-close-button { position: absolute; top: 0.75rem; right: 0.75rem; background-color: rgba(55, 65, 81, 0.6); color: var(--text-color-muted); border-radius: 9999px; width: 2.25rem; height: 2.25rem; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease; border: none; z-index: 110; }
+        #modal-close-button:hover { background-color: rgba(75, 85, 99, 0.8); color: var(--text-color-base); transform: rotate(90deg); }
         .hidden { display: none; }
 
+        /* --- Section Specific Styles --- */
         #about .vision-image {
-            max-width: 250px; height: auto; min-height: 180px;
+            max-width: 300px; /* Slightly larger */
+            height: auto; min-height: 200px;
             margin: 0 auto 1.5rem auto; border-radius: 0.75rem;
-            box-shadow: 0 8px 30px -8px rgba(167, 178, 245, 0.3);
-            opacity: 0.9; background-color: var(--bg-color-tertiary);
-            object-fit: cover;
+            box-shadow: 0 10px 35px -10px rgba(167, 178, 245, 0.4); /* Enhanced shadow */
+            opacity: 0.95; background-color: var(--bg-color-tertiary);
+            object-fit: cover; border: 2px solid rgba(129, 140, 248, 0.3); /* Subtle border */
         }
-         #about, #technology, #student-life, #contact>div.max-w-4xl {
-            background-color: rgba(31, 41, 55, 0.85);
-            backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px);
+         /* Apply subtle background overlay to sections for better readability */
+         #about, #curriculum, #technology, #admissions, #student-life, #contact > div.max-w-4xl, footer {
+            background-color: rgba(17, 24, 39, 0.92); /* Darker overlay */
+            backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
+            position: relative; /* Needed for potential pseudo-elements if added later */
+            z-index: 1; /* Ensure content is above body background */
+            border-radius: 1rem; /* Add slight rounding to section backgrounds */
+            margin: 0 1rem 2rem 1rem; /* Add some spacing between sections */
+            padding: 5rem 2rem; /* Adjust padding if margin is added */
+            box-shadow: 0 0 40px rgba(0,0,0,0.3); /* Soft shadow around sections */
          }
-         #curriculum, #admissions, #contact, footer {
-            background-color: rgba(17, 24, 39, 0.9);
-            backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px);
+         @media (min-width: 768px) {
+             #about, #curriculum, #technology, #admissions, #student-life, #contact > div.max-w-4xl, footer {
+                 margin: 0 2rem 3rem 2rem;
+                 padding: 6rem 3rem;
+             }
          }
+         /* Reset margin for footer if needed */
+         footer { margin-bottom: 0; border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+
          #application-form-container fieldset:last-of-type { margin-bottom: 0; }
 
-        .footer-link { color: var(--text-color-darker); transition: color 0.3s ease; text-decoration: none; }
-        .footer-link:hover { color: var(--text-color-base); }
-        footer a[aria-label] i { color: var(--text-color-darker); transition: color 0.3s ease;}
-        footer a[aria-label]:hover i { color: var(--text-color-base); }
+        /* --- Footer --- */
+        .footer-link { color: var(--text-color-darker); transition: color 0.3s ease, text-shadow 0.3s ease; text-decoration: none; }
+        .footer-link:hover { color: var(--text-color-base); text-shadow: 0 0 8px var(--link-glow-bright); }
+        footer a[aria-label] i { color: var(--text-color-darker); transition: color 0.3s ease, transform 0.3s ease; }
+        footer a[aria-label]:hover i { color: var(--text-color-base); transform: scale(1.2); }
 
+        /* --- Accessibility Widget --- */
         #accessibility-widget {
             position: fixed; bottom: 1rem; left: 1rem; z-index: 70;
             display: flex; flex-direction: column; align-items: flex-start;
@@ -370,8 +425,9 @@
             cursor: pointer; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
             transition: background-color 0.3s ease, transform 0.3s ease;
         }
-        #accessibility-toggle:hover { background-color: var(--primary-accent-darkest); transform: scale(1.1); }
-        #accessibility-toggle i { font-size: 1.4rem; }
+        #accessibility-toggle:hover { background-color: var(--primary-accent-darkest); transform: scale(1.1) rotate(15deg); }
+        #accessibility-toggle i { font-size: 1.4rem; transition: transform 0.3s ease; }
+        #accessibility-toggle[aria-expanded="true"] i { transform: rotate(360deg); } /* Rotate icon when open */
         html.high-contrast #accessibility-toggle {
              background-color: var(--primary-accent) !important; border: 1px solid var(--text-color-base) !important;
              color: var(--bg-color-primary) !important; box-shadow: none !important;
@@ -384,18 +440,18 @@
             background-color: var(--bg-color-secondary); color: var(--text-color-base);
             border: 1px solid var(--border-color); border-radius: 8px;
             padding: 1rem; margin-bottom: 0.5rem;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); width: 200px;
-            visibility: hidden; opacity: 0; transform: translateY(10px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25); width: 220px; /* Slightly wider */
+            visibility: hidden; opacity: 0; transform: translateY(10px) scale(0.95);
             transition: visibility 0s linear 0.3s, opacity 0.3s ease, transform 0.3s ease;
              &.visible {
-                 visibility: visible; opacity: 1; transform: translateY(0);
+                 visibility: visible; opacity: 1; transform: translateY(0) scale(1);
                  transition: visibility 0s linear 0s, opacity 0.3s ease, transform 0.3s ease;
              }
         }
         #accessibility-panel h4 {
             font-family: 'Orbitron', sans-serif; font-size: 1rem; margin-bottom: 1rem;
             text-align: center; color: var(--primary-accent);
-            border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-color); padding-bottom: 0.75rem;
         }
         html.high-contrast #accessibility-panel h4 { color: var(--primary-accent) !important; border-bottom-color: var(--border-color) !important; }
         .accessibility-options { display: flex; flex-direction: column; gap: 0.75rem; }
@@ -403,15 +459,16 @@
         .accessibility-item span { font-size: 0.9em; color: var(--text-color-muted); }
         html.high-contrast .accessibility-item span { color: var(--text-color-muted) !important; }
         .accessibility-options button {
-            font-size: 0.85em; padding: 0.3rem 0.6rem; border-radius: 4px;
+            font-size: 0.85em; padding: 0.4rem 0.7rem; border-radius: 4px;
             cursor: pointer; border: 1px solid var(--border-color);
             background-color: var(--bg-color-tertiary); color: var(--text-color-muted);
-            transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+            transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
         }
         .accessibility-options button:hover { background-color: var(--primary-accent); color: white; border-color: var(--primary-accent); }
-        .font-size-controls button { width: 30px; text-align: center; margin-left: 5px; }
+        .accessibility-options button:active { transform: scale(0.95); } /* Add active state */
+        .font-size-controls button { width: 32px; text-align: center; margin-left: 5px; }
         #reset-accessibility {
-             font-size: 0.8em; width: 100%; margin-top: 1rem; padding: 0.4rem;
+             font-size: 0.8em; width: 100%; margin-top: 1rem; padding: 0.5rem;
              background-color: transparent; border-color: var(--primary-accent);
              color: var(--primary-accent);
          }
@@ -427,16 +484,32 @@
               border-color: var(--primary-accent) !important;
          }
 
+        /* --- Utility --- */
         .h-40 { height: 10rem; }
         .h-48 { height: 12rem; }
         .object-cover { object-fit: cover; }
 
+        /* --- Responsive Adjustments --- */
         @media (max-width: 767px) {
             #navbar.navbar-scrolled { max-width: calc(100% - 1rem); margin-top: 0.5rem; }
+            section, #about, #curriculum, #technology, #admissions, #student-life, #contact > div.max-w-4xl, footer {
+                 margin: 0 0.5rem 1.5rem 0.5rem;
+                 padding: 4rem 1rem;
+                 border-radius: 0.5rem;
+            }
+            h1 { font-size: 3rem; } /* Adjust hero heading */
+            h2 { font-size: 2.25rem; } /* Adjust section headings */
+             #modal-overlay>div#application-form-container { padding: 1.5rem 1rem; }
+             .timeline-container { padding-left: 0.5rem; }
+             .timeline-item { padding-left: 2rem; }
+             .timeline-marker { left: calc(0.5rem - (0.75rem / 2) + 0.375rem); }
         }
         @media (max-width: 640px) {
-            #modal-overlay>div#application-form-container { padding: 1.5rem 1rem; }
+             #hero-content h1 { font-size: 2.5rem; }
+             #hero-content p { font-size: 1.125rem; }
+             .btn-lg { padding: 0.75rem 1.5rem; font-size: 1em; }
         }
+
     </style>
 </head>
 
@@ -445,7 +518,7 @@
     <nav id="navbar" role="navigation" aria-label="Main Navigation">
         <div class="container mx-auto flex justify-between items-center h-full px-4">
             <!-- Brand name -->
-            <a href="#home" class="text-2xl font-orbitron font-bold gradient-text">FA 2050</a>
+            <a href="#home" class="text-2xl font-orbitron font-bold gradient-text transition-transform duration-300 ease-in-out hover:scale-105">FA 2050</a>
 
             <!-- Standard, professional navigation links -->
             <div id="nav-links-desktop" class="hidden md:flex md:items-center md:space-x-6">
@@ -461,7 +534,7 @@
 
             <div class="md:hidden flex items-center">
                 <button class="apply-now-trigger btn btn-outline btn-sm mr-2">Apply</button>
-                <button id="mobile-menu-button" aria-label="Toggle Menu" aria-expanded="false" aria-controls="nav-links-mobile" class="text-white focus:outline-none p-1 inline-flex items-center">
+                <button id="mobile-menu-button" aria-label="Toggle Menu" aria-expanded="false" aria-controls="nav-links-mobile" class="text-white focus:outline-none p-1 inline-flex items-center rounded hover:bg-gray-700 transition-colors duration-200">
                     <svg id="menu-icon-open" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7" /></svg>
                     <svg id="menu-icon-close" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
                 </button>
@@ -470,7 +543,8 @@
 
         <!-- Standard mobile navigation links -->
         <div id="nav-links-mobile" class="hidden md:hidden bg-gray-800 absolute top-full left-0 w-full shadow-lg border-t border-gray-700">
-            <div class="flex flex-col items-center py-2">
+            <!-- Added AOS for subtle slide down effect -->
+            <div class="flex flex-col items-center py-2" data-aos="fade-down" data-aos-duration="300">
                 <a href="#home" class="nav-link w-full text-center">Home</a>
                 <a href="#about" class="nav-link w-full text-center">About Us</a>
                 <a href="#curriculum" class="nav-link w-full text-center">Curriculum</a>
@@ -483,9 +557,10 @@
     </nav>
 
     <!-- Section: Home -->
-    <section id="home" class="relative h-screen flex items-center justify-center text-center text-white p-0 overflow-hidden">
+    <section id="home">
         <div id="hero-video-container" aria-hidden="true">
             <video autoplay muted loop playsinline id="hero-video" preload="auto">
+                <!-- Consider a lighter video file if possible -->
                 <source src="https://assets.mixkit.co/videos/preview/mixkit-futuristic-computer-data-processing-screen-4700-large.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
@@ -493,11 +568,10 @@
         <div id="hero-overlay" aria-hidden="true"></div>
         <div id="hero-content" class="container mx-auto px-4">
             <h1 class="text-5xl md:text-7xl font-orbitron font-extrabold mb-4 gradient-text" data-aos="fade-down" data-aos-duration="1000">Future Academy 2050</h1>
-            <!-- More professional tagline -->
             <p class="text-xl md:text-3xl font-light mb-10 max-w-3xl mx-auto leading-relaxed" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">Educating the next generation of innovators and leaders for a rapidly evolving technological world.</p>
             <div class="space-x-4" data-aos="fade-up" data-aos-delay="400" data-aos-duration="1000">
-                <a href="#about" class="btn btn-gradient">Learn More</a>
-                <button class="btn btn-outline apply-now-trigger">Apply Now</button>
+                <a href="#about" class="btn btn-gradient btn-lg">Learn More</a>
+                <button class="btn btn-outline btn-lg apply-now-trigger">Apply Now</button>
             </div>
         </div>
     </section>
@@ -508,24 +582,23 @@
             <h2 class="text-4xl font-orbitron font-bold mb-16 gradient-text" data-aos="fade-up">About Future Academy</h2>
             <div class="grid md:grid-cols-2 gap-16 items-start max-w-5xl mx-auto">
                 <div data-aos="fade-right" data-aos-delay="100">
-                     <!-- Image representing diverse, tech-enabled learning -->
+                     <!-- NEW IMAGE: Diverse students collaborating with tech -->
+                     <!-- NOTE: Optimize this image (resize/compress/WebP) for production -->
                      <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=871&q=80"
-                          alt="Diverse students collaborating with laptops and tablets in a modern learning space"
+                          alt="Diverse group of students collaborating around laptops and tablets in a modern, bright classroom"
                           class="vision-image rounded-lg" loading="lazy">
-                    <!-- Professional vision statement -->
-                    <h3 class="text-2xl font-orbitron font-semibold mb-4">Our Vision</h3>
-                    <p class="leading-relaxed text-left md:text-center">To be a premier global institution fostering critical thinking, creativity, and ethical leadership. We empower students to navigate complexity, leverage emerging technologies responsibly, and drive positive, sustainable change for the future.</p>
+                    <h3 class="text-2xl font-orbitron font-semibold mb-4 mt-6" data-aos="fade-up" data-aos-delay="200">Our Vision</h3>
+                    <p class="leading-relaxed text-left md:text-center" data-aos="fade-up" data-aos-delay="300">To be a premier global institution fostering critical thinking, creativity, and ethical leadership. We empower students to navigate complexity, leverage emerging technologies responsibly, and drive positive, sustainable change for the future.</p>
                 </div>
-                <div data-aos="fade-left" data-aos-delay="200">
-                    <!-- More grounded journey description -->
-                    <h3 class="text-2xl font-orbitron font-semibold mb-4">Our Journey</h3>
-                    <p class="leading-relaxed mb-6 text-left md:text-center">Founded on principles of foresight and adaptation, FA 2050 has consistently evolved its programs to meet the educational demands of an increasingly interconnected and technology-driven world.</p>
-                    <div class="timeline-container text-left space-y-6 relative pl-4">
-                        <!-- More realistic timeline events -->
-                        <div class="timeline-item" data-aos="fade-left" data-aos-delay="300"> <div class="timeline-marker"></div> <p>2040</p> <p>Foundation & Concept: Envisioning a future-focused educational model.</p> </div>
-                        <div class="timeline-item" data-aos="fade-left" data-aos-delay="400"> <div class="timeline-marker"></div> <p>2045</p> <p>Launch of Core AI & Data Science Curriculum with focus on ethics.</p> </div>
-                        <div class="timeline-item" data-aos="fade-left" data-aos-delay="500"> <div class="timeline-marker"></div> <p>2048</p> <p>Integration of Immersive Learning Technologies (VR/AR) across disciplines.</p> </div>
-                        <div class="timeline-item" data-aos="fade-left" data-aos-delay="600"> <div class="timeline-marker"></div> <p>2050</p> <p>Expansion with Advanced Computing & Sustainable Design Programs.</p> </div>
+                <div data-aos="fade-left" data-aos-delay="100">
+                    <h3 class="text-2xl font-orbitron font-semibold mb-4" data-aos="fade-up" data-aos-delay="200">Our Journey</h3>
+                    <p class="leading-relaxed mb-8 text-left md:text-center" data-aos="fade-up" data-aos-delay="300">Founded on principles of foresight and adaptation, FA 2050 has consistently evolved its programs to meet the educational demands of an increasingly interconnected and technology-driven world.</p>
+                    <div class="timeline-container text-left space-y-6 relative">
+                        <!-- Added AOS to timeline items for staggered effect -->
+                        <div class="timeline-item" data-aos="fade-left" data-aos-delay="400"> <div class="timeline-marker"></div> <p>2040</p> <p>Foundation & Concept: Envisioning a future-focused educational model.</p> </div>
+                        <div class="timeline-item" data-aos="fade-left" data-aos-delay="500"> <div class="timeline-marker"></div> <p>2045</p> <p>Launch of Core AI & Data Science Curriculum with focus on ethics.</p> </div>
+                        <div class="timeline-item" data-aos="fade-left" data-aos-delay="600"> <div class="timeline-marker"></div> <p>2048</p> <p>Integration of Immersive Learning Technologies (VR/AR) across disciplines.</p> </div>
+                        <div class="timeline-item" data-aos="fade-left" data-aos-delay="700"> <div class="timeline-marker"></div> <p>2050</p> <p>Expansion with Advanced Computing & Sustainable Design Programs.</p> </div>
                     </div>
                 </div>
             </div>
@@ -536,35 +609,59 @@
     <section id="curriculum">
         <div class="container mx-auto px-4">
             <h2 class="text-4xl font-orbitron font-bold text-center mb-8 gradient-text" data-aos="fade-up">Innovative Curriculum</h2>
-            <!-- Grounded description -->
             <p class="text-center max-w-3xl mx-auto mb-16 leading-relaxed" data-aos="fade-up" data-aos-delay="100">Our curriculum integrates cutting-edge fields through project-based learning, ethical considerations, and real-world problem-solving to prepare students for future challenges.</p>
-            <div class="grid md:grid-cols-3 gap-8">
-                 <!-- More professional curriculum descriptions -->
-                <div class="interactive-card p-6 text-center" data-aos="zoom-in" data-aos-delay="200"> <div class="mb-4 mx-auto"><i class="fas fa-robot fa-3x text-indigo-400"></i></div> <h4 class="text-xl font-orbitron font-semibold mb-3 gradient-text">AI & Robotics</h4> <p class="leading-relaxed flex-grow">Explore intelligent systems, machine learning, and automation, while examining the societal and ethical implications of AI.</p> </div>
-                <div class="interactive-card p-6 text-center" data-aos="zoom-in" data-aos-delay="300"> <div class="mb-4 mx-auto"><i class="fas fa-project-diagram fa-3x text-indigo-400"></i></div> <h4 class="text-xl font-orbitron font-semibold mb-3 gradient-text">Advanced Computing</h4> <p class="leading-relaxed flex-grow">Delve into next-generation computing paradigms, including quantum principles, high-performance computing, and complex simulations.</p> </div>
-                 <div class="interactive-card p-6 text-center" data-aos="zoom-in" data-aos-delay="400"> <div class="mb-4 mx-auto"><i class="fas fa-leaf fa-3x text-indigo-400"></i></div> <h4 class="text-xl font-orbitron font-semibold mb-3 gradient-text">Sustainable Design</h4> <p class="leading-relaxed flex-grow">Integrate principles from biology, engineering, and design to create innovative, sustainable materials, systems, and solutions.</p> </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Using zoom-in effect for curriculum cards -->
+                <div class="interactive-card text-center" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="card-content">
+                        <i class="fas fa-robot fa-3x text-indigo-400"></i>
+                        <h4 class="text-xl font-orbitron font-semibold mt-4 mb-3 gradient-text">AI & Robotics</h4>
+                        <p class="leading-relaxed">Explore intelligent systems, machine learning, and automation, while examining the societal and ethical implications of AI.</p>
+                    </div>
+                </div>
+                <div class="interactive-card text-center" data-aos="zoom-in" data-aos-delay="300">
+                     <div class="card-content">
+                         <i class="fas fa-project-diagram fa-3x text-indigo-400"></i>
+                        <h4 class="text-xl font-orbitron font-semibold mt-4 mb-3 gradient-text">Advanced Computing</h4>
+                        <p class="leading-relaxed">Delve into next-generation computing paradigms, including quantum principles, high-performance computing, and complex simulations.</p>
+                    </div>
+                </div>
+                 <div class="interactive-card text-center" data-aos="zoom-in" data-aos-delay="400">
+                     <div class="card-content">
+                        <i class="fas fa-leaf fa-3x text-indigo-400"></i>
+                        <h4 class="text-xl font-orbitron font-semibold mt-4 mb-3 gradient-text">Sustainable Design</h4>
+                        <p class="leading-relaxed">Integrate principles from biology, engineering, and design to create innovative, sustainable materials, systems, and solutions.</p>
+                    </div>
+                </div>
             </div>
-            <div class="mt-16 text-center" data-aos="fade-up" data-aos-delay="300">
-                <h3 class="text-3xl font-orbitron font-semibold mb-8 gradient-text">Student Project Showcase</h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto mb-8">
-                    <!-- Updated Project Showcase Items with clearer descriptions -->
+
+            <div class="mt-20 text-center" data-aos="fade-up" data-aos-delay="300">
+                <h3 class="text-3xl font-orbitron font-semibold mb-12 gradient-text">Student Project Showcase</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto mb-10">
+                    <!-- NEW IMAGES for projects. Optimize these! -->
                     <div class="project-showcase-card" data-aos="fade-up" data-aos-delay="400">
-                         <img src="https://images.unsplash.com/photo-1634733600148-a9d68717c9dc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80"
-                             alt="Abstract visualization of environmental data analysis" class="rounded mb-3 h-40 object-cover" loading="lazy">
-                        <h5 class="font-semibold text-lg mb-1">EcoSim AI</h5>
-                        <p class="text-sm">AI-powered environmental modeling for climate change prediction.</p>
+                         <img src="https://images.unsplash.com/photo-1611095790444-1dfa3c034439?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80"
+                             alt="Abstract visualization of green and blue data points representing environmental data" class="rounded-t-lg" loading="lazy">
+                         <div class="card-content">
+                            <h5 class="font-semibold text-lg">EcoSim AI</h5>
+                            <p>AI-powered environmental modeling for climate change prediction and impact analysis.</p>
+                        </div>
                     </div>
                     <div class="project-showcase-card" data-aos="fade-up" data-aos-delay="500">
                         <img src="https://images.unsplash.com/photo-1604079628040-94301bb21b91?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80"
-                             alt="Abstract representation of complex data simulation" class="rounded mb-3 h-40 object-cover" loading="lazy">
-                        <h5 class="font-semibold text-lg mb-1">Quantum Material Sim</h5>
-                        <p class="text-sm">Simulating novel material properties using quantum computing principles.</p>
+                             alt="Abstract colorful swirl pattern representing complex data simulation or quantum states" class="rounded-t-lg" loading="lazy">
+                         <div class="card-content">
+                            <h5 class="font-semibold text-lg">Quantum Material Sim</h5>
+                            <p>Simulating novel material properties using quantum computing principles for discovery.</p>
+                        </div>
                     </div>
                     <div class="project-showcase-card" data-aos="fade-up" data-aos-delay="600">
-                         <img src="https://images.unsplash.com/photo-1611095965923-893b5799903f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80"
-                             alt="Close-up of a bio-based material structure" class="rounded mb-3 h-40 object-cover" loading="lazy">
-                        <h5 class="font-semibold text-lg mb-1">BioFab Structures</h5>
-                        <p class="text-sm">Developing sustainable building components using bio-fabrication techniques.</p>
+                         <img src="https://images.unsplash.com/photo-1581092917920-7c046a39e4e7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80"
+                             alt="Close-up of a 3D printer creating a complex white structure, representing bio-fabrication" class="rounded-t-lg" loading="lazy">
+                         <div class="card-content">
+                            <h5 class="font-semibold text-lg">BioFab Structures</h5>
+                            <p>Developing sustainable building components using advanced bio-fabrication techniques.</p>
+                        </div>
                     </div>
                 </div>
                 <a href="#contact" class="mt-8 btn btn-gradient" data-aos="fade-up" data-aos-delay="700">Inquire About Research</a>
@@ -577,42 +674,54 @@
         <div class="container mx-auto px-4">
             <h2 class="text-4xl font-orbitron font-bold text-center mb-16 gradient-text" data-aos="fade-up">Technology-Enhanced Learning</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                 <!-- More professional technology descriptions -->
-                <div class="interactive-card p-6" data-aos="fade-up" data-aos-delay="100">
+                 <!-- NEW IMAGES for technology. Optimize these! -->
+                <div class="interactive-card" data-aos="fade-up" data-aos-delay="100">
                      <img src="https://images.unsplash.com/photo-1589220340948-3e9b765b1c95?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80"
-                         alt="Student using VR headset for an educational simulation" class="rounded mb-4 h-48 object-cover" loading="lazy">
-                    <h4 class="text-xl font-orbitron font-semibold mb-3 gradient-text">Immersive Environments</h4>
-                    <p class="leading-relaxed flex-grow">Utilize VR/AR simulations and holographic displays for collaborative learning and exploration of complex subjects.</p>
+                         alt="Student wearing a VR headset, immersed in a virtual learning environment" class="rounded-t-lg" loading="lazy">
+                    <div class="card-content">
+                        <h4 class="text-xl font-orbitron font-semibold mb-3 gradient-text">Immersive Environments</h4>
+                        <p class="leading-relaxed">Utilize VR/AR simulations and holographic displays for collaborative learning and exploration of complex subjects.</p>
+                    </div>
                 </div>
-                 <div class="interactive-card p-6" data-aos="fade-up" data-aos-delay="200">
+                 <div class="interactive-card" data-aos="fade-up" data-aos-delay="200">
                     <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format=fit=crop&w=765&q=80"
-                         alt="Abstract representation of AI data processing" class="rounded mb-4 h-48 object-cover" loading="lazy">
-                    <h4 class="text-xl font-orbitron font-semibold mb-3 gradient-text">AI-Powered Personalization</h4>
-                    <p class="leading-relaxed flex-grow">Benefit from adaptive learning platforms and AI tools that tailor educational content and provide personalized feedback.</p>
+                         alt="Abstract image of an AI robot head with glowing blue neural network connections" class="rounded-t-lg" loading="lazy">
+                    <div class="card-content">
+                        <h4 class="text-xl font-orbitron font-semibold mb-3 gradient-text">AI-Powered Personalization</h4>
+                        <p class="leading-relaxed">Benefit from adaptive learning platforms and AI tools that tailor educational content and provide personalized feedback.</p>
+                    </div>
                 </div>
-                 <div class="interactive-card p-6" data-aos="fade-up" data-aos-delay="300">
+                 <div class="interactive-card" data-aos="fade-up" data-aos-delay="300">
                     <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format=fit=crop&w=870&q=80"
-                         alt="Integrated technology infrastructure represented by circuitry" class="rounded mb-4 h-48 object-cover" loading="lazy">
-                    <h4 class="text-xl font-orbitron font-semibold mb-3 gradient-text">Integrated Campus Systems</h4>
-                    <p class="leading-relaxed flex-grow">Experience a connected campus with smart classrooms, digital resource access, and streamlined communication platforms.</p>
+                         alt="Close-up of a computer motherboard with intricate circuits and components glowing slightly" class="rounded-t-lg" loading="lazy">
+                    <div class="card-content">
+                        <h4 class="text-xl font-orbitron font-semibold mb-3 gradient-text">Integrated Campus Systems</h4>
+                        <p class="leading-relaxed">Experience a connected campus with smart classrooms, digital resource access, and streamlined communication platforms.</p>
+                    </div>
                 </div>
-                 <div class="interactive-card p-6" data-aos="fade-up" data-aos-delay="100">
+                 <div class="interactive-card" data-aos="fade-up" data-aos-delay="100"> <!-- Stagger delay for row wrap -->
                      <img src="https://images.unsplash.com/photo-1614914142081-0ea36a17a5c6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format=fit=crop&w=870&q=80"
-                         alt="Modern digital fabrication lab with 3D printers" class="rounded mb-4 h-48 object-cover" loading="lazy">
-                    <h4 class="text-xl font-orbitron font-semibold mb-3 gradient-text">Advanced Maker Spaces</h4>
-                    <p class="leading-relaxed flex-grow">Access state-of-the-art fabrication labs equipped with 3D printers, robotics kits, and tools for prototyping and innovation.</p>
+                         alt="Modern digital fabrication lab with multiple 3D printers in operation on workbenches" class="rounded-t-lg" loading="lazy">
+                    <div class="card-content">
+                        <h4 class="text-xl font-orbitron font-semibold mb-3 gradient-text">Advanced Maker Spaces</h4>
+                        <p class="leading-relaxed">Access state-of-the-art fabrication labs equipped with 3D printers, robotics kits, and tools for prototyping and innovation.</p>
+                    </div>
                 </div>
-                 <div class="interactive-card p-6" data-aos="fade-up" data-aos-delay="200">
-                     <img src="https://images.unsplash.com/photo-1554734867-bf3c00a49371?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format=fit=crop&w=774&q=80"
-                         alt="Visualization related to cognitive processes or data analysis" class="rounded mb-4 h-48 object-cover" loading="lazy">
-                    <h4 class="text-xl font-orbitron font-semibold mb-3 gradient-text">Cognitive Learning Tools</h4>
-                    <p class="leading-relaxed flex-grow">Engage with tools designed to enhance learning based on cognitive science principles, including advanced data visualization and analysis.</p>
+                 <div class="interactive-card" data-aos="fade-up" data-aos-delay="200">
+                     <img src="https://images.unsplash.com/photo-1554734867-bf3c00a49371?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80"
+                         alt="Abstract visualization of interconnected data points forming a complex network or brain-like structure" class="rounded-t-lg" loading="lazy">
+                    <div class="card-content">
+                        <h4 class="text-xl font-orbitron font-semibold mb-3 gradient-text">Cognitive Learning Tools</h4>
+                        <p class="leading-relaxed">Engage with tools designed to enhance learning based on cognitive science principles, including advanced data visualization.</p>
+                    </div>
                 </div>
-                 <div class="interactive-card p-6" data-aos="fade-up" data-aos-delay="300">
+                 <div class="interactive-card" data-aos="fade-up" data-aos-delay="300">
                     <img src="https://images.unsplash.com/photo-1587620962725-abab7fe55159?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format=fit=crop&w=1031&q=80"
-                         alt="Abstract representation of global network connectivity" class="rounded mb-4 h-48 object-cover" loading="lazy">
-                    <h4 class="text-xl font-orbitron font-semibold mb-3 gradient-text">Global Collaboration Network</h4>
-                    <p class="leading-relaxed flex-grow">Connect and collaborate on projects with peers and partner institutions worldwide through our high-speed digital network.</p>
+                         alt="Laptop screen showing code with abstract network lines connecting globally in the background" class="rounded-t-lg" loading="lazy">
+                     <div class="card-content">
+                        <h4 class="text-xl font-orbitron font-semibold mb-3 gradient-text">Global Collaboration Network</h4>
+                        <p class="leading-relaxed">Connect and collaborate on projects with peers and partner institutions worldwide through our high-speed digital network.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -622,13 +731,33 @@
     <section id="admissions">
         <div class="container mx-auto px-4">
             <h2 class="text-4xl font-orbitron font-bold text-center mb-8 gradient-text" data-aos="fade-up">Admissions</h2>
-            <!-- Standard admissions intro -->
             <p class="text-center max-w-3xl mx-auto mb-16 leading-relaxed" data-aos="fade-up" data-aos-delay="100">Join a community of forward-thinkers shaping tomorrow. We seek curious, motivated students with a passion for innovation and problem-solving. Learn about our application process and financial aid opportunities.</p>
             <div class="grid md:grid-cols-3 gap-8 text-center mb-16">
-                <!-- Standard admissions info cards -->
-                <div class="interactive-card p-8 items-center" data-aos="fade-up" data-aos-delay="200"> <i class="fas fa-clipboard-list fa-3x text-indigo-400 mb-4"></i> <h3 class="text-2xl font-orbitron font-semibold mb-4">Application Process</h3> <p class="mb-6 leading-relaxed flex-grow">Discover our holistic review process, including academic assessment, personal essays, and portfolio submissions.</p> <a href="#contact" class="mt-auto btn btn-gradient w-full">View Details</a> </div>
-                <div class="interactive-card p-8 items-center" data-aos="fade-up" data-aos-delay="300"> <i class="fas fa-chalkboard-teacher fa-3x text-indigo-400 mb-4"></i> <h3 class="text-2xl font-orbitron font-semibold mb-4">Virtual Info Sessions</h3> <p class="mb-6 leading-relaxed flex-grow">Experience FA 2050 through our online information sessions. Meet faculty and learn about our programs.</p> <a href="#contact" class="mt-auto btn btn-gradient w-full">View Schedule</a> </div>
-                <div class="interactive-card p-8 items-center" data-aos="fade-up" data-aos-delay="400"> <i class="fas fa-hand-holding-usd fa-3x text-indigo-400 mb-4"></i> <h3 class="text-2xl font-orbitron font-semibold mb-4">Scholarships & Aid</h3> <p class="mb-6 leading-relaxed flex-grow">Explore comprehensive merit-based scholarships, need-based grants, and other financial aid options.</p> <a href="#contact" class="mt-auto btn btn-gradient w-full">Learn About Aid</a> </div>
+                <!-- Adding AOS to admissions info cards -->
+                <div class="interactive-card items-center" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card-content items-center">
+                        <i class="fas fa-clipboard-list fa-3x text-indigo-400"></i>
+                        <h3 class="text-2xl font-orbitron font-semibold mt-4 mb-4">Application Process</h3>
+                        <p class="mb-6 leading-relaxed">Discover our holistic review process, including academic assessment, personal essays, and portfolio submissions.</p>
+                        <a href="#contact" class="mt-auto btn btn-gradient w-4/5">View Details</a>
+                    </div>
+                </div>
+                <div class="interactive-card items-center" data-aos="fade-up" data-aos-delay="300">
+                    <div class="card-content items-center">
+                        <i class="fas fa-chalkboard-teacher fa-3x text-indigo-400"></i>
+                        <h3 class="text-2xl font-orbitron font-semibold mt-4 mb-4">Virtual Info Sessions</h3>
+                        <p class="mb-6 leading-relaxed">Experience FA 2050 through our online information sessions. Meet faculty and learn about our programs.</p>
+                        <a href="#contact" class="mt-auto btn btn-gradient w-4/5">View Schedule</a>
+                    </div>
+                </div>
+                <div class="interactive-card items-center" data-aos="fade-up" data-aos-delay="400">
+                    <div class="card-content items-center">
+                        <i class="fas fa-hand-holding-usd fa-3x text-indigo-400"></i>
+                        <h3 class="text-2xl font-orbitron font-semibold mt-4 mb-4">Scholarships & Aid</h3>
+                        <p class="mb-6 leading-relaxed">Explore comprehensive merit-based scholarships, need-based grants, and other financial aid options.</p>
+                        <a href="#contact" class="mt-auto btn btn-gradient w-4/5">Learn About Aid</a>
+                    </div>
+                </div>
             </div>
             <div class="text-center" data-aos="fade-up" data-aos-delay="500">
                 <button class="btn btn-gradient btn-lg apply-now-trigger">Start Your Application</button>
@@ -641,24 +770,30 @@
         <div class="container mx-auto px-4">
             <h2 class="text-4xl font-orbitron font-bold text-center mb-16 gradient-text" data-aos="fade-up">Vibrant Student Life</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                 <!-- More professional student life descriptions -->
-                <div class="interactive-card p-6" data-aos="zoom-in-up" data-aos-delay="100">
-                     <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format=fit=crop&w=870&q=80"
-                         alt="Diverse students collaborating in a modern campus setting" class="rounded mb-4 h-48 object-cover" loading="lazy">
-                    <h4 class="text-xl font-orbitron font-semibold mb-3 gradient-text">Community & Collaboration</h4>
-                    <p class="leading-relaxed flex-grow">Join diverse student clubs, participate in collaborative projects, engage with global partners, and contribute to campus initiatives.</p>
+                 <!-- NEW IMAGES for student life. Optimize these! Using zoom-in-up effect -->
+                <div class="interactive-card" data-aos="zoom-in-up" data-aos-delay="100">
+                     <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80"
+                         alt="Diverse group of happy students sitting together outdoors on a modern campus lawn" class="rounded-t-lg" loading="lazy">
+                    <div class="card-content">
+                        <h4 class="text-xl font-orbitron font-semibold mb-3 gradient-text">Community & Collaboration</h4>
+                        <p class="leading-relaxed">Join diverse student clubs, participate in collaborative projects, engage with global partners, and contribute to campus initiatives.</p>
+                    </div>
                 </div>
-                <div class="interactive-card p-6" data-aos="zoom-in-up" data-aos-delay="200">
-                    <img src="https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format=fit=crop&w=870&q=80"
-                         alt="Student relaxing or studying in a comfortable campus environment" class="rounded mb-4 h-48 object-cover" loading="lazy">
-                    <h4 class="text-xl font-orbitron font-semibold mb-3 gradient-text">Holistic Wellness</h4>
-                    <p class="leading-relaxed flex-grow">Access comprehensive support services, including academic advising, counseling, health services, and fitness facilities.</p>
+                <div class="interactive-card" data-aos="zoom-in-up" data-aos-delay="200">
+                    <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80"
+                         alt="Student studying comfortably with a laptop and coffee in a bright, modern campus lounge area" class="rounded-t-lg" loading="lazy">
+                    <div class="card-content">
+                        <h4 class="text-xl font-orbitron font-semibold mb-3 gradient-text">Holistic Wellness</h4>
+                        <p class="leading-relaxed">Access comprehensive support services, including academic advising, counseling, health services, and fitness facilities.</p>
+                    </div>
                 </div>
-                <div class="interactive-card p-6" data-aos="zoom-in-up" data-aos-delay="300">
-                    <img src="https://images.unsplash.com/photo-1605152276897-4f618f831960?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format=fit=crop&w=1032&q=80"
-                         alt="Digital interface showing collaborative tools and connections" class="rounded mb-4 h-48 object-cover" loading="lazy">
-                    <h4 class="text-xl font-orbitron font-semibold mb-3 gradient-text">Innovation Hubs</h4>
-                    <p class="leading-relaxed flex-grow">Utilize dedicated project spaces, digital collaboration platforms, and advanced labs to work on group assignments and innovative ideas.</p>
+                <div class="interactive-card" data-aos="zoom-in-up" data-aos-delay="300">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80"
+                         alt="Team of students working together around a table with laptops and schematics in a workshop setting" class="rounded-t-lg" loading="lazy">
+                     <div class="card-content">
+                        <h4 class="text-xl font-orbitron font-semibold mb-3 gradient-text">Innovation Hubs</h4>
+                        <p class="leading-relaxed">Utilize dedicated project spaces, digital collaboration platforms, and advanced labs to work on group assignments and innovative ideas.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -668,25 +803,23 @@
     <section id="contact">
         <div class="container mx-auto px-4">
             <h2 class="text-4xl font-orbitron font-bold text-center mb-12 gradient-text" data-aos="fade-up">Contact Us</h2>
-             <!-- Standard contact intro -->
             <p class="text-center max-w-3xl mx-auto mb-10 leading-relaxed" data-aos="fade-up" data-aos-delay="100">Have questions about Future Academy 2050? Reach out using the form below, or find our contact details and location information. We look forward to connecting with you.</p>
-            <div class="max-w-4xl mx-auto p-8 rounded-lg shadow-xl grid md:grid-cols-2 gap-10" data-aos="fade-up" data-aos-delay="200">
+            <div class="max-w-4xl mx-auto p-8 rounded-lg shadow-xl grid md:grid-cols-2 gap-10 bg-gray-800 bg-opacity-70 backdrop-blur-sm" data-aos="fade-up" data-aos-delay="200">
                 <div>
-                    <h3 class="text-2xl font-orbitron font-semibold mb-6">Send Us a Message</h3>
+                    <h3 class="text-2xl font-orbitron font-semibold mb-6" data-aos="fade-right" data-aos-delay="300">Send Us a Message</h3>
                     <form id="contact-form" action="#" method="POST" class="space-y-6" novalidate>
-                         <!-- Standard form fields -->
-                        <div> <label for="name">Name</label> <input type="text" id="name" name="name" required class="form-input" placeholder="Your Name"> </div>
-                        <div> <label for="email">Email</label> <input type="email" id="email" name="email" required class="form-input" placeholder="your.email@example.com"> </div>
-                        <div> <label for="subject">Subject</label> <input type="text" id="subject" name="subject" class="form-input" placeholder="Inquiry Subject"> </div>
-                        <div> <label for="message">Message</label> <textarea id="message" name="message" rows="4" required class="form-input" placeholder="Your inquiry or feedback..."></textarea> </div>
-                        <div> <button type="submit" class="btn btn-gradient w-full md:w-auto">Send Message</button> </div>
+                         <!-- Added AOS to form fields -->
+                        <div data-aos="fade-right" data-aos-delay="400"> <label for="name">Name<span class="text-red-400">*</span></label> <input type="text" id="name" name="name" required class="form-input" placeholder="Your Name"> </div>
+                        <div data-aos="fade-right" data-aos-delay="450"> <label for="email">Email<span class="text-red-400">*</span></label> <input type="email" id="email" name="email" required class="form-input" placeholder="your.email@example.com"> </div>
+                        <div data-aos="fade-right" data-aos-delay="500"> <label for="subject">Subject</label> <input type="text" id="subject" name="subject" class="form-input" placeholder="Inquiry Subject"> </div>
+                        <div data-aos="fade-right" data-aos-delay="550"> <label for="message">Message<span class="text-red-400">*</span></label> <textarea id="message" name="message" rows="4" required class="form-input" placeholder="Your inquiry or feedback..."></textarea> </div>
+                        <div data-aos="fade-up" data-aos-delay="600"> <button type="submit" class="btn btn-gradient w-full md:w-auto">Send Message</button> </div>
                     </form>
                     <div id="form-feedback" class="text-center mt-4 min-h-[1.5em]" aria-live="polite"></div>
                 </div>
                 <div class="mt-6 md:mt-0">
-                     <!-- Slightly futuristic but professional location info -->
-                    <h3 class="text-2xl font-orbitron font-semibold mb-6">Visit Our Innovation Hub</h3>
-                    <div class="map-container mb-6 h-64 md:h-80 rounded-lg overflow-hidden border border-gray-700 shadow-md">
+                    <h3 class="text-2xl font-orbitron font-semibold mb-6" data-aos="fade-left" data-aos-delay="300">Visit Our Innovation Hub</h3>
+                    <div class="map-container mb-6 h-64 md:h-80 rounded-lg overflow-hidden border border-gray-700 shadow-md" data-aos="fade-left" data-aos-delay="400">
                         <iframe
                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d124424.4960087899!2d77.5229028870011!3d12.953961297985107!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1670c9b44e6d%3A0xf8dfc3e8517e4fe0!2sBengaluru%2C%20Karnataka%2C%20India!5e0!3m2!1sen!2sus!4v1678886000000"
                             width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
@@ -694,22 +827,34 @@
                             aria-label="Interactive map showing simulated location in Bengaluru area">
                         </iframe>
                     </div>
-                    <p class="text-lg mb-2"><i class="fas fa-map-marker-alt mr-2 text-indigo-400 w-4 text-center"></i>1 Innovation Parkway, Tech District 7, Neo-Bengaluru, Bharat 2050</p>
-                    <p class="text-sm mb-1"><i class="fas fa-clock mr-2 text-indigo-400 w-4 text-center"></i>Office Hours: Mon-Fri, 09:00 - 17:00 Local Time</p>
-                    <p class="text-sm"><i class="fas fa-headset mr-2 text-indigo-400 w-4 text-center"></i>Online Support: Available 24/7</p>
-                    <!-- Standard buttons -->
-                     <div class="mt-6 space-x-3"> <a href="#contact" class="btn btn-outline">Virtual Tour</a> <a href="https://www.google.com/maps?q=Bengaluru,Karnataka,India" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Get Directions</a> </div>
+                    <div data-aos="fade-left" data-aos-delay="500">
+                        <p class="text-lg mb-2"><i class="fas fa-map-marker-alt mr-2 text-indigo-400 w-4 text-center"></i>1 Innovation Parkway, Tech District 7, Neo-Bengaluru, Bharat 2050</p>
+                        <p class="text-sm mb-1"><i class="fas fa-clock mr-2 text-indigo-400 w-4 text-center"></i>Office Hours: Mon-Fri, 09:00 - 17:00 Local Time</p>
+                        <p class="text-sm"><i class="fas fa-headset mr-2 text-indigo-400 w-4 text-center"></i>Online Support: Available 24/7</p>
+                    </div>
+                     <div class="mt-6 space-x-3" data-aos="fade-up" data-aos-delay="600">
+                         <a href="#contact" class="btn btn-outline">Virtual Tour</a>
+                         <a href="https://www.google.com/maps?q=Bengaluru,Karnataka,India" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Get Directions</a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <footer>
-        <div class="container mx-auto px-4 py-8 text-center text-gray-400">
-            <!-- Standard footer -->
+        <div class="container mx-auto px-4 py-10 text-center text-gray-400" data-aos="fade-up">
             <p class="mb-4">© 2050 Future Academy. All Rights Reserved.</p>
-            <div class="space-x-4 text-sm"> <a href="#" class="footer-link">Privacy Policy</a><span class="opacity-50 mx-1">|</span> <a href="#" class="footer-link">Terms of Use</a><span class="opacity-50 mx-1">|</span> <a href="#" class="footer-link">Accessibility</a> </div>
-            <div class="mt-4 space-x-4"> <a href="#" aria-label="Twitter"><i class="fab fa-twitter fa-lg"></i></a> <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in fa-lg"></i></a> <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f fa-lg"></i></a> <a href="#" aria-label="Instagram"><i class="fab fa-instagram fa-lg"></i></a> </div>
+            <div class="space-x-4 text-sm mb-4">
+                 <a href="#" class="footer-link">Privacy Policy</a><span class="opacity-50 mx-1">|</span>
+                 <a href="#" class="footer-link">Terms of Use</a><span class="opacity-50 mx-1">|</span>
+                 <a href="#" class="footer-link">Accessibility</a>
+            </div>
+            <div class="mt-4 space-x-5">
+                <a href="#" aria-label="Twitter" class="inline-block" data-aos="zoom-in" data-aos-delay="100"><i class="fab fa-twitter fa-lg"></i></a>
+                <a href="#" aria-label="LinkedIn" class="inline-block" data-aos="zoom-in" data-aos-delay="200"><i class="fab fa-linkedin-in fa-lg"></i></a>
+                <a href="#" aria-label="Facebook" class="inline-block" data-aos="zoom-in" data-aos-delay="300"><i class="fab fa-facebook-f fa-lg"></i></a>
+                <a href="#" aria-label="Instagram" class="inline-block" data-aos="zoom-in" data-aos-delay="400"><i class="fab fa-instagram fa-lg"></i></a>
+            </div>
         </div>
     </footer>
 
@@ -721,10 +866,9 @@
     <div id="modal-overlay" class="hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
         <div id="application-form-container" role="document">
             <button id="modal-close-button" aria-label="Close Application Form"> <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg> </button>
-            <!-- Standard modal title -->
             <h3 id="modal-title" class="text-3xl font-orbitron font-bold text-center mb-10 gradient-text">Application Form - FA 2050 Intake</h3>
             <form id="application-form" action="#" method="POST" class="space-y-6" novalidate>
-                 <!-- Standard form fieldsets and fields -->
+                 <!-- Standard form fieldsets and fields - could add subtle AOS here too if desired -->
                  <fieldset>
                     <legend class="gradient-text">Personal Information</legend>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -774,10 +918,10 @@
         </div>
     </div>
 
-    <!-- Accessibility Widget - Functionality unchanged, title slightly adjusted -->
+    <!-- Accessibility Widget -->
     <div id="accessibility-widget">
         <div id="accessibility-panel">
-            <h4>Accessibility Settings</h4> <!-- Standard Title -->
+            <h4>Accessibility Settings</h4>
             <div class="accessibility-options">
                 <div class="accessibility-item font-size-controls"> <span>Font Size</span> <div> <button id="decrease-font" aria-label="Decrease font size">-</button> <button id="increase-font" aria-label="Increase font size">+</button> </div> </div>
                 <div class="accessibility-item"> <span>High Contrast</span> <button id="toggle-contrast">Toggle</button> </div>
@@ -788,16 +932,21 @@
         <button id="accessibility-toggle" aria-label="Accessibility Settings" aria-controls="accessibility-panel" aria-expanded="false"> <i class="fa-solid fa-universal-access"></i> </button>
     </div>
 
+    <!-- AOS JS (Animation Library) -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // --- JAVASCRIPT REMAINS LARGELY THE SAME ---
-        // No functional changes needed for the requested visual/content updates.
-        // Existing JS handles navbar scroll, mobile menu, smooth scroll,
-        // modal interactions, form demos, scroll-to-top, and accessibility.
+        // --- JAVASCRIPT (Mostly Unchanged, with AOS init and feedback visibility logic) ---
 
         document.addEventListener('DOMContentLoaded', () => {
 
-            AOS.init({ duration: 800, once: true, offset: 50, delay: 100 });
+            // Initialize AOS library with default settings
+            AOS.init({
+                duration: 800,     // values from 0 to 3000, with step 50ms
+                once: true,       // whether animation should happen only once - while scrolling down
+                offset: 50,       // offset (in px) from the original trigger point
+                delay: 100,       // values from 0 to 3000, with step 50ms
+                easing: 'ease-out-cubic', // default easing for AOS animations
+            });
 
             const htmlEl = document.documentElement;
             const bodyEl = document.body;
@@ -832,10 +981,11 @@
             const FONT_SIZE_STEP = 1;
             const MAX_FONT_SIZE = 24;
             const MIN_FONT_SIZE = 12;
-            const ACTIVE_LINK_BUFFER = 50; // Adjust buffer slightly if needed
+            const ACTIVE_LINK_BUFFER = 70; // Slightly increased buffer for nav activation
 
             let modalTriggerElement = null;
             let currentActiveSectionId = null;
+            let feedbackTimeout = null; // To manage feedback message clearing
 
             function handleNavbarScroll() {
                 if (!nav || !htmlEl) return;
@@ -845,6 +995,7 @@
                 const isMobileMenuOpen = navLinksMobile && !navLinksMobile.classList.contains('hidden');
                 nav.classList.toggle('mobile-menu-open', isMobileMenuOpen);
 
+                 // Handle background transparency/blur based on state (unless high contrast)
                  if (!htmlEl.classList.contains('high-contrast')) {
                      if (isMobileMenuOpen) {
                          nav.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--bg-color-secondary').trim();
@@ -859,6 +1010,14 @@
                          nav.style.backdropFilter = 'none';
                          nav.style.webkitBackdropFilter = 'none';
                      }
+                 } else {
+                      // Ensure high contrast overrides are applied correctly
+                      nav.style.backgroundColor = '';
+                      nav.style.backdropFilter = '';
+                      nav.style.webkitBackdropFilter = '';
+                      if(isMobileMenuOpen || isScrolled) {
+                          nav.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--bg-color-secondary').trim();
+                      }
                  }
             }
 
@@ -886,8 +1045,7 @@
                                     let offset = 0;
                                     const navHeight = nav.offsetHeight;
                                     const navMarginTop = nav.classList.contains('navbar-scrolled') ? parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--navbar-margin-top-scrolled')) : 0;
-                                    // Add a base padding value (like 1rem or 16px)
-                                    const basePadding = 16;
+                                    const basePadding = 16; // Base padding adjustment
                                     offset = navHeight + navMarginTop + basePadding;
 
                                     const elementPosition = targetElement.getBoundingClientRect().top;
@@ -898,19 +1056,21 @@
                                         behavior: 'smooth'
                                     });
 
+                                    // Close mobile menu if a link inside it is clicked
                                     if (navLinksMobile && !navLinksMobile.classList.contains('hidden') && this.closest('#nav-links-mobile')) {
                                         toggleMobileMenu(false);
                                     }
+                                    // Manually update active link state immediately after click for better UX
                                     updateActiveNavLink(targetId.substring(1));
                                 }
                             } catch (error) { console.error("Smooth scroll target error:", error); }
-                        } else if (targetIdRaw === '#') {
+                        } else if (targetIdRaw === '#') { // Handle clicking the brand link (goes to top)
                             e.preventDefault();
                             window.scrollTo({ top: 0, behavior: 'smooth' });
                             if (navLinksMobile && !navLinksMobile.classList.contains('hidden') && this.closest('#nav-links-mobile')) {
                                 toggleMobileMenu(false);
                             }
-                             updateActiveNavLink('home');
+                             updateActiveNavLink('home'); // Activate home link
                         }
                     });
                 });
@@ -921,11 +1081,24 @@
                 if (!mobileMenuButton || !navLinksMobile || !menuIconOpen || !menuIconClose || !nav) return;
                 const isCurrentlyExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
                 const openMenu = forceOpen === true || (forceOpen === null && !isCurrentlyExpanded);
-                navLinksMobile.classList.toggle('hidden', !openMenu);
+
                 mobileMenuButton.setAttribute('aria-expanded', String(openMenu));
                 menuIconOpen.classList.toggle('hidden', openMenu);
                 menuIconClose.classList.toggle('hidden', !openMenu);
                 nav.classList.toggle('mobile-menu-open', openMenu);
+
+                if (openMenu) {
+                    navLinksMobile.classList.remove('hidden');
+                    // Optional: Trigger AOS for mobile menu if needed (already added via data-aos)
+                    // AOS.refreshHard(); // Or specific refresh for the menu
+                } else {
+                    // Add a slight delay before hiding to allow for potential closing animations if added
+                    setTimeout(() => {
+                        navLinksMobile.classList.add('hidden');
+                    }, 150); // Adjust timing based on animation needs
+                }
+
+                // Ensure navbar background is updated immediately
                 setTimeout(handleNavbarScroll, 0);
             }
 
@@ -933,7 +1106,7 @@
                 if (!scrollToTopButton) return;
                 scrollToTopButton.addEventListener('click', () => {
                     window.scrollTo({ top: 0, behavior: 'smooth' });
-                    updateActiveNavLink('home');
+                    updateActiveNavLink('home'); // Set 'home' active when scrolling to top
                 });
             }
 
@@ -942,15 +1115,17 @@
                 modalTriggerElement = triggerElement;
                 modalOverlay.classList.remove('hidden');
                 bodyEl.classList.add('modal-open');
+                // Force reflow before adding active class for transition
                 void modalOverlay.offsetWidth;
                 modalOverlay.classList.add('modal-active');
+                // Focus management for accessibility
                 if (applicationFormContainer) {
                     setTimeout(() => {
                         const firstFocusable = applicationFormContainer.querySelector(
                             'input:not([type="hidden"]):not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), [tabindex]:not([tabindex="-1"])'
                         );
                         (firstFocusable || applicationFormContainer)?.focus();
-                    }, 100);
+                    }, 100); // Delay focus slightly after transition starts
                 }
             }
 
@@ -960,9 +1135,10 @@
                 bodyEl.classList.remove('modal-open');
                 setTimeout(() => {
                     modalOverlay.classList.add('hidden');
-                    if (applicationFeedback) applicationFeedback.textContent = '';
+                    clearFeedback(applicationFeedback); // Clear feedback on close
                     if (applicationForm) applicationForm.reset();
                     applicationForm?.querySelectorAll('.border-red-400').forEach(field => field.classList.remove('border-red-400')); // Clear error borders
+                    // Return focus to the element that opened the modal
                     if (modalTriggerElement) {
                         modalTriggerElement.focus();
                         modalTriggerElement = null;
@@ -974,31 +1150,46 @@
                 if (!modalOverlay) return;
                 applyNowTriggers.forEach(trigger => trigger.addEventListener('click', (e) => { e.preventDefault(); openModal(e.currentTarget); }));
                 if (modalCloseButton) modalCloseButton.addEventListener('click', closeModal);
+                // Close modal on overlay click
                 modalOverlay.addEventListener('click', (e) => { if (e.target === modalOverlay) closeModal(); });
+                // Close modal on Escape key press
                 window.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modalOverlay.classList.contains('modal-active')) closeModal(); });
             }
+
+            // Helper to display and clear feedback messages
+             function showFeedback(element, message, isError = false, duration = 5000) {
+                 if (!element) return;
+                 clearTimeout(feedbackTimeout); // Clear any existing timeout
+                 element.textContent = message;
+                 element.style.color = isError ? 'var(--text-red-400)' : 'var(--primary-accent)';
+                 element.classList.add('visible');
+
+                 feedbackTimeout = setTimeout(() => {
+                     clearFeedback(element);
+                 }, duration);
+             }
+             function clearFeedback(element) {
+                if (!element) return;
+                 clearTimeout(feedbackTimeout);
+                 element.classList.remove('visible');
+                 // Use timeout to allow fade out before clearing text
+                 setTimeout(() => { element.textContent = ''; }, 300);
+             }
 
             function setupContactForm() {
                 if (!contactForm || !formFeedback) return;
                 contactForm.addEventListener('submit', (e) => {
                     e.preventDefault();
-                    formFeedback.textContent = '';
-                    contactForm.querySelectorAll('.border-red-400').forEach(field => field.classList.remove('border-red-400')); // Clear previous errors
+                    clearFeedback(formFeedback); // Clear previous feedback immediately
+                    contactForm.querySelectorAll('.border-red-400').forEach(field => field.classList.remove('border-red-400'));
 
                     if (contactForm.checkValidity()) {
-                        formFeedback.textContent = 'Message sent successfully. (Demo)';
-                        formFeedback.style.color = 'var(--primary-accent)';
+                        showFeedback(formFeedback, 'Message sent successfully. (Demo)');
                         contactForm.reset();
-                        setTimeout(() => { if (formFeedback) formFeedback.textContent = ''; }, 5000);
                     } else {
-                        formFeedback.textContent = 'Please fill out all required fields correctly.';
-                        formFeedback.style.color = 'var(--text-red-400)';
+                        showFeedback(formFeedback, 'Please fill out all required fields correctly.', true, 6000);
                         contactForm.querySelector(':invalid')?.focus();
                         contactForm.querySelectorAll(':invalid').forEach(field => field.classList.add('border-red-400'));
-                        setTimeout(() => {
-                             if (formFeedback) formFeedback.textContent = '';
-                             contactForm.querySelectorAll('.border-red-400').forEach(field => field.classList.remove('border-red-400'));
-                         }, 6000);
                     }
                 });
             }
@@ -1007,104 +1198,102 @@
                 if (!applicationForm || !applicationFeedback || !applicationFormContainer) return;
                 applicationForm.addEventListener('submit', (e) => {
                     e.preventDefault();
-                    applicationFeedback.textContent = '';
-                     applicationForm.querySelectorAll('.border-red-400').forEach(field => field.classList.remove('border-red-400')); // Clear previous errors
+                    clearFeedback(applicationFeedback); // Clear previous feedback immediately
+                    applicationForm.querySelectorAll('.border-red-400').forEach(field => field.classList.remove('border-red-400'));
 
                     if (!applicationForm.checkValidity()) {
                         const firstInvalidField = applicationForm.querySelector(':invalid');
-                        applicationFeedback.textContent = 'Please complete all required (*) fields.';
-                        applicationFeedback.style.color = 'var(--text-red-400)';
+                        showFeedback(applicationFeedback, 'Please complete all required (*) fields.', true, 6000);
                         if (firstInvalidField) {
                             firstInvalidField.focus();
+                            // Scroll field into view, considering potential fixed headers/modal elements
                             firstInvalidField.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                            firstInvalidField.classList.add('border-red-400'); // Highlight first invalid field
+                            firstInvalidField.classList.add('border-red-400');
                         }
-                        // Highlight all invalid fields
                          applicationForm.querySelectorAll(':invalid').forEach(field => field.classList.add('border-red-400'));
-                        setTimeout(() => {
-                            if (applicationFeedback) applicationFeedback.textContent = '';
-                             applicationForm.querySelectorAll('.border-red-400').forEach(field => field.classList.remove('border-red-400'));
-                         }, 6000);
                         return;
                     }
-                    applicationFeedback.textContent = 'Application Submitted Successfully! (Demo Only)';
-                    applicationFeedback.style.color = 'var(--primary-accent)';
-                    applicationForm.reset();
+                    // Success
+                    showFeedback(applicationFeedback, 'Application Submitted Successfully! (Demo Only)', false, 3000);
+                    // Close modal after a short delay on success
                     setTimeout(() => { closeModal(); }, 2500);
                 });
             }
 
-           function updateActiveNavLink(targetId = null) {
+            function updateActiveNavLink(targetId = null) {
                 if (!sections.length || !allNavLinks.length) return;
 
                 const scrollY = window.scrollY;
                 const viewportHeight = window.innerHeight;
-                let newActiveId = targetId;
+                let newActiveId = targetId; // Use manually passed ID if available (from click)
 
-                if (!newActiveId) {
-                    // Determine active section based on scroll position relative to viewport top edge + offset
+                if (!newActiveId) { // Determine active section based on scroll position
                     let bestMatch = { id: null, position: -Infinity };
 
                     const navHeight = nav.offsetHeight;
                     const navMarginTop = nav.classList.contains('navbar-scrolled') ? parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--navbar-margin-top-scrolled')) : 0;
-                    const activationOffset = navHeight + navMarginTop + ACTIVE_LINK_BUFFER; // How far below the nav activation starts
+                     // Calculate the point on screen where activation should happen (e.g., 70px below nav top)
+                    const activationPoint = navHeight + navMarginTop + ACTIVE_LINK_BUFFER;
 
                     sections.forEach(section => {
                         const rect = section.getBoundingClientRect();
-                        const topPosition = rect.top + scrollY; // Absolute top position
+                        const sectionTopAbsolute = rect.top + scrollY;
+                        const sectionBottomAbsolute = sectionTopAbsolute + rect.height;
 
-                        // Condition 1: Section top is above the activation offset
-                        // Condition 2: Section bottom is below the activation offset (ensures section is in view)
-                        if (topPosition <= scrollY + activationOffset && topPosition + rect.height > scrollY + activationOffset) {
-                             // Check if this section's top is closer (higher on page) than the current best match
-                            if (topPosition > bestMatch.position) {
-                                bestMatch = { id: section.id, position: topPosition };
+                        // Check if the section's top edge is above the activation point
+                        // AND the section's bottom edge is below the activation point.
+                        // This means the activation point is currently within this section's bounds.
+                        if (sectionTopAbsolute <= scrollY + activationPoint && sectionBottomAbsolute > scrollY + activationPoint) {
+                            // If multiple sections match (rare), prefer the one closer to the top
+                            if (sectionTopAbsolute > bestMatch.position) {
+                                bestMatch = { id: section.id, position: sectionTopAbsolute };
                             }
                         }
                     });
 
-                     // Handle edge case: at the very top, activate 'home'
-                    if (scrollY < sections[0].offsetTop / 2) { // Use a fraction of the first section's offset
-                        bestMatch.id = sections[0].id;
+                     // Edge case: Very top of the page (activate 'home')
+                    if (scrollY < sections[0].offsetTop / 2) {
+                        bestMatch.id = 'home'; // Explicitly set to home
                     }
 
-                     // Handle edge case: very bottom of page, activate last section
-                    if (scrollY + viewportHeight >= bodyEl.scrollHeight - 20) { // Near bottom buffer
+                    // Edge case: Scrolled to the very bottom (activate the last section)
+                    if (scrollY + viewportHeight >= bodyEl.scrollHeight - 20) { // 20px buffer
                          bestMatch.id = sections[sections.length - 1].id;
                     }
 
                     newActiveId = bestMatch.id;
                 }
 
-
-                // Update links only if the active section has changed
+                // Update link classes only if the active section has changed
                 if (newActiveId && newActiveId !== currentActiveSectionId) {
                     currentActiveSectionId = newActiveId;
                     allNavLinks.forEach(link => {
                         link.classList.remove('active');
+                        // Check href against the currentActiveSectionId
                         if (link.getAttribute('href') === `#${currentActiveSectionId}`) {
                             link.classList.add('active');
                         }
                     });
                 } else if (!newActiveId && currentActiveSectionId) {
-                    // If no section detected as active, clear the state
+                    // If no section is detected as active (e.g., scrolling between sections), remove active class
                     currentActiveSectionId = null;
                     allNavLinks.forEach(link => link.classList.remove('active'));
                 }
             }
 
-
+            // --- Accessibility Functions ---
             function toggleAccessibilityPanel(forceClose = false) {
                 if (!accessibilityWidget || !accessibilityToggleBtn || !accessibilityPanel) return;
                 const isExpanded = accessibilityToggleBtn.getAttribute('aria-expanded') === 'true';
                 const newState = forceClose ? false : !isExpanded;
                 accessibilityToggleBtn.setAttribute('aria-expanded', String(newState));
                 accessibilityPanel.classList.toggle('visible', newState);
-                if (newState) {
+                if (newState) { // If opening, focus first button inside
                     setTimeout(() => {
                         accessibilityPanel.querySelector('button:not([disabled])')?.focus();
                     }, 100);
                 } else if (document.activeElement && accessibilityPanel.contains(document.activeElement)) {
+                     // If closing and focus is inside, return focus to the toggle button
                     accessibilityToggleBtn.focus();
                 }
             }
@@ -1113,13 +1302,15 @@
                 const clampedSize = Math.max(MIN_FONT_SIZE, Math.min(MAX_FONT_SIZE, size));
                 htmlEl.style.fontSize = `${clampedSize}px`;
                 localStorage.setItem('accessibilityFontSize', clampedSize);
-                setTimeout(() => { handleNavbarScroll(); updateActiveNavLink(); AOS.refresh(); }, 100);
+                // Recalculate layout-dependent things after font size change
+                setTimeout(() => { handleNavbarScroll(); updateActiveNavLink(); AOS.refresh(); }, 150);
             }
             function increaseFontSize() { applyFontSize(parseFloat(getComputedStyle(htmlEl).fontSize) + FONT_SIZE_STEP); }
             function decreaseFontSize() { applyFontSize(parseFloat(getComputedStyle(htmlEl).fontSize) - FONT_SIZE_STEP); }
             function toggleHighContrast() {
                 const isContrast = htmlEl.classList.toggle('high-contrast');
                 localStorage.setItem('accessibilityHighContrast', isContrast);
+                 // Allow styles to apply, then recalculate layout
                  setTimeout(() => { handleNavbarScroll(); updateActiveNavLink(); }, 50);
             }
             function toggleGrayscale() {
@@ -1130,31 +1321,39 @@
                 applyFontSize(DEFAULT_FONT_SIZE);
                 htmlEl.classList.remove('high-contrast'); localStorage.removeItem('accessibilityHighContrast');
                 htmlEl.classList.remove('grayscale'); localStorage.removeItem('accessibilityGrayscale');
-                 setTimeout(() => { handleNavbarScroll(); updateActiveNavLink(); }, 50);
-                 toggleAccessibilityPanel(true);
+                 setTimeout(() => { handleNavbarScroll(); updateActiveNavLink(); }, 50); // Recalculate layout
+                 toggleAccessibilityPanel(true); // Close panel after reset
             }
             function loadAccessibilityPreferences() {
+                // Font Size
                 const savedFontSize = localStorage.getItem('accessibilityFontSize');
                 const initialSize = savedFontSize ? Math.max(MIN_FONT_SIZE, Math.min(MAX_FONT_SIZE, parseInt(savedFontSize))) : DEFAULT_FONT_SIZE;
-                htmlEl.style.fontSize = `${initialSize}px`;
-
-                if (localStorage.getItem('accessibilityHighContrast') === 'true') htmlEl.classList.add('high-contrast');
-                if (localStorage.getItem('accessibilityGrayscale') === 'true') htmlEl.classList.add('grayscale');
-
+                if (initialSize !== DEFAULT_FONT_SIZE) { // Apply only if different from default
+                    htmlEl.style.fontSize = `${initialSize}px`;
+                }
+                // High Contrast
+                if (localStorage.getItem('accessibilityHighContrast') === 'true') {
+                     htmlEl.classList.add('high-contrast');
+                }
+                // Grayscale
+                if (localStorage.getItem('accessibilityGrayscale') === 'true') {
+                     htmlEl.classList.add('grayscale');
+                }
+                // Ensure panel is closed on load
                 if(accessibilityPanel) accessibilityPanel.classList.remove('visible');
                 if(accessibilityToggleBtn) accessibilityToggleBtn.setAttribute('aria-expanded', 'false');
             }
 
             // --- Initialization ---
-            loadAccessibilityPreferences();
-            handleScroll();
+            loadAccessibilityPreferences(); // Load preferences first
+            handleScroll(); // Initial check for navbar, scroll-top, active link
             setupSmoothScrolling();
             setupScrollToTop();
             setupModalTriggers();
             setupContactForm();
             setupApplicationForm();
 
-            // --- Event Listeners ---
+            // --- Global Event Listeners ---
             if (accessibilityToggleBtn) accessibilityToggleBtn.addEventListener('click', () => toggleAccessibilityPanel());
             if (increaseFontBtn) increaseFontBtn.addEventListener('click', increaseFontSize);
             if (decreaseFontBtn) decreaseFontBtn.addEventListener('click', decreaseFontSize);
@@ -1162,11 +1361,13 @@
             if (toggleGrayscaleBtn) toggleGrayscaleBtn.addEventListener('click', toggleGrayscale);
             if (resetAccessibilityBtn) resetAccessibilityBtn.addEventListener('click', resetAccessibility);
 
+            // Close accessibility panel if clicking outside
             document.addEventListener('click', (e) => {
                 if (accessibilityPanel?.classList.contains('visible') && !accessibilityPanel.contains(e.target) && !accessibilityToggleBtn?.contains(e.target)) {
                     toggleAccessibilityPanel(true);
                 }
             });
+            // Close accessibility panel with Escape key
             window.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape' && accessibilityPanel?.classList.contains('visible')) {
                     toggleAccessibilityPanel(true);
@@ -1175,14 +1376,16 @@
 
             if (mobileMenuButton) mobileMenuButton.addEventListener('click', () => toggleMobileMenu());
 
+            // Debounced or Throttled scroll/resize listeners could be used for performance optimization,
+            // but for this scope, standard listeners are acceptable.
             window.addEventListener('scroll', handleScroll, { passive: true });
             window.addEventListener('resize', handleScroll, { passive: true });
 
-             setTimeout(() => updateActiveNavLink(), 150); // Delay initial active link check slightly more
+             // Initial active link check after slight delay to ensure layout stability
+             setTimeout(() => updateActiveNavLink(), 150);
 
         });
     </script>
 
 </body>
 </html>
-
