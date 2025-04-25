@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Updated Title -->
+    <title>Future Academy 2050 - Educating Innovators for Tomorrow</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Orbitron:wght@400..900&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --navbar-height-initial: 68px;
+            --navbar-height-scrolled: 60px;
+            --navbar-margin-top-scrolled: 1rem;
+            --base-font-size: 16px;
+            --text-color-base: #f3f4f6;
+            --text-color-muted: #d1d5db;
+            --text-color-darker: #9ca3af;
+            --bg-color-primary: #111827;
+            --bg-color-secondary: #1f2937;
+            --bg-color-tertiary: #374151;
+            --border-color: #4b5563;
+            --gradient-start: #a7b2f5;
+            --gradient-end: #c8a8e4;
+            --gradient-start-hover: #b8c1f8;
+            --gradient-end-hover: #d8bcf0;
+            --primary-accent: #818cf8;
+            --primary-accent-darker: #6366f1;
+            --primary-accent-darkest: #4f46e5;
+            --link-glow-bright: rgba(199, 210, 254, 0.7);
+            --link-glow-active: #c8a8e4;
+            --scroll-padding-top: calc(var(--navbar-height-initial) + 1rem);
+        }
+
+        html {
+            scroll-padding-top: var(--scroll-padding-top);
+            scroll-behavior: smooth;
+            font-size: var(--base-font-size);
+            background-color: var(--bg-color-primary);
+            filter: none;
+            transition: font-size 0.3s ease, filter 0.4s ease;
+        }
+         html.navbar-scrolled {
+             scroll-padding-top: calc(var(--navbar-height-scrolled) + var(--navbar-margin-top-scrolled) + 1rem);
+         }
+
+        html.high-contrast {
+            --text-color-base: #ffffff;
+            --text-color-muted: #eeeeee;
+            --text-color-darker: #dddddd;
+            --bg-color-primary: #000000;
+            --bg-color-secondary: #1a1a1a;
+            --bg-color-tertiary: #333333;
+            --border-color: #ffffff;
+            --gradient-start: #ffffff;
+            --gradient-end: #ffffff;
+            --gradient-start-hover: #ffffff;
+            --gradient-end-hover: #ffffff;
+            --primary-accent: #00ffff;
+            --primary-accent-darker: #00e5e5;
+            --primary-accent-darkest: #00cccc;
+            --link-glow-bright: none;
+            --link-glow-active: none;
+            background-color: var(--bg-color-primary);
+        }
+        html.high-contrast .gradient-text {
+            background: none;
+            -webkit-background-clip: initial;
+            background-clip: initial;
+            color: var(--primary-accent);
+            -webkit-text-fill-color: initial;
+        }
+        html.high-contrast body,
+        html.high-contrast #navbar.navbar-scrolled,
+        html.high-contrast #navbar.mobile-menu-open,
+        html.high-contrast .interactive-card,
+        html.high-contrast .project-showcase-card,
+        html.high-contrast fieldset,
+        html.high-contrast .form-input,
+        html.high-contrast #modal-overlay>div,
+        html.high-contrast #accessibility-panel {
+            background-color: var(--bg-color-secondary) !important;
+            border-color: var(--border-color) !important;
+            box-shadow: none !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+        }
+        html.high-contrast #home,
+         html.high-contrast #about, html.high-contrast #technology, html.high-contrast #student-life,
+         html.high-contrast #contact>div.max-w-4xl, html.high-contrast #curriculum,
+         html.high-contrast #admissions, html.high-contrast #contact, html.high-contrast footer {
+             background-color: var(--bg-color-secondary) !important;
+             background-image: none !important;
+         }
+        html.high-contrast body {
+            background-image: none !important;
+        }
+         html.high-contrast .btn-gradient,
+         html.high-contrast .btn-outline,
+         html.high-contrast #scroll-to-top {
+            background-image: none !important;
+            background-color: var(--primary-accent);
+            color: var(--bg-color-primary) !important;
+            border: 1px solid var(--text-color-base) !important;
+            text-shadow: none !important;
+            box-shadow: none !important;
+         }
+         html.high-contrast .btn-gradient:hover,
+         html.high-contrast .btn-outline:hover,
+         html.high-contrast #scroll-to-top:hover {
+             background-color: var(--primary-accent-darkest);
+             color: var(--text-color-base) !important;
+             transform: none !important;
+         }
+          html.high-contrast .btn-outline {
+             background-color: transparent !important;
+             color: var(--primary-accent) !important;
+         }
+         html.high-contrast nav a.nav-link:hover,
+         html.high-contrast nav a.nav-link.active {
+             color: var(--primary-accent) !important;
+             text-shadow: none !important;
+         }
+          html.high-contrast nav a.nav-link::after {
+             background: var(--primary-accent) !important;
+             height: 2px !important;
+         }
+        html.high-contrast img,
+        html.high-contrast video {
+            filter: brightness(1.1) contrast(1.2);
+        }
+        html.high-contrast .fa, html.high-contrast .fas, html.high-contrast .fab {
+             color: var(--primary-accent) !important;
+        }
+         html.high-contrast #hero-video-container { display: none; }
+
+
+        html.grayscale { filter: grayscale(100%); }
+
+        body {
+            font-family: 'Exo 2', sans-serif;
+            /* Keep original background image as requested */
+            background-image: url('https://images.unsplash.com/photo-1531306728370-e2ebd9d7bb99?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-color: var(--bg-color-primary);
+            background-blend-mode: multiply;
+            color: var(--text-color-base);
+            overflow-x: hidden;
+        }
+
+        body.modal-open { overflow: hidden; }
+        section { padding: 5rem 1rem; }
+        @media (min-width: 768px) { section { padding: 6rem 2rem; } }
+        .container { max-width: 1400px; margin-left: auto; margin-right: auto; width: 100%; }
+        h1, h2, h3, h4, h5, h6, .font-orbitron { font-family: 'Orbitron', sans-serif; }
+        .gradient-text {
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+            -webkit-background-clip: text; background-clip: text;
+            color: transparent; -webkit-text-fill-color: transparent;
+        }
+        .leading-relaxed { line-height: 1.625; }
+        .text-red-400 { color: #f87171; }
+
+        #navbar {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+            background-color: transparent; color: white;
+            padding: 0 1rem; height: var(--navbar-height-initial);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease, height 0.3s ease, max-width 0.4s ease, margin 0.4s ease, border-radius 0.4s ease;
+        }
+        #navbar .container { height: 100%; }
+        #navbar.navbar-scrolled {
+            margin-top: var(--navbar-margin-top-scrolled);
+            max-width: calc(100% - 2rem);
+            margin-left: auto; margin-right: auto;
+            border-radius: 0.75rem;
+            height: var(--navbar-height-scrolled);
+            background-color: rgba(31, 41, 55, 0.9);
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 6px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 8px -4px rgba(0, 0, 0, 0.15);
+        }
+         #navbar.mobile-menu-open {
+             background-color: var(--bg-color-secondary);
+             backdrop-filter: none; -webkit-backdrop-filter: none;
+             box-shadow: none;
+             max-width: 100%; margin-top: 0; border-radius: 0;
+             height: var(--navbar-height-initial);
+         }
+         #navbar.mobile-menu-open.navbar-scrolled { height: var(--navbar-height-scrolled); }
+
+        nav a.nav-link {
+            position: relative; padding: 0.25rem 0;
+            color: var(--text-color-muted);
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+            text-decoration: none;
+        }
+        nav a.nav-link::after {
+            content: ''; position: absolute; width: 0; height: 2px;
+            bottom: -4px; left: 50%; transform: translateX(-50%);
+            background: linear-gradient(135deg, var(--gradient-start-hover) 0%, var(--gradient-end-hover) 100%);
+            transition: width 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        nav a.nav-link:hover::after, nav a.nav-link.active::after { width: 100%; }
+        nav a.nav-link:hover { color: var(--text-color-base); text-shadow: 0 0 12px var(--link-glow-bright); }
+        nav a.nav-link.active {
+            color: var(--text-color-base); font-weight: 600;
+            text-shadow: 0 0 12px var(--link-glow-active);
+        }
+         #nav-links-mobile a.nav-link {
+             color: var(--text-color-base); padding: 0.75rem 1rem;
+             &::after { display: none; }
+         }
+         #nav-links-mobile a.nav-link:hover { background-color: rgba(55, 65, 81, 0.5); }
+         #nav-links-mobile a.nav-link.active { color: var(--primary-accent); font-weight: 700; }
+
+        /* Keep home background image section as per request */
+        #home {
+            background-color: transparent !important;
+            background-image: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-blend-mode: overlay;
+        }
+        #hero-video-container { position: absolute; inset: 0; width: 100%; height: 100%; overflow: hidden; z-index: -1; }
+        #hero-video { min-width: 100%; min-height: 100%; width: auto; height: auto; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); object-fit: cover; opacity: 0.7; }
+        #hero-overlay {
+            position: absolute; inset: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(17, 24, 39, 0.75), rgba(49, 46, 129, 0.85));
+            z-index: 0;
+        }
+        #hero-content { position: relative; z-index: 1; }
+
+        .timeline-container::before {
+            content: ''; position: absolute; left: calc(1rem + 0.375rem);
+            top: 0.25rem; bottom: 0; width: 2px;
+            background-color: var(--primary-accent); opacity: 0.5; z-index: 0;
+        }
+        .timeline-item { position: relative; padding-left: 2.5rem; z-index: 1; }
+        .timeline-marker {
+            position: absolute; left: calc(1rem - (0.75rem / 2) + 0.375rem);
+            top: 0.25rem; width: 0.75rem; height: 0.75rem;
+            background-color: var(--primary-accent-darker); border-radius: 50%;
+            border: 2px solid var(--bg-color-secondary); z-index: 2;
+        }
+        .timeline-item p:first-of-type { color: var(--primary-accent); font-weight: 600; }
+        .timeline-item p { color: var(--text-color-muted); }
+
+        .btn { display: inline-block; font-weight: 600; padding: 0.75rem 1.5rem; border-radius: 0.5rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); transition: all 0.3s ease; text-align: center; cursor: pointer; border: 1px solid transparent; text-decoration: none; }
+        .btn-sm { padding: 0.5rem 1rem; font-size: 0.875em; }
+        .btn-lg { padding: 0.875rem 1.75rem; font-size: 1.125em; }
+        .btn-gradient { background-image: linear-gradient(to right, var(--primary-accent-darker), var(--primary-accent-darkest)); color: white; }
+        .btn-gradient:hover { background-image: linear-gradient(to right, var(--primary-accent-darkest), var(--primary-accent-darker)); filter: brightness(1.1); transform: translateY(-3px); box-shadow: 0 8px 15px -3px rgba(99, 102, 241, 0.35), 0 4px 8px -2px rgba(139, 92, 246, 0.25); }
+        .btn-outline { border-color: var(--primary-accent); color: var(--primary-accent); background-color: transparent; }
+        .btn-outline:hover { background-color: rgba(129, 140, 248, 0.15); color: var(--text-color-base); border-color: var(--primary-accent-darker); transform: translateY(-3px); box-shadow: 0 8px 15px -3px rgba(129, 140, 248, 0.2), 0 4px 8px -2px rgba(129, 140, 248, 0.15); }
+
+        .interactive-card, .project-showcase-card {
+            border: 1px solid transparent;
+            transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease, background-color 0.35s ease;
+            overflow: hidden; background-color: var(--bg-color-secondary);
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+            color: var(--text-color-muted);
+            display: flex; flex-direction: column;
+        }
+        .interactive-card h4, .project-showcase-card h5 { color: var(--text-color-base); }
+        .interactive-card:hover, .project-showcase-card:hover {
+            transform: translateY(-6px) scale(1.02);
+            border-color: var(--primary-accent);
+            box-shadow: 0 15px 25px -5px rgba(129, 140, 248, 0.2), 0 10px 15px -6px rgba(129, 140, 248, 0.15);
+            background-color: var(--bg-color-tertiary);
+        }
+        .interactive-card img, .project-showcase-card img {
+            transition: transform 0.4s ease, opacity 0.4s ease;
+            width: 100%; height: auto; object-fit: cover;
+        }
+        .interactive-card:hover img, .project-showcase-card:hover img {
+            transform: scale(1.06); opacity: 0.95;
+        }
+        .project-showcase-card { padding: 1rem; }
+        .project-showcase-card h5 { color: var(--primary-accent); }
+        .project-showcase-card p { color: var(--text-color-darker); }
+        .interactive-card p { color: var(--text-color-muted); }
+
+        .form-input { display: block; width: 100%; background-color: var(--bg-color-tertiary); border: 1px solid var(--border-color); border-radius: 0.375rem; box-shadow: inset 0 1px 2px 0 rgba(0, 0, 0, 0.05); padding: 0.625rem 0.75rem; color: var(--text-color-base); outline: none; transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out; color-scheme: dark; }
+        .form-input::placeholder { color: var(--text-color-darker); opacity: 0.8; }
+        .form-input:focus { border-color: var(--primary-accent-darker); box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3); }
+        .form-input:required:invalid { border-color: #f87171; }
+        .form-input:required:focus:invalid { box-shadow: 0 0 0 3px rgba(248, 113, 129, 0.3); }
+        .form-input[type="file"] { padding: 0.3rem 0.75rem; cursor: pointer; }
+        .form-input[type="file"]::-webkit-file-upload-button, .form-input[type="file"]::-moz-file-upload-button { margin-right: 1rem; padding: 0.5rem 1rem; border-radius: 9999px; border-width: 0px; font-size: 0.875em; font-weight: 600; background-color: #e0e7ff; color: #4338ca; cursor: pointer; transition: background-color 0.2s ease; }
+        .form-input[type="file"]:hover::-webkit-file-upload-button, .form-input[type="file"]:hover::-moz-file-upload-button { background-color: #c7d2fe; }
+        select.form-input { appearance: none; background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%239ca3af' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e"); background-position: right 0.5rem center; background-repeat: no-repeat; background-size: 1.5em 1.5em; padding-right: 2.5rem; }
+        label { cursor: pointer; display: inline-block; margin-bottom: 0.25rem; color: var(--text-color-muted); }
+        label span.text-red-400 { margin-left: 0.125rem; }
+        fieldset { border-width: 1px; padding: 1rem; border-radius: 0.375rem; border-color: var(--border-color); margin-bottom: 1.5rem; }
+        legend { font-size: 1.25rem; font-family: 'Orbitron', sans-serif; font-weight: 600; margin-bottom: 1rem; padding-left: 0.5rem; padding-right: 0.5rem; color: var(--text-color-base); }
+        #form-feedback, #application-feedback { min-height: 1.5em; transition: color 0.3s ease; }
+
+        #scroll-to-top { position: fixed; bottom: 1.25rem; right: 1.25rem; background-image: linear-gradient(to right, var(--primary-accent-darker), var(--primary-accent-darkest)); color: white; padding: 0.75rem; border-radius: 9999px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease, background-image 0.3s ease; opacity: 0; visibility: hidden; z-index: 60; cursor: pointer; border: none; }
+        #scroll-to-top.visible { opacity: 1; visibility: visible; }
+        #scroll-to-top:hover { background-image: linear-gradient(to right, var(--primary-accent-darkest), var(--primary-accent-darker)); transform: scale(1.1); }
+
+        #modal-overlay {
+            position: fixed; inset: 0; background-color: rgba(17, 24, 39, 0.8);
+            backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
+            display: flex; align-items: center; justify-content: center;
+            z-index: 100; opacity: 0; visibility: hidden;
+            transition: opacity 0.3s ease-out, visibility 0s linear 0.3s; padding: 1rem;
+        }
+        #modal-overlay.modal-active { opacity: 1; visibility: visible; transition: opacity 0.3s ease-out, visibility 0s linear 0s; }
+        #modal-overlay>div#application-form-container {
+            background-color: var(--bg-color-secondary); border-radius: 0.75rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            padding: 2rem; max-width: 56rem; width: 100%; max-height: 90vh; overflow-y: auto;
+            position: relative; transform: scale(0.95) translateY(-20px);
+            transition: transform 0.3s ease-out, background-color 0.3s ease, border-color 0.3s ease;
+        }
+        #modal-overlay.modal-active>div#application-form-container { transform: scale(1) translateY(0); }
+        #modal-close-button { position: absolute; top: 0.75rem; right: 0.75rem; background-color: rgba(55, 65, 81, 0.6); color: var(--text-color-muted); border-radius: 9999px; width: 2rem; height: 2rem; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background-color 0.2s ease, color 0.2s ease; border: none; z-index: 110; }
+        #modal-close-button:hover { background-color: rgba(75, 85, 99, 0.8); color: var(--text-color-base); }
+        .hidden { display: none; }
+
+        #about .vision-image {
+            max-width: 250px; height: auto; min-height: 180px;
+            margin: 0 auto 1.5rem auto; border-radius: 0.75rem;
+            box-shadow: 0 8px 30px -8px rgba(167, 178, 245, 0.3);
+            opacity: 0.9; background-color: var(--bg-color-tertiary);
+            object-fit: cover;
+        }
+         #about, #technology, #student-life, #contact>div.max-w-4xl {
+            background-color: rgba(31, 41, 55, 0.85);
+            backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px);
+         }
+         #curriculum, #admissions, #contact, footer {
+            background-color: rgba(17, 24, 39, 0.9);
+            backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px);
+         }
+         #application-form-container fieldset:last-of-type { margin-bottom: 0; }
+
+        .footer-link { color: var(--text-color-darker); transition: color 0.3s ease; text-decoration: none; }
+        .footer-link:hover { color: var(--text-color-base); }
+        footer a[aria-label] i { color: var(--text-color-darker); transition: color 0.3s ease;}
+        footer a[aria-label]:hover i { color: var(--text-color-base); }
+
+        #accessibility-widget {
+            position: fixed; bottom: 1rem; left: 1rem; z-index: 70;
+            display: flex; flex-direction: column; align-items: flex-start;
+        }
+        #accessibility-toggle {
+            background-color: var(--primary-accent-darker); color: white;
+            border: none; border-radius: 50%; width: 48px; height: 48px;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        #accessibility-toggle:hover { background-color: var(--primary-accent-darkest); transform: scale(1.1); }
+        #accessibility-toggle i { font-size: 1.4rem; }
+        html.high-contrast #accessibility-toggle {
+             background-color: var(--primary-accent) !important; border: 1px solid var(--text-color-base) !important;
+             color: var(--bg-color-primary) !important; box-shadow: none !important;
+        }
+         html.high-contrast #accessibility-toggle:hover {
+             background-color: var(--primary-accent-darkest) !important; color: var(--text-color-base) !important;
+             transform: none !important;
+        }
+        #accessibility-panel {
+            background-color: var(--bg-color-secondary); color: var(--text-color-base);
+            border: 1px solid var(--border-color); border-radius: 8px;
+            padding: 1rem; margin-bottom: 0.5rem;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); width: 200px;
+            visibility: hidden; opacity: 0; transform: translateY(10px);
+            transition: visibility 0s linear 0.3s, opacity 0.3s ease, transform 0.3s ease;
+             &.visible {
+                 visibility: visible; opacity: 1; transform: translateY(0);
+                 transition: visibility 0s linear 0s, opacity 0.3s ease, transform 0.3s ease;
+             }
+        }
+        #accessibility-panel h4 {
+            font-family: 'Orbitron', sans-serif; font-size: 1rem; margin-bottom: 1rem;
+            text-align: center; color: var(--primary-accent);
+            border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;
+        }
+        html.high-contrast #accessibility-panel h4 { color: var(--primary-accent) !important; border-bottom-color: var(--border-color) !important; }
+        .accessibility-options { display: flex; flex-direction: column; gap: 0.75rem; }
+        .accessibility-item { display: flex; justify-content: space-between; align-items: center; }
+        .accessibility-item span { font-size: 0.9em; color: var(--text-color-muted); }
+        html.high-contrast .accessibility-item span { color: var(--text-color-muted) !important; }
+        .accessibility-options button {
+            font-size: 0.85em; padding: 0.3rem 0.6rem; border-radius: 4px;
+            cursor: pointer; border: 1px solid var(--border-color);
+            background-color: var(--bg-color-tertiary); color: var(--text-color-muted);
+            transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+        }
+        .accessibility-options button:hover { background-color: var(--primary-accent); color: white; border-color: var(--primary-accent); }
+        .font-size-controls button { width: 30px; text-align: center; margin-left: 5px; }
+        #reset-accessibility {
+             font-size: 0.8em; width: 100%; margin-top: 1rem; padding: 0.4rem;
+             background-color: transparent; border-color: var(--primary-accent);
+             color: var(--primary-accent);
+         }
+         #reset-accessibility:hover { background-color: var(--primary-accent); color: var(--bg-color-primary); }
+         html.high-contrast .accessibility-options button,
+         html.high-contrast #reset-accessibility {
+              background-color: var(--bg-color-tertiary) !important; border-color: var(--border-color) !important;
+              color: var(--text-color-base) !important;
+         }
+         html.high-contrast .accessibility-options button:hover,
+         html.high-contrast #reset-accessibility:hover {
+             background-color: var(--primary-accent) !important; color: var(--bg-color-primary) !important;
+              border-color: var(--primary-accent) !important;
+         }
+
+        .h-40 { height: 10rem; }
+        .h-48 { height: 12rem; }
+        .object-cover { object-fit: cover; }
+
+        @media (max-width: 767px) {
+            #navbar.navbar-scrolled { max-width: calc(100% - 1rem); margin-top: 0.5rem; }
+        }
+        @media (max-width: 640px) {
+            #modal-overlay>div#application-form-container { padding: 1.5rem 1rem; }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-900 text-gray-100">
+
+    <nav id="navbar" role="navigation" aria-label="Main Navigation">
+        <div class="container mx-auto flex justify-between items-center h-full px-4">
+            <!-- Brand name -->
+            <a href="#home" class="text-2xl font-orbitron font-bold gradient-text">FA 2050</a>
+
+            <!-- Standard, professional navigation links -->
+            <div id="nav-links-desktop" class="hidden md:flex md:items-center md:space-x-6">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#about" class="nav-link">About Us</a>
+                <a href="#curriculum" class="nav-link">Curriculum</a>
+                <a href="#technology" class="nav-link">Technology</a>
+                <a href="#admissions" class="nav-link">Admissions</a>
+                <a href="#student-life" class="nav-link">Student Life</a>
+                <a href="#contact" class="nav-link">Contact</a>
+                <button class="btn btn-outline btn-sm ml-4 apply-now-trigger">Apply Now</button>
+            </div>
+
+            <div class="md:hidden flex items-center">
+                <button class="apply-now-trigger btn btn-outline btn-sm mr-2">Apply</button>
+                <button id="mobile-menu-button" aria-label="Toggle Menu" aria-expanded="false" aria-controls="nav-links-mobile" class="text-white focus:outline-none p-1 inline-flex items-center">
+                    <svg id="menu-icon-open" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7" /></svg>
+                    <svg id="menu-icon-close" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Standard mobile navigation links -->
+        <div id="nav-links-mobile" class="hidden md:hidden bg-gray-800 absolute top-full left-0 w-full shadow-lg border-t border-gray-700">
+            <div class="flex flex-col items-center py-2">
+                <a href="#home" class="nav-link w-full text-center">Home</a>
+                <a href="#about" class="nav-link w-full text-center">About Us</a>
+                <a href="#curriculum" class="nav-link w-full text-center">Curriculum</a>
+                <a href="#technology" class="nav-link w-full text-center">Technology</a>
+                <a href="#admissions" class="nav-link w-full text-center">Admissions</a>
+                <a href="#student-life" class="nav-link w-full text-center">Student Life</a>
+                <a href="#contact" class="nav-link w-full text-center">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Section: Home -->
+    <section id="home" class="relative h-screen flex items-center justify-center text-center text-white p-0 overflow-hidden">
+        <div id="hero-video-container" aria-hidden="true">
+            <video autoplay muted loop playsinline id="hero-video" preload="auto">
+                <source src="https://assets.mixkit.co/videos/preview/mixkit-futuristic-computer-data-processing-screen-4700-large.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <div id="hero-overlay" aria-hidden="true"></div>
+        <div id="hero-content" class="container mx-auto px-4">
+            <h1 class="text-5xl md:text-7xl font-orbitron font-extrabold mb-4 gradient-text" data-aos="fade-down" data-aos-duration="1000">Future Academy 2050</h1>
+            <!-- More professional tagline -->
+            <p class="text-xl md:text-3xl font-light mb-10 max-w-3xl mx-auto leading-relaxed" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">Educating the next generation of innovators and leaders for a rapidly evolving technological world.</p>
+            <div class="space-x-4" data-aos="fade-up" data-aos-delay="400" data-aos-duration="1000">
+                <a href="#about" class="btn btn-gradient">Learn More</a>
+                <button class="btn btn-outline apply-now-trigger">Apply Now</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: About Us -->
+    <section id="about">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl font-orbitron font-bold mb-16 gradient-text" data-aos="fade-up">About Future Academy</h2>
+            <div class="grid md:grid-cols-2 gap-16 items-start max-w-5xl mx-auto">
+                <div data-aos="fade-right" data-aos-delay="100">
+                     <!-- Image representing diverse, tech-enabled learning -->
+                     <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=871&q=80"
+                          alt="Diverse students collaborating with laptops and tablets in a modern learning space"
+                          class="vision-image rounded-lg" loading="lazy">
+                    <!-- Professional vision statement -->
+                    <h3 class="text-2xl font-orbitron font-semibold mb-4">Our Vision</h3>
+                    <p class="leading-relaxed text-left md:text-center">To be a premier global institution fostering critical thinking, creativity, and ethical leadership. We empower students to navigate complexity, leverage emerging technologies responsibly, and drive positive, sustainable change for the future.</p>
+                </div>
+                <div data-aos="fade-left" data-aos-delay="200">
+                    <!-- More grounded journey description -->
+                    <h3 class="text-2xl font-orbitron font-semibold mb-4">Our Journey</h3>
+                    <p class="leading-relaxed mb-6 text-left md:text-center">Founded on principles of foresight and adaptation, FA 2050 has consistently evolved its programs to meet the educational demands of an increasingly interconnected and technology-driven world.</p>
+                    <div class="timeline-container text-left space-y-6 relative pl-4">
+                        <!-- More realistic timeline events -->
+                        <div class="timeline-item" data-aos="fade-left" data-aos-delay="300"> <div class="timeline-marker"></div> <p>2040</p> <p>Foundation & Concept: Envisioning a future-focused educational model.</p> </div>
+                        <div class="timeline-item" data-aos="fade-left" data-aos-delay="400"> <div class="timeline-marker"></div> <p>2045</p> <p>Launch of Core AI & Data Science Curriculum with focus on ethics.</p> </div>
+                        <div class="timeline-item" data-aos="fade-left" data-aos-delay="500"> <div class="timeline-marker"></div> <p>2048</p> <p>Integration of Immersive Learning Technologies (VR/AR) across disciplines.</p> </div>
+                        <div class="timeline-item" data-aos="fade-left" data-aos-delay="600"> <div class="timeline-marker"></div> <p>2050</p> <p>Expansion with Advanced Computing & Sustainable Design Programs.</p> </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Curriculum -->
+    <section id="curriculum">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-orbitron font-bold text-center mb-8 gradient-text" data-aos="fade-up">Innovative Curriculum</h2>
+            <!-- Grounded description -->
+            <p class="text-center max-w-3xl mx-auto mb-16 leading-relaxed" data-aos="fade-up" data-aos-delay="100">Our curriculum integrates cutting-edge fields through project-based learning, ethical considerations, and real-world problem-solving to prepare students for future challenges.</p>
+            <div class="grid md:grid-cols-3 gap-8">
+                 <!-- More professional curriculum descriptions -->
+                <div class="interactive-card p-6 text-center" data-aos="zoom-in" data-aos-delay="200"> <div class="mb-4 mx-auto"><i class="fas fa-robot fa-3x text-indigo-400"></i></div> <h4 class="text-xl font-orbitron font-semibold mb-3 gradient-text">AI & Robotics</h4> <p class="leading-relaxed flex-grow">Explore intelligent systems, machine learning, and automation, while examining the societal and ethical implications of AI.</p> </div>
+                <div class="interactive-card p-6 text-center" data-aos="zoom-in" data-aos-delay="300"> <div class="mb-4 mx-auto"><i class="fas fa-project-diagram fa-3x text-indigo-400"></i></div> <h4 class="text-xl font-orbitron font-semibold mb-3 gradient-text">Advanced Computing</h4> <p class="leading-relaxed flex-grow">Delve into next-generation computing paradigms, including quantum principles, high-performance computing, and complex simulations.</p> </div>
+                 <div class="interactive-card p-6 text-center" data-aos="zoom-in" data-aos-delay="400"> <div class="mb-4 mx-auto"><i class="fas fa-leaf fa-3x text-indigo-400"></i></div> <h4 class="text-xl font-orbitron font-semibold mb-3 gradient-text">Sustainable Design</h4> <p class="leading-relaxed flex-grow">Integrate principles from biology, engineering, and design to create innovative, sustainable materials, systems, and solutions.</p> </div>
+            </div>
+            <div class="mt-16 text-center" data-aos="fade-up" data-aos-delay="300">
+                <h3 class="text-3xl font-orbitron font-semibold mb-8 gradient-text">Student Project Showcase</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto mb-8">
+                    <!-- Updated Project Showcase Items with clearer descriptions -->
+                    <div class="project-showcase-card" data-aos="fade-up" data-aos-delay="400">
+                         <img src="https://images.unsplash.com/photo-1634733600148-a9d68717c9dc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80"
+                             alt="Abstract visualization of environmental data analysis" class="rounded mb-3 h-40 object-cover" loading="lazy">
+                        <h5 class="font-semibold text-lg mb-1">EcoSim AI</h5>
+                        <p class="text-sm">AI-powered environmental modeling for climate change prediction.</p>
+                    </div>
+                    <div class="project-showcase-card" data-aos="fade-up" data-aos-delay="500">
+                        <img src="https://images.unsplash.com/photo-1604079628040-94301bb21b91?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80"
+                             alt="Abstract representation of complex data simulation" class="rounded mb-3 h-40 object-cover" loading="lazy">
+                        <h5 class="font-semibold text-lg mb-1">Quantum Material Sim</h5>
+                        <p class="text-sm">Simulating novel material properties using quantum computing principles.</p>
+                    </div>
+                    <div class="project-showcase-card" data-aos="fade-up" data-aos-delay="600">
+                         <img src="https://images.unsplash.com/photo-1611095965923-893b5799903f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80"
+                             alt="Close-up of a bio-based material structure" class="rounded mb-3 h-40 object-cover" loading="lazy">
+                        <h5 class="font-semibold text-lg mb-1">BioFab Structures</h5>
+                        <p class="text-sm">Developing sustainable building components using bio-fabrication techniques.</p>
+                    </div>
+                </div>
+                <a href="#contact" class="mt-8 btn btn-gradient" data-aos="fade-up" data-aos-delay="700">Inquire About Research</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Technology -->
+    <section id="technology">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-orbitron font-bold text-center mb-16 gradient-text" data-aos="fade-up">Technology-Enhanced Learning</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                 <!-- More professional technology descriptions -->
+                <div class="interactive-card p-6" data-aos="fade-up" data-aos-delay="100">
+                     <img src="https://images.unsplash.com/photo-1589220340948-3e9b765b1c95?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80"
+                         alt="Student using VR headset for an educational simulation" class="rounded mb-4 h-48 object-cover" loading="lazy">
+                    <h4 class="text-xl font-orbitron font-semibold mb-3 gradient-text">Immersive Environments</h4>
+                    <p class="leading-relaxed flex-grow">Utilize VR/AR simulations and holographic displays for collaborative learning and exploration of complex subjects.</p>
+                </div>
+                 <div class="interactive-card p-6" data-aos="fade-up" data-aos-delay="200">
+                    <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format=fit=crop&w=765&q=80"
+                         alt="Abstract representation of AI data processing" class="rounded mb-4 h-48 object-cover" loading="lazy">
+                    <h4 class="text-xl font-orbitron font-semibold mb-3 gradient-text">AI-Powered Personalization</h4>
+                    <p class="leading-relaxed flex-grow">Benefit from adaptive learning platforms and AI tools that tailor educational content and provide personalized feedback.</p>
+                </div>
+                 <div class="interactive-card p-6" data-aos="fade-up" data-aos-delay="300">
+                    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format=fit=crop&w=870&q=80"
+                         alt="Integrated technology infrastructure represented by circuitry" class="rounded mb-4 h-48 object-cover" loading="lazy">
+                    <h4 class="text-xl font-orbitron font-semibold mb-3 gradient-text">Integrated Campus Systems</h4>
+                    <p class="leading-relaxed flex-grow">Experience a connected campus with smart classrooms, digital resource access, and streamlined communication platforms.</p>
+                </div>
+                 <div class="interactive-card p-6" data-aos="fade-up" data-aos-delay="100">
+                     <img src="https://images.unsplash.com/photo-1614914142081-0ea36a17a5c6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format=fit=crop&w=870&q=80"
+                         alt="Modern digital fabrication lab with 3D printers" class="rounded mb-4 h-48 object-cover" loading="lazy">
+                    <h4 class="text-xl font-orbitron font-semibold mb-3 gradient-text">Advanced Maker Spaces</h4>
+                    <p class="leading-relaxed flex-grow">Access state-of-the-art fabrication labs equipped with 3D printers, robotics kits, and tools for prototyping and innovation.</p>
+                </div>
+                 <div class="interactive-card p-6" data-aos="fade-up" data-aos-delay="200">
+                     <img src="https://images.unsplash.com/photo-1554734867-bf3c00a49371?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format=fit=crop&w=774&q=80"
+                         alt="Visualization related to cognitive processes or data analysis" class="rounded mb-4 h-48 object-cover" loading="lazy">
+                    <h4 class="text-xl font-orbitron font-semibold mb-3 gradient-text">Cognitive Learning Tools</h4>
+                    <p class="leading-relaxed flex-grow">Engage with tools designed to enhance learning based on cognitive science principles, including advanced data visualization and analysis.</p>
+                </div>
+                 <div class="interactive-card p-6" data-aos="fade-up" data-aos-delay="300">
+                    <img src="https://images.unsplash.com/photo-1587620962725-abab7fe55159?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format=fit=crop&w=1031&q=80"
+                         alt="Abstract representation of global network connectivity" class="rounded mb-4 h-48 object-cover" loading="lazy">
+                    <h4 class="text-xl font-orbitron font-semibold mb-3 gradient-text">Global Collaboration Network</h4>
+                    <p class="leading-relaxed flex-grow">Connect and collaborate on projects with peers and partner institutions worldwide through our high-speed digital network.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Admissions -->
+    <section id="admissions">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-orbitron font-bold text-center mb-8 gradient-text" data-aos="fade-up">Admissions</h2>
+            <!-- Standard admissions intro -->
+            <p class="text-center max-w-3xl mx-auto mb-16 leading-relaxed" data-aos="fade-up" data-aos-delay="100">Join a community of forward-thinkers shaping tomorrow. We seek curious, motivated students with a passion for innovation and problem-solving. Learn about our application process and financial aid opportunities.</p>
+            <div class="grid md:grid-cols-3 gap-8 text-center mb-16">
+                <!-- Standard admissions info cards -->
+                <div class="interactive-card p-8 items-center" data-aos="fade-up" data-aos-delay="200"> <i class="fas fa-clipboard-list fa-3x text-indigo-400 mb-4"></i> <h3 class="text-2xl font-orbitron font-semibold mb-4">Application Process</h3> <p class="mb-6 leading-relaxed flex-grow">Discover our holistic review process, including academic assessment, personal essays, and portfolio submissions.</p> <a href="#contact" class="mt-auto btn btn-gradient w-full">View Details</a> </div>
+                <div class="interactive-card p-8 items-center" data-aos="fade-up" data-aos-delay="300"> <i class="fas fa-chalkboard-teacher fa-3x text-indigo-400 mb-4"></i> <h3 class="text-2xl font-orbitron font-semibold mb-4">Virtual Info Sessions</h3> <p class="mb-6 leading-relaxed flex-grow">Experience FA 2050 through our online information sessions. Meet faculty and learn about our programs.</p> <a href="#contact" class="mt-auto btn btn-gradient w-full">View Schedule</a> </div>
+                <div class="interactive-card p-8 items-center" data-aos="fade-up" data-aos-delay="400"> <i class="fas fa-hand-holding-usd fa-3x text-indigo-400 mb-4"></i> <h3 class="text-2xl font-orbitron font-semibold mb-4">Scholarships & Aid</h3> <p class="mb-6 leading-relaxed flex-grow">Explore comprehensive merit-based scholarships, need-based grants, and other financial aid options.</p> <a href="#contact" class="mt-auto btn btn-gradient w-full">Learn About Aid</a> </div>
+            </div>
+            <div class="text-center" data-aos="fade-up" data-aos-delay="500">
+                <button class="btn btn-gradient btn-lg apply-now-trigger">Start Your Application</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Student Life -->
+    <section id="student-life">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-orbitron font-bold text-center mb-16 gradient-text" data-aos="fade-up">Vibrant Student Life</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                 <!-- More professional student life descriptions -->
+                <div class="interactive-card p-6" data-aos="zoom-in-up" data-aos-delay="100">
+                     <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format=fit=crop&w=870&q=80"
+                         alt="Diverse students collaborating in a modern campus setting" class="rounded mb-4 h-48 object-cover" loading="lazy">
+                    <h4 class="text-xl font-orbitron font-semibold mb-3 gradient-text">Community & Collaboration</h4>
+                    <p class="leading-relaxed flex-grow">Join diverse student clubs, participate in collaborative projects, engage with global partners, and contribute to campus initiatives.</p>
+                </div>
+                <div class="interactive-card p-6" data-aos="zoom-in-up" data-aos-delay="200">
+                    <img src="https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format=fit=crop&w=870&q=80"
+                         alt="Student relaxing or studying in a comfortable campus environment" class="rounded mb-4 h-48 object-cover" loading="lazy">
+                    <h4 class="text-xl font-orbitron font-semibold mb-3 gradient-text">Holistic Wellness</h4>
+                    <p class="leading-relaxed flex-grow">Access comprehensive support services, including academic advising, counseling, health services, and fitness facilities.</p>
+                </div>
+                <div class="interactive-card p-6" data-aos="zoom-in-up" data-aos-delay="300">
+                    <img src="https://images.unsplash.com/photo-1605152276897-4f618f831960?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format=fit=crop&w=1032&q=80"
+                         alt="Digital interface showing collaborative tools and connections" class="rounded mb-4 h-48 object-cover" loading="lazy">
+                    <h4 class="text-xl font-orbitron font-semibold mb-3 gradient-text">Innovation Hubs</h4>
+                    <p class="leading-relaxed flex-grow">Utilize dedicated project spaces, digital collaboration platforms, and advanced labs to work on group assignments and innovative ideas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Contact -->
+    <section id="contact">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-orbitron font-bold text-center mb-12 gradient-text" data-aos="fade-up">Contact Us</h2>
+             <!-- Standard contact intro -->
+            <p class="text-center max-w-3xl mx-auto mb-10 leading-relaxed" data-aos="fade-up" data-aos-delay="100">Have questions about Future Academy 2050? Reach out using the form below, or find our contact details and location information. We look forward to connecting with you.</p>
+            <div class="max-w-4xl mx-auto p-8 rounded-lg shadow-xl grid md:grid-cols-2 gap-10" data-aos="fade-up" data-aos-delay="200">
+                <div>
+                    <h3 class="text-2xl font-orbitron font-semibold mb-6">Send Us a Message</h3>
+                    <form id="contact-form" action="#" method="POST" class="space-y-6" novalidate>
+                         <!-- Standard form fields -->
+                        <div> <label for="name">Name</label> <input type="text" id="name" name="name" required class="form-input" placeholder="Your Name"> </div>
+                        <div> <label for="email">Email</label> <input type="email" id="email" name="email" required class="form-input" placeholder="your.email@example.com"> </div>
+                        <div> <label for="subject">Subject</label> <input type="text" id="subject" name="subject" class="form-input" placeholder="Inquiry Subject"> </div>
+                        <div> <label for="message">Message</label> <textarea id="message" name="message" rows="4" required class="form-input" placeholder="Your inquiry or feedback..."></textarea> </div>
+                        <div> <button type="submit" class="btn btn-gradient w-full md:w-auto">Send Message</button> </div>
+                    </form>
+                    <div id="form-feedback" class="text-center mt-4 min-h-[1.5em]" aria-live="polite"></div>
+                </div>
+                <div class="mt-6 md:mt-0">
+                     <!-- Slightly futuristic but professional location info -->
+                    <h3 class="text-2xl font-orbitron font-semibold mb-6">Visit Our Innovation Hub</h3>
+                    <div class="map-container mb-6 h-64 md:h-80 rounded-lg overflow-hidden border border-gray-700 shadow-md">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d124424.4960087899!2d77.5229028870011!3d12.953961297985107!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1670c9b44e6d%3A0xf8dfc3e8517e4fe0!2sBengaluru%2C%20Karnataka%2C%20India!5e0!3m2!1sen!2sus!4v1678886000000"
+                            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                            title="Future Academy 2050 Location - Bengaluru Area Simulation"
+                            aria-label="Interactive map showing simulated location in Bengaluru area">
+                        </iframe>
+                    </div>
+                    <p class="text-lg mb-2"><i class="fas fa-map-marker-alt mr-2 text-indigo-400 w-4 text-center"></i>1 Innovation Parkway, Tech District 7, Neo-Bengaluru, Bharat 2050</p>
+                    <p class="text-sm mb-1"><i class="fas fa-clock mr-2 text-indigo-400 w-4 text-center"></i>Office Hours: Mon-Fri, 09:00 - 17:00 Local Time</p>
+                    <p class="text-sm"><i class="fas fa-headset mr-2 text-indigo-400 w-4 text-center"></i>Online Support: Available 24/7</p>
+                    <!-- Standard buttons -->
+                     <div class="mt-6 space-x-3"> <a href="#contact" class="btn btn-outline">Virtual Tour</a> <a href="https://www.google.com/maps?q=Bengaluru,Karnataka,India" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Get Directions</a> </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container mx-auto px-4 py-8 text-center text-gray-400">
+            <!-- Standard footer -->
+            <p class="mb-4">© 2050 Future Academy. All Rights Reserved.</p>
+            <div class="space-x-4 text-sm"> <a href="#" class="footer-link">Privacy Policy</a><span class="opacity-50 mx-1">|</span> <a href="#" class="footer-link">Terms of Use</a><span class="opacity-50 mx-1">|</span> <a href="#" class="footer-link">Accessibility</a> </div>
+            <div class="mt-4 space-x-4"> <a href="#" aria-label="Twitter"><i class="fab fa-twitter fa-lg"></i></a> <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in fa-lg"></i></a> <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f fa-lg"></i></a> <a href="#" aria-label="Instagram"><i class="fab fa-instagram fa-lg"></i></a> </div>
+        </div>
+    </footer>
+
+    <button id="scroll-to-top" aria-label="Scroll to Top">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" /></svg>
+    </button>
+
+    <!-- Modal: Application Form -->
+    <div id="modal-overlay" class="hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div id="application-form-container" role="document">
+            <button id="modal-close-button" aria-label="Close Application Form"> <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg> </button>
+            <!-- Standard modal title -->
+            <h3 id="modal-title" class="text-3xl font-orbitron font-bold text-center mb-10 gradient-text">Application Form - FA 2050 Intake</h3>
+            <form id="application-form" action="#" method="POST" class="space-y-6" novalidate>
+                 <!-- Standard form fieldsets and fields -->
+                 <fieldset>
+                    <legend class="gradient-text">Personal Information</legend>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div><label for="app-fullname">Full Name <span class="text-red-400">*</span></label><input type="text" id="app-fullname" name="fullname" required class="form-input" placeholder="e.g., Jane Doe"></div>
+                        <div><label for="app-dob">Date of Birth <span class="text-red-400">*</span></label><input type="date" id="app-dob" name="dob" required class="form-input" placeholder="YYYY-MM-DD" max="2040-01-01"></div>
+                        <div><label for="app-email">Email Address <span class="text-red-400">*</span></label><input type="email" id="app-email" name="email" required class="form-input" placeholder="you@example.com"></div>
+                        <div><label for="app-phone">Phone Number (Optional)</label><input type="tel" id="app-phone" name="phone" class="form-input" placeholder="e.g., +1-555-123-4567"></div>
+                    </div>
+                    <div class="mt-6"><label for="app-address">Current Address <span class="text-red-400">*</span></label><textarea id="app-address" name="address" rows="3" required class="form-input" placeholder="Street Address, City, State/Province, Postal Code, Country"></textarea></div>
+                </fieldset>
+                <fieldset>
+                    <legend class="gradient-text">Previous Education</legend>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div><label for="app-prev-school">Last School Attended <span class="text-red-400">*</span></label><input type="text" id="app-prev-school" name="prev_school" required class="form-input" placeholder="e.g., Central High School"></div>
+                        <div><label for="app-gpa">GPA / Academic Standing</label><input type="text" id="app-gpa" name="gpa" class="form-input" placeholder="e.g., 3.8 GPA or Equivalent"></div>
+                        <div class="md:col-span-2"><label for="app-transcript">Upload Transcript <span class="text-red-400">*</span> (.pdf, .doc, .docx)</label><input type="file" id="app-transcript" name="transcript" required class="form-input" accept=".pdf,.doc,.docx">
+                            <p class="text-xs mt-1 text-gray-400">Max file size: 5MB.</p>
+                        </div>
+                    </div>
+                </fieldset>
+                 <fieldset>
+                    <legend class="gradient-text">Program Interest & Goals</legend>
+                    <div><label for="app-program">Desired Program of Study <span class="text-red-400">*</span></label>
+                        <select id="app-program" name="program" required class="form-input">
+                            <option value="" disabled selected>Select Program...</option>
+                            <option value="ai-robotics">AI & Robotics</option>
+                            <option value="advanced-computing">Advanced Computing</option>
+                            <option value="sustainable-design">Sustainable Design</option>
+                            <option value="data-science">Data Science & Analytics</option>
+                            <option value="interdisciplinary">Interdisciplinary Studies</option>
+                            <option value="undecided">Undecided / Exploring</option>
+                         </select>
+                    </div>
+                    <div class="mt-6"><label for="app-essay">Personal Statement / Essay <span class="text-red-400">*</span></label><textarea id="app-essay" name="essay" rows="6" required class="form-input" placeholder="Tell us about your interests, goals, and why you believe FA 2050 is the right place for you. (Approx. 500 words)"></textarea></div>
+                    <div class="mt-6"><label for="app-essay-upload">Upload Essay (Optional - .pdf, .doc, .docx)</label><input type="file" id="app-essay-upload" name="essay_upload" class="form-input" accept=".pdf,.doc,.docx"></div>
+                </fieldset>
+                <fieldset>
+                    <legend class="gradient-text">Additional Information</legend>
+                    <div><label for="app-referral">How did you hear about us?</label><input type="text" id="app-referral" name="referral" class="form-input" placeholder="e.g., Website, Counselor, Friend, Event"></div>
+                    <div class="mt-6"><label for="app-questions">Any Questions?</label><textarea id="app-questions" name="questions" rows="3" class="form-input" placeholder="Enter any questions you have for the admissions team..."></textarea></div>
+                </fieldset>
+                <div class="pt-4">
+                    <button type="submit" class="btn btn-gradient w-full text-lg">Submit Application</button>
+                 </div>
+            </form>
+            <div id="application-feedback" class="text-center mt-6 font-semibold min-h-[1.5em]" aria-live="polite"></div>
+        </div>
+    </div>
+
+    <!-- Accessibility Widget - Functionality unchanged, title slightly adjusted -->
+    <div id="accessibility-widget">
+        <div id="accessibility-panel">
+            <h4>Accessibility Settings</h4> <!-- Standard Title -->
+            <div class="accessibility-options">
+                <div class="accessibility-item font-size-controls"> <span>Font Size</span> <div> <button id="decrease-font" aria-label="Decrease font size">-</button> <button id="increase-font" aria-label="Increase font size">+</button> </div> </div>
+                <div class="accessibility-item"> <span>High Contrast</span> <button id="toggle-contrast">Toggle</button> </div>
+                <div class="accessibility-item"> <span>Grayscale</span> <button id="toggle-grayscale">Toggle</button> </div>
+                <button id="reset-accessibility" class="w-full">Reset Settings</button>
+            </div>
+        </div>
+        <button id="accessibility-toggle" aria-label="Accessibility Settings" aria-controls="accessibility-panel" aria-expanded="false"> <i class="fa-solid fa-universal-access"></i> </button>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // --- JAVASCRIPT REMAINS LARGELY THE SAME ---
+        // No functional changes needed for the requested visual/content updates.
+        // Existing JS handles navbar scroll, mobile menu, smooth scroll,
+        // modal interactions, form demos, scroll-to-top, and accessibility.
+
+        document.addEventListener('DOMContentLoaded', () => {
+
+            AOS.init({ duration: 800, once: true, offset: 50, delay: 100 });
+
+            const htmlEl = document.documentElement;
+            const bodyEl = document.body;
+            const nav = document.getElementById('navbar');
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const navLinksMobile = document.getElementById('nav-links-mobile');
+            const menuIconOpen = document.getElementById('menu-icon-open');
+            const menuIconClose = document.getElementById('menu-icon-close');
+            const scrollToTopButton = document.getElementById('scroll-to-top');
+            const contactForm = document.getElementById('contact-form');
+            const formFeedback = document.getElementById('form-feedback');
+            const modalOverlay = document.getElementById('modal-overlay');
+            const modalCloseButton = document.getElementById('modal-close-button');
+            const applicationFormContainer = document.getElementById('application-form-container');
+            const applicationForm = document.getElementById('application-form');
+            const applicationFeedback = document.getElementById('application-feedback');
+            const applyNowTriggers = document.querySelectorAll('.apply-now-trigger');
+            const allNavLinks = document.querySelectorAll('#nav-links-desktop .nav-link, #nav-links-mobile .nav-link');
+            const sections = document.querySelectorAll('section[id]');
+            const accessibilityWidget = document.getElementById('accessibility-widget');
+            const accessibilityToggleBtn = document.getElementById('accessibility-toggle');
+            const accessibilityPanel = document.getElementById('accessibility-panel');
+            const increaseFontBtn = document.getElementById('increase-font');
+            const decreaseFontBtn = document.getElementById('decrease-font');
+            const toggleContrastBtn = document.getElementById('toggle-contrast');
+            const toggleGrayscaleBtn = document.getElementById('toggle-grayscale');
+            const resetAccessibilityBtn = document.getElementById('reset-accessibility');
+
+            const scrollThreshold = 50;
+            const MODAL_TRANSITION_DURATION = 300;
+            const DEFAULT_FONT_SIZE = 16;
+            const FONT_SIZE_STEP = 1;
+            const MAX_FONT_SIZE = 24;
+            const MIN_FONT_SIZE = 12;
+            const ACTIVE_LINK_BUFFER = 50; // Adjust buffer slightly if needed
+
+            let modalTriggerElement = null;
+            let currentActiveSectionId = null;
+
+            function handleNavbarScroll() {
+                if (!nav || !htmlEl) return;
+                const isScrolled = window.scrollY > scrollThreshold;
+                nav.classList.toggle('navbar-scrolled', isScrolled);
+                htmlEl.classList.toggle('navbar-scrolled', isScrolled);
+                const isMobileMenuOpen = navLinksMobile && !navLinksMobile.classList.contains('hidden');
+                nav.classList.toggle('mobile-menu-open', isMobileMenuOpen);
+
+                 if (!htmlEl.classList.contains('high-contrast')) {
+                     if (isMobileMenuOpen) {
+                         nav.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--bg-color-secondary').trim();
+                         nav.style.backdropFilter = 'none';
+                         nav.style.webkitBackdropFilter = 'none';
+                     } else if (isScrolled) {
+                         nav.style.backgroundColor = 'rgba(31, 41, 55, 0.9)';
+                         nav.style.backdropFilter = 'blur(10px)';
+                         nav.style.webkitBackdropFilter = 'blur(10px)';
+                     } else {
+                         nav.style.backgroundColor = 'transparent';
+                         nav.style.backdropFilter = 'none';
+                         nav.style.webkitBackdropFilter = 'none';
+                     }
+                 }
+            }
+
+            function handleScrollTopVisibility() {
+                if (!scrollToTopButton) return;
+                scrollToTopButton.classList.toggle('visible', window.scrollY > 300);
+            }
+
+            function handleScroll() {
+                handleNavbarScroll();
+                handleScrollTopVisibility();
+                updateActiveNavLink();
+            }
+
+            function setupSmoothScrolling() {
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', function (e) {
+                        const targetIdRaw = this.getAttribute('href');
+                        if (targetIdRaw && targetIdRaw.length > 1 && targetIdRaw.startsWith('#')) {
+                             const targetId = targetIdRaw;
+                            try {
+                                const targetElement = document.querySelector(targetId);
+                                if (targetElement) {
+                                    e.preventDefault();
+                                    let offset = 0;
+                                    const navHeight = nav.offsetHeight;
+                                    const navMarginTop = nav.classList.contains('navbar-scrolled') ? parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--navbar-margin-top-scrolled')) : 0;
+                                    // Add a base padding value (like 1rem or 16px)
+                                    const basePadding = 16;
+                                    offset = navHeight + navMarginTop + basePadding;
+
+                                    const elementPosition = targetElement.getBoundingClientRect().top;
+                                    const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+                                    window.scrollTo({
+                                        top: offsetPosition,
+                                        behavior: 'smooth'
+                                    });
+
+                                    if (navLinksMobile && !navLinksMobile.classList.contains('hidden') && this.closest('#nav-links-mobile')) {
+                                        toggleMobileMenu(false);
+                                    }
+                                    updateActiveNavLink(targetId.substring(1));
+                                }
+                            } catch (error) { console.error("Smooth scroll target error:", error); }
+                        } else if (targetIdRaw === '#') {
+                            e.preventDefault();
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                            if (navLinksMobile && !navLinksMobile.classList.contains('hidden') && this.closest('#nav-links-mobile')) {
+                                toggleMobileMenu(false);
+                            }
+                             updateActiveNavLink('home');
+                        }
+                    });
+                });
+            }
+
+
+            function toggleMobileMenu(forceOpen = null) {
+                if (!mobileMenuButton || !navLinksMobile || !menuIconOpen || !menuIconClose || !nav) return;
+                const isCurrentlyExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
+                const openMenu = forceOpen === true || (forceOpen === null && !isCurrentlyExpanded);
+                navLinksMobile.classList.toggle('hidden', !openMenu);
+                mobileMenuButton.setAttribute('aria-expanded', String(openMenu));
+                menuIconOpen.classList.toggle('hidden', openMenu);
+                menuIconClose.classList.toggle('hidden', !openMenu);
+                nav.classList.toggle('mobile-menu-open', openMenu);
+                setTimeout(handleNavbarScroll, 0);
+            }
+
+            function setupScrollToTop() {
+                if (!scrollToTopButton) return;
+                scrollToTopButton.addEventListener('click', () => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    updateActiveNavLink('home');
+                });
+            }
+
+            function openModal(triggerElement) {
+                if (!modalOverlay) return;
+                modalTriggerElement = triggerElement;
+                modalOverlay.classList.remove('hidden');
+                bodyEl.classList.add('modal-open');
+                void modalOverlay.offsetWidth;
+                modalOverlay.classList.add('modal-active');
+                if (applicationFormContainer) {
+                    setTimeout(() => {
+                        const firstFocusable = applicationFormContainer.querySelector(
+                            'input:not([type="hidden"]):not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+                        );
+                        (firstFocusable || applicationFormContainer)?.focus();
+                    }, 100);
+                }
+            }
+
+            function closeModal() {
+                if (!modalOverlay) return;
+                modalOverlay.classList.remove('modal-active');
+                bodyEl.classList.remove('modal-open');
+                setTimeout(() => {
+                    modalOverlay.classList.add('hidden');
+                    if (applicationFeedback) applicationFeedback.textContent = '';
+                    if (applicationForm) applicationForm.reset();
+                    applicationForm?.querySelectorAll('.border-red-400').forEach(field => field.classList.remove('border-red-400')); // Clear error borders
+                    if (modalTriggerElement) {
+                        modalTriggerElement.focus();
+                        modalTriggerElement = null;
+                    }
+                }, MODAL_TRANSITION_DURATION);
+            }
+
+            function setupModalTriggers() {
+                if (!modalOverlay) return;
+                applyNowTriggers.forEach(trigger => trigger.addEventListener('click', (e) => { e.preventDefault(); openModal(e.currentTarget); }));
+                if (modalCloseButton) modalCloseButton.addEventListener('click', closeModal);
+                modalOverlay.addEventListener('click', (e) => { if (e.target === modalOverlay) closeModal(); });
+                window.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modalOverlay.classList.contains('modal-active')) closeModal(); });
+            }
+
+            function setupContactForm() {
+                if (!contactForm || !formFeedback) return;
+                contactForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    formFeedback.textContent = '';
+                    contactForm.querySelectorAll('.border-red-400').forEach(field => field.classList.remove('border-red-400')); // Clear previous errors
+
+                    if (contactForm.checkValidity()) {
+                        formFeedback.textContent = 'Message sent successfully. (Demo)';
+                        formFeedback.style.color = 'var(--primary-accent)';
+                        contactForm.reset();
+                        setTimeout(() => { if (formFeedback) formFeedback.textContent = ''; }, 5000);
+                    } else {
+                        formFeedback.textContent = 'Please fill out all required fields correctly.';
+                        formFeedback.style.color = 'var(--text-red-400)';
+                        contactForm.querySelector(':invalid')?.focus();
+                        contactForm.querySelectorAll(':invalid').forEach(field => field.classList.add('border-red-400'));
+                        setTimeout(() => {
+                             if (formFeedback) formFeedback.textContent = '';
+                             contactForm.querySelectorAll('.border-red-400').forEach(field => field.classList.remove('border-red-400'));
+                         }, 6000);
+                    }
+                });
+            }
+
+            function setupApplicationForm() {
+                if (!applicationForm || !applicationFeedback || !applicationFormContainer) return;
+                applicationForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    applicationFeedback.textContent = '';
+                     applicationForm.querySelectorAll('.border-red-400').forEach(field => field.classList.remove('border-red-400')); // Clear previous errors
+
+                    if (!applicationForm.checkValidity()) {
+                        const firstInvalidField = applicationForm.querySelector(':invalid');
+                        applicationFeedback.textContent = 'Please complete all required (*) fields.';
+                        applicationFeedback.style.color = 'var(--text-red-400)';
+                        if (firstInvalidField) {
+                            firstInvalidField.focus();
+                            firstInvalidField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            firstInvalidField.classList.add('border-red-400'); // Highlight first invalid field
+                        }
+                        // Highlight all invalid fields
+                         applicationForm.querySelectorAll(':invalid').forEach(field => field.classList.add('border-red-400'));
+                        setTimeout(() => {
+                            if (applicationFeedback) applicationFeedback.textContent = '';
+                             applicationForm.querySelectorAll('.border-red-400').forEach(field => field.classList.remove('border-red-400'));
+                         }, 6000);
+                        return;
+                    }
+                    applicationFeedback.textContent = 'Application Submitted Successfully! (Demo Only)';
+                    applicationFeedback.style.color = 'var(--primary-accent)';
+                    applicationForm.reset();
+                    setTimeout(() => { closeModal(); }, 2500);
+                });
+            }
+
+           function updateActiveNavLink(targetId = null) {
+                if (!sections.length || !allNavLinks.length) return;
+
+                const scrollY = window.scrollY;
+                const viewportHeight = window.innerHeight;
+                let newActiveId = targetId;
+
+                if (!newActiveId) {
+                    // Determine active section based on scroll position relative to viewport top edge + offset
+                    let bestMatch = { id: null, position: -Infinity };
+
+                    const navHeight = nav.offsetHeight;
+                    const navMarginTop = nav.classList.contains('navbar-scrolled') ? parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--navbar-margin-top-scrolled')) : 0;
+                    const activationOffset = navHeight + navMarginTop + ACTIVE_LINK_BUFFER; // How far below the nav activation starts
+
+                    sections.forEach(section => {
+                        const rect = section.getBoundingClientRect();
+                        const topPosition = rect.top + scrollY; // Absolute top position
+
+                        // Condition 1: Section top is above the activation offset
+                        // Condition 2: Section bottom is below the activation offset (ensures section is in view)
+                        if (topPosition <= scrollY + activationOffset && topPosition + rect.height > scrollY + activationOffset) {
+                             // Check if this section's top is closer (higher on page) than the current best match
+                            if (topPosition > bestMatch.position) {
+                                bestMatch = { id: section.id, position: topPosition };
+                            }
+                        }
+                    });
+
+                     // Handle edge case: at the very top, activate 'home'
+                    if (scrollY < sections[0].offsetTop / 2) { // Use a fraction of the first section's offset
+                        bestMatch.id = sections[0].id;
+                    }
+
+                     // Handle edge case: very bottom of page, activate last section
+                    if (scrollY + viewportHeight >= bodyEl.scrollHeight - 20) { // Near bottom buffer
+                         bestMatch.id = sections[sections.length - 1].id;
+                    }
+
+                    newActiveId = bestMatch.id;
+                }
+
+
+                // Update links only if the active section has changed
+                if (newActiveId && newActiveId !== currentActiveSectionId) {
+                    currentActiveSectionId = newActiveId;
+                    allNavLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${currentActiveSectionId}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                } else if (!newActiveId && currentActiveSectionId) {
+                    // If no section detected as active, clear the state
+                    currentActiveSectionId = null;
+                    allNavLinks.forEach(link => link.classList.remove('active'));
+                }
+            }
+
+
+            function toggleAccessibilityPanel(forceClose = false) {
+                if (!accessibilityWidget || !accessibilityToggleBtn || !accessibilityPanel) return;
+                const isExpanded = accessibilityToggleBtn.getAttribute('aria-expanded') === 'true';
+                const newState = forceClose ? false : !isExpanded;
+                accessibilityToggleBtn.setAttribute('aria-expanded', String(newState));
+                accessibilityPanel.classList.toggle('visible', newState);
+                if (newState) {
+                    setTimeout(() => {
+                        accessibilityPanel.querySelector('button:not([disabled])')?.focus();
+                    }, 100);
+                } else if (document.activeElement && accessibilityPanel.contains(document.activeElement)) {
+                    accessibilityToggleBtn.focus();
+                }
+            }
+
+             function applyFontSize(size) {
+                const clampedSize = Math.max(MIN_FONT_SIZE, Math.min(MAX_FONT_SIZE, size));
+                htmlEl.style.fontSize = `${clampedSize}px`;
+                localStorage.setItem('accessibilityFontSize', clampedSize);
+                setTimeout(() => { handleNavbarScroll(); updateActiveNavLink(); AOS.refresh(); }, 100);
+            }
+            function increaseFontSize() { applyFontSize(parseFloat(getComputedStyle(htmlEl).fontSize) + FONT_SIZE_STEP); }
+            function decreaseFontSize() { applyFontSize(parseFloat(getComputedStyle(htmlEl).fontSize) - FONT_SIZE_STEP); }
+            function toggleHighContrast() {
+                const isContrast = htmlEl.classList.toggle('high-contrast');
+                localStorage.setItem('accessibilityHighContrast', isContrast);
+                 setTimeout(() => { handleNavbarScroll(); updateActiveNavLink(); }, 50);
+            }
+            function toggleGrayscale() {
+                const isGrayscale = htmlEl.classList.toggle('grayscale');
+                localStorage.setItem('accessibilityGrayscale', isGrayscale);
+            }
+            function resetAccessibility() {
+                applyFontSize(DEFAULT_FONT_SIZE);
+                htmlEl.classList.remove('high-contrast'); localStorage.removeItem('accessibilityHighContrast');
+                htmlEl.classList.remove('grayscale'); localStorage.removeItem('accessibilityGrayscale');
+                 setTimeout(() => { handleNavbarScroll(); updateActiveNavLink(); }, 50);
+                 toggleAccessibilityPanel(true);
+            }
+            function loadAccessibilityPreferences() {
+                const savedFontSize = localStorage.getItem('accessibilityFontSize');
+                const initialSize = savedFontSize ? Math.max(MIN_FONT_SIZE, Math.min(MAX_FONT_SIZE, parseInt(savedFontSize))) : DEFAULT_FONT_SIZE;
+                htmlEl.style.fontSize = `${initialSize}px`;
+
+                if (localStorage.getItem('accessibilityHighContrast') === 'true') htmlEl.classList.add('high-contrast');
+                if (localStorage.getItem('accessibilityGrayscale') === 'true') htmlEl.classList.add('grayscale');
+
+                if(accessibilityPanel) accessibilityPanel.classList.remove('visible');
+                if(accessibilityToggleBtn) accessibilityToggleBtn.setAttribute('aria-expanded', 'false');
+            }
+
+            // --- Initialization ---
+            loadAccessibilityPreferences();
+            handleScroll();
+            setupSmoothScrolling();
+            setupScrollToTop();
+            setupModalTriggers();
+            setupContactForm();
+            setupApplicationForm();
+
+            // --- Event Listeners ---
+            if (accessibilityToggleBtn) accessibilityToggleBtn.addEventListener('click', () => toggleAccessibilityPanel());
+            if (increaseFontBtn) increaseFontBtn.addEventListener('click', increaseFontSize);
+            if (decreaseFontBtn) decreaseFontBtn.addEventListener('click', decreaseFontSize);
+            if (toggleContrastBtn) toggleContrastBtn.addEventListener('click', toggleHighContrast);
+            if (toggleGrayscaleBtn) toggleGrayscaleBtn.addEventListener('click', toggleGrayscale);
+            if (resetAccessibilityBtn) resetAccessibilityBtn.addEventListener('click', resetAccessibility);
+
+            document.addEventListener('click', (e) => {
+                if (accessibilityPanel?.classList.contains('visible') && !accessibilityPanel.contains(e.target) && !accessibilityToggleBtn?.contains(e.target)) {
+                    toggleAccessibilityPanel(true);
+                }
+            });
+            window.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && accessibilityPanel?.classList.contains('visible')) {
+                    toggleAccessibilityPanel(true);
+                }
+            });
+
+            if (mobileMenuButton) mobileMenuButton.addEventListener('click', () => toggleMobileMenu());
+
+            window.addEventListener('scroll', handleScroll, { passive: true });
+            window.addEventListener('resize', handleScroll, { passive: true });
+
+             setTimeout(() => updateActiveNavLink(), 150); // Delay initial active link check slightly more
+
+        });
+    </script>
+
+</body>
+</html>
+
