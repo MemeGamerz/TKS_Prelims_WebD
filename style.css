@@ -1,43 +1,27 @@
-/* --- CSS Variables --- */
 :root {
     --navbar-height-initial: 68px;
     --navbar-height-scrolled: 60px;
     --navbar-margin-top-scrolled: 1rem;
     --base-font-size: 16px;
     --text-color-base: #f3f4f6;
-    /* Gray 100 */
     --text-color-muted: #d1d5db;
-    /* Gray 300 */
     --text-color-darker: #9ca3af;
-    /* Gray 400 */
     --bg-color-primary: #111827;
-    /* Gray 900 */
     --bg-color-secondary: #1f2937;
-    /* Gray 800 */
     --bg-color-tertiary: #374151;
-    /* Gray 700 */
     --border-color: #4b5563;
-    /* Gray 600 */
     --gradient-start: #a7b2f5;
-    /* Indigo 300 Light */
     --gradient-end: #c8a8e4;
-    /* Violet 300 Light */
     --gradient-start-hover: #b8c1f8;
     --gradient-end-hover: #d8bcf0;
     --primary-accent: #818cf8;
-    /* Indigo 400 */
     --primary-accent-darker: #6366f1;
-    /* Indigo 500 */
     --primary-accent-darkest: #4f46e5;
-    /* Indigo 600 */
     --link-glow-bright: rgba(199, 210, 254, 0.7);
-    /* Indigo 200 Light */
     --link-glow-active: #c8a8e4;
-    /* Violet Light */
     --scroll-padding-top: calc(var(--navbar-height-initial) + 1rem);
 }
 
-/* --- Base & Accessibility Styles --- */
 html {
     scroll-padding-top: var(--scroll-padding-top);
     scroll-behavior: smooth;
@@ -64,7 +48,6 @@ html.high-contrast {
     --gradient-start-hover: #ffffff;
     --gradient-end-hover: #ffffff;
     --primary-accent: #00ffff;
-    /* Cyan for high contrast */
     --primary-accent-darker: #00e5e5;
     --primary-accent-darkest: #00cccc;
     --link-glow-bright: none;
@@ -88,7 +71,6 @@ html.high-contrast .project-showcase-card,
 html.high-contrast fieldset,
 html.high-contrast .form-input,
 html.high-contrast #modal-overlay #modal-dynamic-content,
-/* Updated modal content selector */
 html.high-contrast #accessibility-panel {
     background-color: var(--bg-color-secondary) !important;
     border-color: var(--border-color) !important;
@@ -98,18 +80,15 @@ html.high-contrast #accessibility-panel {
 }
 
 html.high-contrast section {
-    /* Target sections directly */
     background-color: var(--bg-color-secondary) !important;
     background-image: none !important;
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
     box-shadow: none !important;
     border: 1px solid var(--border-color);
-    /* Add border for definition */
 }
 
 html.high-contrast #contact>div.max-w-4xl {
-    /* Target contact inner div */
     background-color: var(--bg-color-secondary) !important;
     box-shadow: none !important;
     border: 1px solid var(--border-color);
@@ -174,61 +153,43 @@ html.high-contrast #hero-video-container {
     display: none;
 }
 
-/* Hide video in high contrast */
-
 html.grayscale {
     filter: grayscale(100%);
 }
 
-/* --- Body & Layout --- */
 body {
     font-family: 'Exo 2', sans-serif;
-    /* UPDATED Background Image */
-    background-image: url('https://images.unsplash.com/photo-1580654712603-eb43273aff33?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
-    /* Futuristic architecture image */
+    background-image: url('data:image/jpeg;base64,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');
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-color: var(--bg-color-primary);
     background-blend-mode: multiply;
-    /* Keep the blend mode for dark effect */
     color: var(--text-color-base);
     overflow-x: hidden;
-    /* Prevent horizontal scroll often caused by animations */
 }
 
 body.modal-open {
     overflow: hidden;
 }
 
-/* Section Styling with Background Overlay */
 section:not(#home) {
-    /* Exclude hero from this styling */
     padding: 5rem 1rem;
     background-color: rgba(17, 24, 39, 0.92);
-    /* Darker overlay */
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
     position: relative;
     z-index: 1;
     border-radius: 1rem;
-    /* Rounding */
     margin: 0 1rem 2rem 1rem;
-    /* Spacing */
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-    /* Soft shadow */
 }
 
-/* Contact form container specific adjustments if needed */
 #contact>div.max-w-4xl {
-    /* Inherits section overlay styles, but we remove the margin */
-    /* and ensure padding is applied if not on the section itself */
     padding: 2rem;
-    /* Adjust as needed */
     border-radius: 0.75rem;
     background-color: rgba(31, 41, 55, 0.85);
-    /* Slightly different bg for contact form area */
     backdrop-filter: blur(3px);
     -webkit-backdrop-filter: blur(3px);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
@@ -252,7 +213,6 @@ section:not(#home) {
     width: 100%;
 }
 
-/* --- Typography & Text Styles --- */
 h1,
 h2,
 h3,
@@ -279,9 +239,6 @@ h6,
     color: #f87171;
 }
 
-/* For form validation errors */
-
-/* --- Navbar Styles --- */
 #navbar {
     position: fixed;
     top: 0;
@@ -307,7 +264,6 @@ h6,
     border-radius: 0.75rem;
     height: var(--navbar-height-scrolled);
     background-color: rgba(31, 41, 55, 0.9);
-    /* Darker gray with opacity */
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     box-shadow: 0 6px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 8px -4px rgba(0, 0, 0, 0.15);
@@ -369,7 +325,6 @@ nav a.nav-link.active {
     padding: 0.75rem 1rem;
     transition: background-color 0.2s ease, color 0.2s ease;
 
-    /* Add transition */
     &::after {
         display: none;
     }
@@ -385,50 +340,23 @@ nav a.nav-link.active {
     background-color: rgba(99, 102, 241, 0.1);
 }
 
-
-/* --- Hero Section (#home) --- */
 #home {
-    /* This section intentionally keeps its video background setup */
-    background-color: transparent !important;
-    /* Ensure override */
-    /* Removed specific background image here, relies on video + overlay */
+    background-image: url('https://schoolbuilding.org.uk/wp-content/uploads/2019/07/ZAS1.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
     min-height: 100vh;
-    /* Ensure it takes full viewport height */
     display: flex;
-    /* Use flex for centering */
     align-items: center;
-    /* Center vertically */
     justify-content: center;
-    /* Center horizontally */
     text-align: center;
     padding: 0;
-    /* Remove default section padding */
     position: relative;
-    /* For overlay and video positioning */
     overflow: hidden;
-    /* Prevent content spill */
 }
 
 #hero-video-container {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    z-index: -1;
-}
-
-#hero-video {
-    min-width: 100%;
-    min-height: 100%;
-    width: auto;
-    height: auto;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    object-fit: cover;
-    opacity: 0.6;
+    display: none;
 }
 
 #hero-overlay {
@@ -436,8 +364,7 @@ nav a.nav-link.active {
     inset: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(rgba(17, 24, 39, 0.85), rgba(49, 46, 129, 0.9));
-    /* Dark gradient overlay */
+    background: linear-gradient(rgba(17, 24, 39, 0.80), rgba(49, 46, 129, 0.85));
     z-index: 0;
 }
 
@@ -446,7 +373,6 @@ nav a.nav-link.active {
     z-index: 1;
 }
 
-/* --- Timeline (About Section) --- */
 .timeline-container {
     position: relative;
     padding-left: 1rem;
@@ -463,7 +389,6 @@ nav a.nav-link.active {
     opacity: 0.5;
     z-index: 0;
     transition: background-color 0.3s ease;
-    /* Add transition */
 }
 
 .timeline-container:hover::before {
@@ -471,7 +396,6 @@ nav a.nav-link.active {
     opacity: 0.8;
 }
 
-/* Enhance line on hover */
 .timeline-item {
     position: relative;
     padding-left: 2.5rem;
@@ -486,12 +410,10 @@ nav a.nav-link.active {
     background-color: rgba(255, 255, 255, 0.05);
 }
 
-/* Subtle highlight */
 .timeline-marker {
     position: absolute;
     left: calc(1rem - (0.75rem / 2) + 0.375rem);
     top: 0.35rem;
-    /* Align better with text */
     width: 0.75rem;
     height: 0.75rem;
     background-color: var(--primary-accent-darker);
@@ -504,7 +426,6 @@ nav a.nav-link.active {
 .timeline-item:hover .timeline-marker {
     transform: scale(1.4);
     background-color: var(--gradient-end);
-    /* Change color on hover */
 }
 
 .timeline-item p:first-of-type {
@@ -518,7 +439,6 @@ nav a.nav-link.active {
     font-size: 0.95em;
 }
 
-/* --- Buttons --- */
 .btn {
     display: inline-block;
     font-weight: 600;
@@ -569,11 +489,9 @@ nav a.nav-link.active {
     box-shadow: 0 10px 20px -5px rgba(129, 140, 248, 0.25), 0 6px 10px -4px rgba(129, 140, 248, 0.2);
 }
 
-/* --- Cards (Interactive & Project Showcase) --- */
 .interactive-card,
 .project-showcase-card {
     border: 1px solid transparent;
-    /* More refined transition for smoother effect */
     transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
         box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
         border-color 0.3s ease,
@@ -587,7 +505,6 @@ nav a.nav-link.active {
     flex-direction: column;
     height: 100%;
     transform-origin: center bottom;
-    /* Helps with rotate effect */
 }
 
 .interactive-card h4,
@@ -596,30 +513,24 @@ nav a.nav-link.active {
     transition: color 0.35s ease;
 }
 
-/* Enhanced Hover Effect */
 .interactive-card:hover,
 .project-showcase-card:hover {
     transform: translateY(-10px) scale(1.04) rotate(-1deg);
-    /* Lift, scale, and slight rotate */
     border-color: var(--primary-accent-darker);
     box-shadow: 0 20px 35px -10px rgba(129, 140, 248, 0.3), 0 15px 20px -10px rgba(129, 140, 248, 0.25), 0 0 0 2px rgba(129, 140, 248, 0.2);
-    /* More pronounced shadow + subtle glow */
     background-color: var(--bg-color-tertiary);
 }
 
-/* Make right-side cards rotate the other way */
 .grid>div:nth-child(3n):hover.interactive-card,
 .grid>div:nth-child(3n):hover.project-showcase-card {
     transform: translateY(-10px) scale(1.04) rotate(1deg);
 }
 
-/* Card Title Hover */
 .interactive-card:hover h4,
 .project-showcase-card:hover h5 {
     color: var(--primary-accent);
 }
 
-/* Card Image Hover */
 .interactive-card img,
 .project-showcase-card img {
     transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.4s ease;
@@ -632,12 +543,9 @@ nav a.nav-link.active {
 .interactive-card:hover img,
 .project-showcase-card:hover img {
     transform: scale(1.12);
-    /* Larger scale for image */
     opacity: 0.85;
-    /* Slightly dim image to make text pop */
 }
 
-/* Card Content Structure */
 .interactive-card .card-content,
 .project-showcase-card .card-content {
     padding: 1.5rem;
@@ -650,7 +558,6 @@ nav a.nav-link.active {
 .project-showcase-card p {
     color: var(--text-color-muted);
     flex-grow: 1;
-    /* Push actions (button) to bottom */
     margin-bottom: 1rem;
     transition: color 0.3s ease;
 }
@@ -658,7 +565,6 @@ nav a.nav-link.active {
 .interactive-card:hover p,
 .project-showcase-card:hover p {
     color: var(--text-color-base);
-    /* Lighten paragraph text on hover */
 }
 
 .project-showcase-card h5 {
@@ -681,8 +587,6 @@ nav a.nav-link.active {
     color: var(--primary-accent);
 }
 
-
-/* --- Forms --- */
 .form-input {
     display: block;
     width: 100%;
@@ -791,7 +695,6 @@ legend {
     opacity: 1;
 }
 
-/* --- Scroll To Top Button --- */
 #scroll-to-top {
     position: fixed;
     bottom: 1.25rem;
@@ -819,12 +722,10 @@ legend {
     transform: scale(1.1) rotate(5deg);
 }
 
-/* --- Modal (Generic Structure) --- */
 #modal-overlay {
     position: fixed;
     inset: 0;
     background-color: rgba(17, 24, 39, 0.9);
-    /* Darker overlay */
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     display: flex;
@@ -843,12 +744,10 @@ legend {
     transition: opacity 0.35s ease-out, visibility 0s linear 0s;
 }
 
-/* Container for dynamic content inside modal */
 #modal-overlay>#modal-dynamic-content {
     background-color: var(--bg-color-secondary);
     border-radius: 0.75rem;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
-    /* Enhanced shadow */
     padding: 2rem 2.5rem;
     max-width: 56rem;
     width: 100%;
@@ -857,7 +756,6 @@ legend {
     position: relative;
     transform: scale(0.9) translateY(-30px);
     transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275),
-        /* Bounce effect */
         background-color 0.3s ease, border-color 0.3s ease;
 }
 
@@ -889,20 +787,16 @@ legend {
     transform: rotate(180deg) scale(1.1);
 }
 
-/* Red close button */
 .hidden {
     display: none;
 }
 
-/* Styling for content inside the modal body */
 #modal-body-content {
     color: var(--text-color-muted);
 }
 
 #modal-body-content h3.dynamic-modal-title {
-    /* Style title if it's inside the content div */
     display: none;
-    /* Hide by default, JS will manage #modal-title */
 }
 
 #modal-body-content p {
@@ -921,7 +815,6 @@ legend {
     border-radius: 0.5rem;
 }
 
-/* --- Section Specific Styles --- */
 #about .vision-image {
     max-width: 300px;
     height: auto;
@@ -939,17 +832,12 @@ legend {
     margin-bottom: 0;
 }
 
-/* Keep this if form is separate */
-
-/* --- Footer --- */
 footer {
     background-color: rgba(17, 24, 39, 0.92);
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
     padding: 2rem 1rem;
-    /* Adjust padding */
     margin-top: 2rem;
-    /* Ensure space above footer */
     border-top: 1px solid var(--border-color);
 }
 
@@ -974,7 +862,6 @@ footer a[aria-label]:hover i {
     transform: scale(1.2);
 }
 
-/* --- Accessibility Widget --- */
 #accessibility-widget {
     position: fixed;
     bottom: 1rem;
@@ -1141,7 +1028,6 @@ html.high-contrast #reset-accessibility:hover {
     border-color: var(--primary-accent) !important;
 }
 
-/* --- Utility --- */
 .h-40 {
     height: 10rem;
 }
@@ -1154,7 +1040,6 @@ html.high-contrast #reset-accessibility:hover {
     object-fit: cover;
 }
 
-/* --- Responsive Adjustments --- */
 @media (max-width: 767px) {
     #navbar.navbar-scrolled {
         max-width: calc(100% - 1rem);

@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Initialize AOS library
     AOS.init({
         duration: 800,
         once: true,
@@ -8,7 +7,6 @@ document.addEventListener('DOMContentLoaded', () => {
         easing: 'ease-out-cubic',
     });
 
-    // --- DOM Element References ---
     const htmlEl = document.documentElement;
     const bodyEl = document.body;
     const nav = document.getElementById('navbar');
@@ -20,18 +18,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const contactForm = document.getElementById('contact-form');
     const formFeedback = document.getElementById('form-feedback');
 
-    // Modal Elements
     const modalOverlay = document.getElementById('modal-overlay');
     const modalCloseButton = document.getElementById('modal-close-button');
-    const modalDynamicContent = document.getElementById('modal-dynamic-content'); // The main modal container
-    const modalTitleElement = document.getElementById('modal-title'); // The h3 title element
-    const modalBodyContent = document.getElementById('modal-body-content'); // Where content is injected
-    const applicationFeedback = document.getElementById('application-feedback'); // Feedback specifically for app form
+    const modalDynamicContent = document.getElementById('modal-dynamic-content');
+    const modalTitleElement = document.getElementById('modal-title');
+    const modalBodyContent = document.getElementById('modal-body-content');
+    const applicationFeedback = document.getElementById('application-feedback');
 
     const allNavLinks = document.querySelectorAll('#nav-links-desktop .nav-link, #nav-links-mobile .nav-link');
     const sections = document.querySelectorAll('section[id]');
 
-    // Accessibility Elements
     const accessibilityWidget = document.getElementById('accessibility-widget');
     const accessibilityToggleBtn = document.getElementById('accessibility-toggle');
     const accessibilityPanel = document.getElementById('accessibility-panel');
@@ -41,54 +37,36 @@ document.addEventListener('DOMContentLoaded', () => {
     const toggleGrayscaleBtn = document.getElementById('toggle-grayscale');
     const resetAccessibilityBtn = document.getElementById('reset-accessibility');
 
-    // --- State Variables ---
     const scrollThreshold = 50;
-    const MODAL_TRANSITION_DURATION = 350; // Match CSS transition
+    const MODAL_TRANSITION_DURATION = 350;
     const DEFAULT_FONT_SIZE = 16;
     const FONT_SIZE_STEP = 1;
     const MAX_FONT_SIZE = 24;
     const MIN_FONT_SIZE = 12;
-    const ACTIVE_LINK_BUFFER = 70; // Pixels below the navbar to trigger activation
+    const ACTIVE_LINK_BUFFER = 70;
 
-    let modalTriggerElement = null; // Keep track of which button opened the modal
+    let modalTriggerElement = null;
     let currentActiveSectionId = null;
-    let feedbackTimeout = null; // Timer for clearing feedback messages
-
-    // --- Core Functions ---
+    let feedbackTimeout = null;
 
     function handleNavbarScroll() {
         if (!nav || !htmlEl) return;
 
         const isScrolled = window.scrollY > scrollThreshold;
         nav.classList.toggle('navbar-scrolled', isScrolled);
-        htmlEl.classList.toggle('navbar-scrolled', isScrolled); // Also add to html for global styling if needed
+        htmlEl.classList.toggle('navbar-scrolled', isScrolled);
 
         const isMobileMenuOpen = navLinksMobile && !navLinksMobile.classList.contains('hidden');
         nav.classList.toggle('mobile-menu-open', isMobileMenuOpen);
 
-        // Handle background styles - could be simplified using only CSS classes + variables potentially
         if (!htmlEl.classList.contains('high-contrast')) {
-            if (isMobileMenuOpen) {
-                nav.style.backgroundColor = getComputedStyle(htmlEl).getPropertyValue('--bg-color-secondary').trim();
-                nav.style.backdropFilter = 'none';
-                nav.style.webkitBackdropFilter = 'none';
-            } else if (isScrolled) {
-                // Semi-transparent dark background with blur when scrolled
-                nav.style.backgroundColor = 'rgba(31, 41, 55, 0.9)'; // Example: dark slate gray
-                nav.style.backdropFilter = 'blur(10px)';
-                nav.style.webkitBackdropFilter = 'blur(10px)'; // For Safari
-            } else {
-                // Transparent when at top
-                nav.style.backgroundColor = 'transparent';
-                nav.style.backdropFilter = 'none';
-                nav.style.webkitBackdropFilter = 'none';
-            }
-        } else {
-             // Reset inline styles if high contrast is active (rely on CSS class styles)
             nav.style.backgroundColor = '';
             nav.style.backdropFilter = '';
             nav.style.webkitBackdropFilter = '';
-            // Apply secondary background in high contrast if scrolled or menu open
+        } else {
+            nav.style.backgroundColor = '';
+            nav.style.backdropFilter = '';
+            nav.style.webkitBackdropFilter = '';
              if(isMobileMenuOpen || isScrolled) {
                  nav.style.backgroundColor = getComputedStyle(htmlEl).getPropertyValue('--bg-color-secondary').trim();
              }
@@ -112,18 +90,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 const targetIdRaw = this.getAttribute('href');
 
                 if (targetIdRaw && targetIdRaw.length > 1 && targetIdRaw.startsWith('#')) {
-                    const targetId = targetIdRaw; // e.g., "#about"
+                    const targetId = targetIdRaw;
                     try {
                         const targetElement = document.querySelector(targetId);
                         if (targetElement) {
                             e.preventDefault();
 
                             let offset = 0;
-                            // Calculate offset based on navbar height and potential margin
                             const navHeight = nav.offsetHeight;
-                            // Use CSS variable for margin if navbar position changes on scroll
                             const navMarginTop = nav.classList.contains('navbar-scrolled') ? parseFloat(getComputedStyle(htmlEl).getPropertyValue('--navbar-margin-top-scrolled')) : 0;
-                            const basePadding = 16; // Add a little extra padding
+                            const basePadding = 16;
                             offset = navHeight + navMarginTop + basePadding;
 
                             const elementPosition = targetElement.getBoundingClientRect().top;
@@ -134,34 +110,27 @@ document.addEventListener('DOMContentLoaded', () => {
                                 behavior: 'smooth'
                             });
 
-                            // Close mobile menu if a link inside it was clicked
                             if (navLinksMobile && !navLinksMobile.classList.contains('hidden') && this.closest('#nav-links-mobile')) {
-                                toggleMobileMenu(false); // Pass false to force close
+                                toggleMobileMenu(false);
                             }
-                            // Immediately update active link visually
-                            updateActiveNavLink(targetId.substring(1)); // Pass ID without '#'
+                            updateActiveNavLink(targetId.substring(1));
 
                         }
                     } catch (error) {
                         console.error("Smooth scroll target error:", error);
-                        // Prevent default even if target isn't found to avoid jarring jump
                         e.preventDefault();
                     }
                 } else if (targetIdRaw === '#') {
-                    // Link is just "#", scroll to top
                     e.preventDefault();
                     window.scrollTo({ top: 0, behavior: 'smooth' });
-                     // Close mobile menu if needed
                     if (navLinksMobile && !navLinksMobile.classList.contains('hidden') && this.closest('#nav-links-mobile')) {
                         toggleMobileMenu(false);
                     }
-                    updateActiveNavLink('home'); // Assuming 'home' is the ID for the top section/body
+                    updateActiveNavLink('home');
                 }
-                // Let default behavior handle external links or non-hash links
             });
         });
     }
-
 
     function toggleMobileMenu(forceOpen = null) {
         if (!mobileMenuButton || !navLinksMobile || !menuIconOpen || !menuIconClose || !nav) return;
@@ -172,19 +141,14 @@ document.addEventListener('DOMContentLoaded', () => {
         mobileMenuButton.setAttribute('aria-expanded', String(openMenu));
         menuIconOpen.classList.toggle('hidden', openMenu);
         menuIconClose.classList.toggle('hidden', !openMenu);
-        nav.classList.toggle('mobile-menu-open', openMenu); // Add class to nav for styling
+        nav.classList.toggle('mobile-menu-open', openMenu);
 
         if (openMenu) {
             navLinksMobile.classList.remove('hidden');
-            // Optional: Trigger layout/reflow if needed for transitions inside menu
-             // navLinksMobile.offsetHeight;
-             // Force AOS refresh for elements inside mobile menu if needed
              setTimeout(() => AOS.refreshHard(), 50);
         } else {
-            // Optionally delay hiding for transition out effect defined in CSS
-            setTimeout(() => navLinksMobile.classList.add('hidden'), 150); // Adjust timing to match CSS transition
+            setTimeout(() => navLinksMobile.classList.add('hidden'), 150);
         }
-        // Update navbar style immediately after toggling state
         setTimeout(handleNavbarScroll, 0);
     }
 
@@ -192,92 +156,77 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!scrollToTopButton) return;
         scrollToTopButton.addEventListener('click', () => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
-            updateActiveNavLink('home'); // Set 'home' active when scrolling to top
+            updateActiveNavLink('home');
         });
     }
-
-    // --- Dynamic Modal Logic ---
 
     function openModal(targetContentElement, triggerElement) {
         if (!modalOverlay || !modalBodyContent || !modalTitleElement || !targetContentElement) return;
 
-        modalTriggerElement = triggerElement; // Store the button that opened the modal
+        modalTriggerElement = triggerElement;
 
-        // 1. Clear previous content & feedback
         modalBodyContent.innerHTML = '';
-        clearFeedback(applicationFeedback); // Clear feedback from previous modal uses
+        clearFeedback(applicationFeedback);
 
-        // 2. Clone and append new content
-        const contentClone = targetContentElement.cloneNode(true); // True for deep clone
+        const contentClone = targetContentElement.cloneNode(true);
 
-        // 3. Set Modal Title (Try finding a title within the cloned content)
-        let title = "Information"; // Default title
+        let title = "Information";
         const titleInContent = contentClone.querySelector('h3.dynamic-modal-title');
         if (titleInContent) {
             title = titleInContent.textContent;
-            titleInContent.remove(); // Remove title from content body if found
+            titleInContent.remove();
         } else if (targetContentElement.id === 'modal-content-application') {
-             title = "Application Form - FA 2050 Intake"; // Specific title for application form
+             title = "Application Form - FA 2050 Intake";
         }
         modalTitleElement.textContent = title;
 
-        // 4. Append the rest of the content
-        // Append child nodes one by one to handle script tags correctly if they existed (though unlikely here)
         while (contentClone.firstChild) {
             modalBodyContent.appendChild(contentClone.firstChild);
         }
 
-        // 5. Handle Application Form Specific Setup
          if (targetContentElement.id === 'modal-content-application') {
             const newAppForm = modalBodyContent.querySelector('#application-form');
             if (newAppForm) {
-                setupApplicationFormValidation(newAppForm); // Re-attach validation listener to the new form instance
+                setupApplicationFormValidation(newAppForm);
             }
          }
 
-        // 6. Show the modal
         modalOverlay.classList.remove('hidden');
-        bodyEl.classList.add('modal-open'); // Prevent body scrolling
-        void modalOverlay.offsetWidth; // Force reflow for transition
+        bodyEl.classList.add('modal-open');
+        void modalOverlay.offsetWidth;
         modalOverlay.classList.add('modal-active');
 
-        // 7. Focus management: Move focus inside the modal
         setTimeout(() => {
-            // Find first focusable element: input, select, textarea, button, or element with tabindex >= 0
              const firstFocusable = modalDynamicContent.querySelector(
                 'input:not([type="hidden"]):not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), [tabindex]:not([tabindex="-1"])'
             );
-            // Prefer focusing the close button first if no form elements, otherwise the first element, fallback to container
             (firstFocusable || modalCloseButton || modalDynamicContent)?.focus();
-        }, 100); // Delay slightly for transition
+        }, 100);
     }
 
     function closeModal() {
         if (!modalOverlay) return;
 
         modalOverlay.classList.remove('modal-active');
-        bodyEl.classList.remove('modal-open'); // Re-enable body scrolling
+        bodyEl.classList.remove('modal-open');
 
-        // Wait for CSS transition to complete before hiding and clearing
         setTimeout(() => {
             modalOverlay.classList.add('hidden');
-            modalBodyContent.innerHTML = ''; // Clear content on close
-            clearFeedback(applicationFeedback); // Clear any lingering feedback
+            modalBodyContent.innerHTML = '';
+            clearFeedback(applicationFeedback);
 
-            // Return focus to the element that opened the modal
             if (modalTriggerElement) {
                 modalTriggerElement.focus();
-                modalTriggerElement = null; // Clear reference
+                modalTriggerElement = null;
             }
         }, MODAL_TRANSITION_DURATION);
     }
 
-    // Event listener for all modal triggers using event delegation
     bodyEl.addEventListener('click', (e) => {
         const trigger = e.target.closest('[data-modal-target]');
         if (trigger) {
             e.preventDefault();
-            const targetId = trigger.getAttribute('data-modal-target'); // e.g., "#modal-content-about"
+            const targetId = trigger.getAttribute('data-modal-target');
             const targetContentElement = document.querySelector(targetId);
             if (targetContentElement) {
                 openModal(targetContentElement, trigger);
@@ -287,10 +236,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Attach listeners for static modal elements (close button, overlay click)
     if (modalCloseButton) modalCloseButton.addEventListener('click', closeModal);
     modalOverlay.addEventListener('click', (e) => {
-        // Close only if the click is directly on the overlay, not its children
         if (e.target === modalOverlay) closeModal();
     });
     window.addEventListener('keydown', (e) => {
@@ -299,17 +246,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- Form Handling ---
-
     function showFeedback(element, message, isError = false, duration = 5000) {
         if (!element) return;
-        clearTimeout(feedbackTimeout); // Clear existing timer if any
+        clearTimeout(feedbackTimeout);
 
         element.textContent = message;
-        element.style.color = isError ? 'var(--text-red-400)' : 'var(--primary-accent)'; // Use CSS variables for colors
-        element.classList.add('visible'); // Use class to control visibility (e.g., opacity transition)
+        element.style.color = isError ? 'var(--text-red-400)' : 'var(--primary-accent)';
+        element.classList.add('visible');
 
-        // Set a timer to hide the feedback message
         feedbackTimeout = setTimeout(() => clearFeedback(element), duration);
     }
 
@@ -317,48 +261,37 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!element) return;
         clearTimeout(feedbackTimeout);
         element.classList.remove('visible');
-        // Optionally clear text after transition
-        setTimeout(() => { element.textContent = ''; }, 300); // Match CSS transition duration
+        setTimeout(() => { element.textContent = ''; }, 300);
     }
 
     function setupContactFormValidation() {
         if (!contactForm || !formFeedback) return;
 
         contactForm.addEventListener('submit', (e) => {
-            e.preventDefault(); // Prevent default form submission
-            clearFeedback(formFeedback); // Clear previous feedback
-             // Remove previous error borders
+            e.preventDefault();
+            clearFeedback(formFeedback);
             contactForm.querySelectorAll('.border-red-400').forEach(field => field.classList.remove('border-red-400'));
 
-            // Use HTML5 built-in validation
             if (contactForm.checkValidity()) {
-                // Form is valid (Simulate success)
                 showFeedback(formFeedback, 'Message sent successfully. (Demo)');
-                contactForm.reset(); // Clear the form fields
+                contactForm.reset();
             } else {
-                // Form is invalid
-                showFeedback(formFeedback, 'Please fill out all required fields correctly.', true, 6000); // Show error message
-                // Find the first invalid field and focus it for accessibility
+                showFeedback(formFeedback, 'Please fill out all required fields correctly.', true, 6000);
                  contactForm.querySelector(':invalid')?.focus();
-                 // Add error styles to invalid fields
-                 contactForm.querySelectorAll(':invalid').forEach(field => field.classList.add('border-red-400')); // Example error class
+                 contactForm.querySelectorAll(':invalid').forEach(field => field.classList.add('border-red-400'));
             }
         });
     }
 
-    // Setup validation for the application form (needs to be called when form is added to modal)
     function setupApplicationFormValidation(formElement) {
          if (!formElement || !applicationFeedback) return;
-         // Remove previous listener if any to prevent duplicates (important when modal reopens)
         formElement.removeEventListener('submit', handleApplicationSubmit);
-         // Add the listener
          formElement.addEventListener('submit', handleApplicationSubmit);
     }
 
-    // Handler function for application form submission (used as event listener)
     function handleApplicationSubmit(e) {
         e.preventDefault();
-        const form = e.target; // Get the form that triggered the event
+        const form = e.target;
         clearFeedback(applicationFeedback);
         form.querySelectorAll('.border-red-400').forEach(field => field.classList.remove('border-red-400'));
 
@@ -367,68 +300,49 @@ document.addEventListener('DOMContentLoaded', () => {
             showFeedback(applicationFeedback, 'Please complete all required (*) fields.', true, 6000);
             if (firstInvalidField) {
                 firstInvalidField.focus();
-                // Scroll the invalid field into view within the modal if needed
                  firstInvalidField.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                 firstInvalidField.classList.add('border-red-400'); // Highlight the first invalid field
+                 firstInvalidField.classList.add('border-red-400');
              }
-             // Highlight all invalid fields
              form.querySelectorAll(':invalid').forEach(field => field.classList.add('border-red-400'));
-            return; // Stop submission
+            return;
         }
 
-        // ---- If valid ----
-        // In a real app, you would send data via fetch/axios here
-        // fetch('/api/apply', { method: 'POST', body: new FormData(form) })
-        //  .then(response => response.json())
-        //  .then(data => { ... handle success ... })
-        //  .catch(error => { ... handle error ... });
-
-        // Simulate success for demo
         showFeedback(applicationFeedback, 'Application Submitted Successfully! (Demo Only)', false, 3000);
-         // Close modal after a short delay on success
         setTimeout(() => closeModal(), 2500);
-         // form.reset(); // Optionally reset form fields inside modal, or let closeModal clear it
     }
-
-    // --- Active Nav Link Logic ---
 
     function updateActiveNavLink(targetId = null) {
         if (!sections.length || !allNavLinks.length) return;
 
         const scrollY = window.scrollY;
         const viewportHeight = window.innerHeight;
-        let newActiveId = targetId; // Use passed targetId if available (from click)
+        let newActiveId = targetId;
 
-        if (!newActiveId) { // Determine active section based on scroll position
+        if (!newActiveId) {
             let bestMatch = { id: null, position: -Infinity };
 
-            // Calculate the point where a section should become active
             const navHeight = nav.offsetHeight;
             const navMarginTop = nav.classList.contains('navbar-scrolled') ? parseFloat(getComputedStyle(htmlEl).getPropertyValue('--navbar-margin-top-scrolled')) : 0;
-            const activationPoint = navHeight + navMarginTop + ACTIVE_LINK_BUFFER; // Point below the fixed nav
+            const activationPoint = navHeight + navMarginTop + ACTIVE_LINK_BUFFER;
 
             sections.forEach(section => {
                 const rect = section.getBoundingClientRect();
                 const sectionTopAbsolute = rect.top + scrollY;
                 const sectionBottomAbsolute = sectionTopAbsolute + rect.height;
 
-                // Check if the activation point is within this section's bounds
                 if (sectionTopAbsolute <= scrollY + activationPoint && sectionBottomAbsolute > scrollY + activationPoint) {
-                    // If multiple sections match, choose the one starting highest on the page
                     if (sectionTopAbsolute > bestMatch.position) {
                         bestMatch = { id: section.id, position: sectionTopAbsolute };
                     }
                 }
             });
 
-             // Edge case: If very close to the top, activate 'home'
-            if (scrollY < sections[0].offsetTop / 2) { // Or some threshold
-                bestMatch.id = 'home'; // Assuming 'home' is the ID for the top/hero section
+            if (scrollY < sections[0].offsetTop / 2) {
+                bestMatch.id = 'home';
             }
 
-             // Edge case: If scrolled to the very bottom of the page
-            if (scrollY + viewportHeight >= bodyEl.scrollHeight - 20) { // Use a small buffer
-                 bestMatch.id = sections[sections.length - 1].id; // Activate the last section
+            if (scrollY + viewportHeight >= bodyEl.scrollHeight - 20) {
+                 bestMatch.id = sections[sections.length - 1].id;
             }
 
             newActiveId = bestMatch.id;
@@ -444,13 +358,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         } else if (!newActiveId && currentActiveSectionId) {
-            // Scrolled into an area with no matching section ID (e.g., footer)
             currentActiveSectionId = null;
             allNavLinks.forEach(link => link.classList.remove('active'));
         }
     }
-
-    // --- Accessibility Functions ---
 
     function toggleAccessibilityPanel(forceClose = false) {
         if (!accessibilityWidget || !accessibilityToggleBtn || !accessibilityPanel) return;
@@ -459,13 +370,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const newState = forceClose ? false : !isExpanded;
 
         accessibilityToggleBtn.setAttribute('aria-expanded', String(newState));
-        accessibilityPanel.classList.toggle('visible', newState); // Use class for visibility/transitions
+        accessibilityPanel.classList.toggle('visible', newState);
 
         if (newState) {
-            // Focus the first button inside the panel when opened
             setTimeout(() => accessibilityPanel.querySelector('button:not([disabled])')?.focus(), 100);
         } else {
-            // If focus was inside the panel, return focus to the toggle button
             if (document.activeElement && accessibilityPanel.contains(document.activeElement)) {
                 accessibilityToggleBtn.focus();
             }
@@ -473,16 +382,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function applyFontSize(size) {
-        // Clamp font size within defined limits
         const clampedSize = Math.max(MIN_FONT_SIZE, Math.min(MAX_FONT_SIZE, size));
         htmlEl.style.fontSize = `${clampedSize}px`;
         localStorage.setItem('accessibilityFontSize', clampedSize);
-        // Recalculate layout-dependent things after font size change
         setTimeout(() => {
-             handleNavbarScroll(); // Navbar height might change
-             updateActiveNavLink(); // Section positions relative to viewport might change
-             AOS.refresh(); // Refresh animations based on new element positions
-        }, 150); // Delay slightly for rendering
+             handleNavbarScroll();
+             updateActiveNavLink();
+             AOS.refresh();
+        }, 150);
     }
 
     function increaseFontSize() {
@@ -496,10 +403,9 @@ document.addEventListener('DOMContentLoaded', () => {
     function toggleHighContrast() {
         const isContrast = htmlEl.classList.toggle('high-contrast');
         localStorage.setItem('accessibilityHighContrast', isContrast);
-        // Update navbar style immediately as it depends on this class
         setTimeout(() => {
              handleNavbarScroll();
-             updateActiveNavLink(); // Recalculate in case colors affect layout/perception
+             updateActiveNavLink();
         }, 50);
     }
 
@@ -509,23 +415,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function resetAccessibility() {
-        applyFontSize(DEFAULT_FONT_SIZE); // Reset font size first
+        applyFontSize(DEFAULT_FONT_SIZE);
         htmlEl.classList.remove('high-contrast');
         localStorage.removeItem('accessibilityHighContrast');
         htmlEl.classList.remove('grayscale');
         localStorage.removeItem('accessibilityGrayscale');
-        // Update dependent styles
         setTimeout(() => {
              handleNavbarScroll();
              updateActiveNavLink();
         }, 50);
-        toggleAccessibilityPanel(true); // Close the panel after resetting
+        toggleAccessibilityPanel(true);
     }
 
     function loadAccessibilityPreferences() {
         const savedFontSize = localStorage.getItem('accessibilityFontSize');
         if (savedFontSize) {
-             // Apply saved font size on load, clamped to limits
             const initialSize = Math.max(MIN_FONT_SIZE, Math.min(MAX_FONT_SIZE, parseInt(savedFontSize)));
             if (initialSize !== DEFAULT_FONT_SIZE) htmlEl.style.fontSize = `${initialSize}px`;
         }
@@ -537,19 +441,16 @@ document.addEventListener('DOMContentLoaded', () => {
             htmlEl.classList.add('grayscale');
         }
 
-        // Ensure panel is closed on load
         if(accessibilityPanel) accessibilityPanel.classList.remove('visible');
         if(accessibilityToggleBtn) accessibilityToggleBtn.setAttribute('aria-expanded', 'false');
     }
 
-    // --- Initialization ---
-    loadAccessibilityPreferences(); // Load preferences before initial calculations
-    handleScroll(); // Run initial checks for navbar style, scroll-top visibility, and active link
+    loadAccessibilityPreferences();
+    handleScroll();
     setupSmoothScrolling();
     setupScrollToTop();
-    setupContactFormValidation(); // Setup main contact form validation
+    setupContactFormValidation();
 
-    // --- Accessibility Event Listeners ---
     if (accessibilityToggleBtn) accessibilityToggleBtn.addEventListener('click', () => toggleAccessibilityPanel());
     if (increaseFontBtn) increaseFontBtn.addEventListener('click', increaseFontSize);
     if (decreaseFontBtn) decreaseFontBtn.addEventListener('click', decreaseFontSize);
@@ -557,33 +458,28 @@ document.addEventListener('DOMContentLoaded', () => {
     if (toggleGrayscaleBtn) toggleGrayscaleBtn.addEventListener('click', toggleGrayscale);
     if (resetAccessibilityBtn) resetAccessibilityBtn.addEventListener('click', resetAccessibility);
 
-    // Close accessibility panel on click outside
     document.addEventListener('click', (e) => {
         if (accessibilityPanel?.classList.contains('visible') &&
-            !accessibilityPanel.contains(e.target) && // Click is not inside the panel
-            !accessibilityToggleBtn?.contains(e.target)) // Click is not the toggle button itself
+            !accessibilityPanel.contains(e.target) &&
+            !accessibilityToggleBtn?.contains(e.target))
         {
-            toggleAccessibilityPanel(true); // Force close
+            toggleAccessibilityPanel(true);
         }
     });
 
-    // Close accessibility panel on Escape key
     window.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && accessibilityPanel?.classList.contains('visible')) {
-            toggleAccessibilityPanel(true); // Force close
+            toggleAccessibilityPanel(true);
         }
     });
 
-    // Mobile Menu Toggle
     if (mobileMenuButton) {
         mobileMenuButton.addEventListener('click', () => toggleMobileMenu());
     }
 
-    // Scroll/Resize Listeners
     window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('resize', handleScroll, { passive: true }); // Recalculate on resize
+    window.addEventListener('resize', handleScroll, { passive: true });
 
-    // Initial active link check after potential layout shifts from loading/AOS
     setTimeout(() => updateActiveNavLink(), 150);
 
-}); // End DOMContentLoaded
+});
