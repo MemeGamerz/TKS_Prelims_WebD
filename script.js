@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
         offset: 50,
         delay: 100,
         easing: 'ease-out-cubic',
+        disable: 'mobile', // Optionally disable AOS on mobile if it causes issues
     });
 
     const htmlEl = document.documentElement;
@@ -21,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalOverlay = document.getElementById('modal-overlay');
     const modalCloseButton = document.getElementById('modal-close-button');
     const modalDynamicContent = document.getElementById('modal-dynamic-content');
-    const modalTitleElement = document.getElementById('modal-title');
+    const modalTitleElement = document.getElementById('modal-title-content');
     const modalBodyContent = document.getElementById('modal-body-content');
     const applicationFeedback = document.getElementById('application-feedback');
 
@@ -145,12 +146,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (openMenu) {
             navLinksMobile.classList.remove('hidden');
-             setTimeout(() => AOS.refreshHard(), 50);
+            // No need to refresh AOS if disabled on mobile
+            // setTimeout(() => AOS.refreshHard(), 50);
         } else {
-            setTimeout(() => navLinksMobile.classList.add('hidden'), 150);
+            // Add a delay before hiding to allow potential transitions
+             setTimeout(() => {
+                 // Check again if it should be hidden, in case state changed rapidly
+                 if (mobileMenuButton.getAttribute('aria-expanded') === 'false') {
+                     navLinksMobile.classList.add('hidden');
+                 }
+             }, 300); // Match AOS duration or slightly longer
         }
         setTimeout(handleNavbarScroll, 0);
     }
+
 
     function setupScrollToTop() {
         if (!scrollToTopButton) return;
@@ -179,6 +188,8 @@ document.addEventListener('DOMContentLoaded', () => {
              title = "Application Form - FA 2050 Intake";
         }
         modalTitleElement.textContent = title;
+        modalTitleElement.setAttribute('id', 'modal-title-content'); // Ensure ID is set for aria-labelledby
+        modalDynamicContent.setAttribute('aria-labelledby', 'modal-title-content');
 
         while (contentClone.firstChild) {
             modalBodyContent.appendChild(contentClone.firstChild);
@@ -193,7 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         modalOverlay.classList.remove('hidden');
         bodyEl.classList.add('modal-open');
-        void modalOverlay.offsetWidth;
+        void modalOverlay.offsetWidth; // Trigger reflow to ensure transition plays
         modalOverlay.classList.add('modal-active');
 
         setTimeout(() => {
@@ -201,23 +212,27 @@ document.addEventListener('DOMContentLoaded', () => {
                 'input:not([type="hidden"]):not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), [tabindex]:not([tabindex="-1"])'
             );
             (firstFocusable || modalCloseButton || modalDynamicContent)?.focus();
-        }, 100);
+        }, 100); // Short delay for focus management
     }
 
     function closeModal() {
-        if (!modalOverlay) return;
+        if (!modalOverlay || !modalOverlay.classList.contains('modal-active')) return; // Prevent closing if not active
 
         modalOverlay.classList.remove('modal-active');
         bodyEl.classList.remove('modal-open');
 
         setTimeout(() => {
             modalOverlay.classList.add('hidden');
-            modalBodyContent.innerHTML = '';
+            modalBodyContent.innerHTML = ''; // Clear content after transition
             clearFeedback(applicationFeedback);
 
-            if (modalTriggerElement) {
-                modalTriggerElement.focus();
-                modalTriggerElement = null;
+            if (modalTriggerElement && typeof modalTriggerElement.focus === 'function') {
+                 try {
+                    modalTriggerElement.focus();
+                 } catch (e) {
+                     console.warn("Could not focus modal trigger element:", e);
+                 }
+                 modalTriggerElement = null;
             }
         }, MODAL_TRANSITION_DURATION);
     }
@@ -238,7 +253,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (modalCloseButton) modalCloseButton.addEventListener('click', closeModal);
     modalOverlay.addEventListener('click', (e) => {
-        if (e.target === modalOverlay) closeModal();
+        if (e.target === modalOverlay) closeModal(); // Close only if clicking the overlay itself
     });
     window.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && modalOverlay.classList.contains('modal-active')) {
@@ -251,17 +266,24 @@ document.addEventListener('DOMContentLoaded', () => {
         clearTimeout(feedbackTimeout);
 
         element.textContent = message;
-        element.style.color = isError ? 'var(--text-red-400)' : 'var(--primary-accent)';
+        element.style.color = isError ? '#f87171' : 'var(--primary-accent)'; // Use direct color for error
         element.classList.add('visible');
 
-        feedbackTimeout = setTimeout(() => clearFeedback(element), duration);
+        if (duration > 0) {
+            feedbackTimeout = setTimeout(() => clearFeedback(element), duration);
+        }
     }
 
     function clearFeedback(element) {
         if (!element) return;
         clearTimeout(feedbackTimeout);
         element.classList.remove('visible');
-        setTimeout(() => { element.textContent = ''; }, 300);
+        // Delay clearing text content until after fade out
+        setTimeout(() => {
+             if (!element.classList.contains('visible')) { // Check if still hidden
+                 element.textContent = '';
+             }
+        }, 300);
     }
 
     function setupContactFormValidation() {
@@ -270,22 +292,29 @@ document.addEventListener('DOMContentLoaded', () => {
         contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
             clearFeedback(formFeedback);
-            contactForm.querySelectorAll('.border-red-400').forEach(field => field.classList.remove('border-red-400'));
+            // Reset styles on previously invalid fields
+            contactForm.querySelectorAll('.form-input[style*="border-color"]').forEach(field => field.style.borderColor = '');
 
             if (contactForm.checkValidity()) {
                 showFeedback(formFeedback, 'Message sent successfully. (Demo)');
                 contactForm.reset();
             } else {
                 showFeedback(formFeedback, 'Please fill out all required fields correctly.', true, 6000);
-                 contactForm.querySelector(':invalid')?.focus();
-                 contactForm.querySelectorAll(':invalid').forEach(field => field.classList.add('border-red-400'));
+                 const firstInvalid = contactForm.querySelector(':invalid');
+                 if (firstInvalid) {
+                     firstInvalid.focus();
+                     firstInvalid.style.borderColor = '#f87171'; // Apply error style directly
+                 }
+                 // Optionally highlight all invalid fields
+                 // contactForm.querySelectorAll(':invalid').forEach(field => field.style.borderColor = '#f87171');
             }
         });
     }
 
     function setupApplicationFormValidation(formElement) {
          if (!formElement || !applicationFeedback) return;
-        formElement.removeEventListener('submit', handleApplicationSubmit);
+         // Ensure previous listeners are removed if modal content is reused (though cloneNode should prevent this)
+         formElement.removeEventListener('submit', handleApplicationSubmit);
          formElement.addEventListener('submit', handleApplicationSubmit);
     }
 
@@ -293,21 +322,23 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         const form = e.target;
         clearFeedback(applicationFeedback);
-        form.querySelectorAll('.border-red-400').forEach(field => field.classList.remove('border-red-400'));
+        form.querySelectorAll('.form-input[style*="border-color"]').forEach(field => field.style.borderColor = '');
 
         if (!form.checkValidity()) {
              const firstInvalidField = form.querySelector(':invalid');
             showFeedback(applicationFeedback, 'Please complete all required (*) fields.', true, 6000);
             if (firstInvalidField) {
                 firstInvalidField.focus();
-                 firstInvalidField.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                 firstInvalidField.classList.add('border-red-400');
+                 // Scroll into view might be jarring in a modal, consider just focusing
+                 // firstInvalidField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                 firstInvalidField.style.borderColor = '#f87171';
              }
-             form.querySelectorAll(':invalid').forEach(field => field.classList.add('border-red-400'));
+             // Optionally highlight all invalid fields
+             // form.querySelectorAll(':invalid').forEach(field => field.style.borderColor = '#f87171');
             return;
         }
 
-        showFeedback(applicationFeedback, 'Application Submitted Successfully! (Demo Only)', false, 3000);
+        showFeedback(applicationFeedback, 'Application Submitted Successfully! (Demo Only)', false, 0); // Keep success message until close
         setTimeout(() => closeModal(), 2500);
     }
 
@@ -322,6 +353,7 @@ document.addEventListener('DOMContentLoaded', () => {
             let bestMatch = { id: null, position: -Infinity };
 
             const navHeight = nav.offsetHeight;
+            // Use CSS variable directly
             const navMarginTop = nav.classList.contains('navbar-scrolled') ? parseFloat(getComputedStyle(htmlEl).getPropertyValue('--navbar-margin-top-scrolled')) : 0;
             const activationPoint = navHeight + navMarginTop + ACTIVE_LINK_BUFFER;
 
@@ -330,17 +362,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 const sectionTopAbsolute = rect.top + scrollY;
                 const sectionBottomAbsolute = sectionTopAbsolute + rect.height;
 
+                // Check if the top of the section is within the activation zone
                 if (sectionTopAbsolute <= scrollY + activationPoint && sectionBottomAbsolute > scrollY + activationPoint) {
+                    // If multiple sections are in view, prioritize the one closest to the top
                     if (sectionTopAbsolute > bestMatch.position) {
                         bestMatch = { id: section.id, position: sectionTopAbsolute };
                     }
                 }
             });
 
+            // Handle edge case: Scrolled near top
             if (scrollY < sections[0].offsetTop / 2) {
                 bestMatch.id = 'home';
             }
 
+            // Handle edge case: Scrolled near bottom
             if (scrollY + viewportHeight >= bodyEl.scrollHeight - 20) {
                  bestMatch.id = sections[sections.length - 1].id;
             }
@@ -348,6 +384,7 @@ document.addEventListener('DOMContentLoaded', () => {
             newActiveId = bestMatch.id;
         }
 
+        // Update classes only if the active section changed
         if (newActiveId && newActiveId !== currentActiveSectionId) {
             currentActiveSectionId = newActiveId;
 
@@ -358,6 +395,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         } else if (!newActiveId && currentActiveSectionId) {
+            // No section is active (e.g., scrolled way past the last section)
             currentActiveSectionId = null;
             allNavLinks.forEach(link => link.classList.remove('active'));
         }
@@ -375,8 +413,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (newState) {
             setTimeout(() => accessibilityPanel.querySelector('button:not([disabled])')?.focus(), 100);
         } else {
+            // Return focus only if the focus was inside the panel
             if (document.activeElement && accessibilityPanel.contains(document.activeElement)) {
-                accessibilityToggleBtn.focus();
+                 try {
+                    accessibilityToggleBtn.focus();
+                 } catch (e) {
+                     console.warn("Could not focus accessibility toggle button:", e);
+                 }
             }
         }
     }
@@ -385,10 +428,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const clampedSize = Math.max(MIN_FONT_SIZE, Math.min(MAX_FONT_SIZE, size));
         htmlEl.style.fontSize = `${clampedSize}px`;
         localStorage.setItem('accessibilityFontSize', clampedSize);
+        // Recalculate layout dependent things after font size change
         setTimeout(() => {
              handleNavbarScroll();
              updateActiveNavLink();
-             AOS.refresh();
+             // No need to refresh AOS if disabled on mobile
+             // AOS.refresh();
         }, 150);
     }
 
@@ -403,6 +448,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function toggleHighContrast() {
         const isContrast = htmlEl.classList.toggle('high-contrast');
         localStorage.setItem('accessibilityHighContrast', isContrast);
+        // Recalculate navbar style after contrast change
         setTimeout(() => {
              handleNavbarScroll();
              updateActiveNavLink();
@@ -424,14 +470,21 @@ document.addEventListener('DOMContentLoaded', () => {
              handleNavbarScroll();
              updateActiveNavLink();
         }, 50);
-        toggleAccessibilityPanel(true);
+        toggleAccessibilityPanel(true); // Close the panel after reset
     }
 
     function loadAccessibilityPreferences() {
         const savedFontSize = localStorage.getItem('accessibilityFontSize');
         if (savedFontSize) {
             const initialSize = Math.max(MIN_FONT_SIZE, Math.min(MAX_FONT_SIZE, parseInt(savedFontSize)));
-            if (initialSize !== DEFAULT_FONT_SIZE) htmlEl.style.fontSize = `${initialSize}px`;
+            if (initialSize !== DEFAULT_FONT_SIZE) {
+                // Apply initial font size without transition jarring
+                htmlEl.style.transition = 'none';
+                htmlEl.style.fontSize = `${initialSize}px`;
+                // Force reflow
+                void htmlEl.offsetWidth;
+                htmlEl.style.transition = ''; // Re-enable transitions
+            }
         }
 
         if (localStorage.getItem('accessibilityHighContrast') === 'true') {
@@ -441,16 +494,19 @@ document.addEventListener('DOMContentLoaded', () => {
             htmlEl.classList.add('grayscale');
         }
 
+        // Ensure panel starts closed
         if(accessibilityPanel) accessibilityPanel.classList.remove('visible');
         if(accessibilityToggleBtn) accessibilityToggleBtn.setAttribute('aria-expanded', 'false');
     }
 
+    // --- Initialize ---
     loadAccessibilityPreferences();
-    handleScroll();
+    handleScroll(); // Initial check for navbar state and active link
     setupSmoothScrolling();
     setupScrollToTop();
     setupContactFormValidation();
 
+    // --- Event Listeners ---
     if (accessibilityToggleBtn) accessibilityToggleBtn.addEventListener('click', () => toggleAccessibilityPanel());
     if (increaseFontBtn) increaseFontBtn.addEventListener('click', increaseFontSize);
     if (decreaseFontBtn) decreaseFontBtn.addEventListener('click', decreaseFontSize);
@@ -458,6 +514,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (toggleGrayscaleBtn) toggleGrayscaleBtn.addEventListener('click', toggleGrayscale);
     if (resetAccessibilityBtn) resetAccessibilityBtn.addEventListener('click', resetAccessibility);
 
+    // Click outside accessibility panel closes it
     document.addEventListener('click', (e) => {
         if (accessibilityPanel?.classList.contains('visible') &&
             !accessibilityPanel.contains(e.target) &&
@@ -467,19 +524,23 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Escape key closes accessibility panel
     window.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && accessibilityPanel?.classList.contains('visible')) {
             toggleAccessibilityPanel(true);
         }
     });
 
+    // Mobile menu toggle button
     if (mobileMenuButton) {
         mobileMenuButton.addEventListener('click', () => toggleMobileMenu());
     }
 
+    // Scroll and resize listeners
     window.addEventListener('scroll', handleScroll, { passive: true });
     window.addEventListener('resize', handleScroll, { passive: true });
 
+    // Initial active link update after potential layout shifts
     setTimeout(() => updateActiveNavLink(), 150);
 
 });

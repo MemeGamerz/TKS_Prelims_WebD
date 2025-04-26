@@ -19,13 +19,13 @@
 </head>
 
 <body class="bg-gray-900 text-gray-100">
-
+    <div id="animated-bg"></div>
     <nav id="navbar" role="navigation" aria-label="Main Navigation">
         <div class="container mx-auto flex justify-between items-center h-full px-4">
             <a href="#home"
                 class="text-xl md:text-2xl font-orbitron font-bold gradient-text transition-transform duration-300 ease-in-out hover:scale-105">Maplewood
                 Academy <sub>7G</sub></a>
-            <div id="nav-links-desktop" class="hidden md:flex md:items-center md:space-x-6">
+            <div id="nav-links-desktop" class="hidden 2xl:flex 2xl:items-center 2xl:space-x-6">
                 <a href="#home" class="nav-link">Home</a>
                 <a href="#about" class="nav-link">About Us</a>
                 <a href="#curriculum" class="nav-link">Curriculum</a>
@@ -36,7 +36,7 @@
                 <button class="btn btn-outline btn-sm ml-4" data-modal-target="#modal-content-application">Apply
                     Now</button>
             </div>
-            <div class="md:hidden flex items-center">
+            <div class="2xl:hidden flex items-center">
                 <button class="btn btn-outline btn-sm mr-2"
                     data-modal-target="#modal-content-application">Apply</button>
                 <button id="mobile-menu-button" aria-label="Toggle Menu" aria-expanded="false"
@@ -52,7 +52,7 @@
             </div>
         </div>
         <div id="nav-links-mobile"
-            class="hidden md:hidden bg-gray-800 absolute top-full left-0 w-full shadow-lg border-t border-gray-700">
+            class="hidden 2xl:hidden bg-gray-800 absolute top-full left-0 w-full shadow-lg border-t border-gray-700">
             <div class="flex flex-col items-center py-2" data-aos="fade-down" data-aos-duration="300">
                 <a href="#home" class="nav-link w-full text-center">Home</a>
                 <a href="#about" class="nav-link w-full text-center">About Us</a>
@@ -452,14 +452,15 @@
             <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" /></svg>
     </button>
 
-    <div id="modal-overlay" class="hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div id="modal-overlay" class="hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title-content">
         <div id="modal-dynamic-content" role="document">
             <button id="modal-close-button" aria-label="Close Modal">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
             </button>
-            <h3 id="modal-title" class="text-3xl font-orbitron font-bold text-center mb-8 gradient-text">Information
+            <h3 id="modal-title-content" class="text-3xl font-orbitron font-bold text-center mb-8 gradient-text">
+                Information
                 Node</h3>
             <div id="modal-body-content" class="space-y-6">
             </div>
