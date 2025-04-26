@@ -184,7 +184,6 @@ body {
     font-family: 'Exo 2', sans-serif;
     background-color: var(--bg-color-primary);
     color: var(--text-color-base);
-    overflow-x: hidden; 
     position: relative;
 }
 
