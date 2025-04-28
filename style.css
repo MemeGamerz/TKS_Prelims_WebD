@@ -30,7 +30,7 @@ html {
     background-color: var(--bg-color-primary);
     filter: none;
     transition: font-size 0.3s ease, filter 0.4s ease;
-    overflow-x: hidden; 
+    overflow-x: hidden;
 }
 
 
@@ -188,8 +188,13 @@ body {
 }
 
 @keyframes move-particles {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(-100vh); }
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(-100vh);
+    }
 }
 
 #animated-bg {
@@ -209,7 +214,7 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    height: 200vh; 
+    height: 200vh;
     background-image:
         radial-gradient(circle, rgba(129, 140, 248, 0.15) 1px, transparent 1px),
         radial-gradient(circle, rgba(199, 210, 254, 0.1) 1px, transparent 1px);
@@ -876,7 +881,7 @@ legend {
     background-color: var(--bg-color-secondary);
     border-radius: 0.75rem;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
-    padding: 2rem 2.5rem;
+    padding: 2.5rem 3rem;
     max-width: 56rem;
     width: 100%;
     max-height: 90vh;
@@ -1224,56 +1229,62 @@ html.high-contrast #reset-accessibility:hover {
 
 
 @media (max-width: 1024px) {
-  #nav-links-desktop {
-    display: none;
-  }
-  .md\:hidden {
-    display: flex;
-  }
-  #nav-links-mobile.hidden {
-    display: none;
-  }
-  #nav-links-mobile:not(.hidden) {
-  }
+    #nav-links-desktop {
+        display: none;
+    }
 
-  #navbar.navbar-scrolled {
-    max-width: calc(100% - 1rem);
-    margin-top: 0.5rem;
-  }
+    .md\:hidden {
+        display: flex;
+    }
 
-  section:not(#home) {
-    margin: 0 0.5rem 1.5rem 0.5rem;
-    padding: 4rem 1rem;
-    border-radius: 0.5rem;
-  }
+    #nav-links-mobile.hidden {
+        display: none;
+    }
 
-  #contact>div.max-w-4xl {
-    padding: 1.5rem;
-  }
+    #nav-links-mobile:not(.hidden) {}
 
-  h1 {
-    font-size: 3rem;
-  }
+    #navbar.navbar-scrolled {
+        max-width: calc(100% - 1rem);
+        margin-top: 0.5rem;
+    }
 
-  h2 {
-    font-size: 2.25rem;
-  }
+    section:not(#home) {
+        margin: 0 0.5rem 1.5rem 0.5rem;
+        padding: 4rem 1rem;
+        border-radius: 0.5rem;
+    }
 
-  #modal-overlay>#modal-dynamic-content {
-    padding: 1.5rem 1rem;
-  }
+    #contact>div.max-w-4xl {
+        padding: 1.5rem;
+    }
 
-  .timeline-container {
-    padding-left: 0.5rem;
-  }
+    h1 {
+        font-size: 3rem;
+    }
 
-  .timeline-item {
-    padding-left: 2rem;
-  }
+    h2 {
+        font-size: 2.25rem;
+    }
 
-  .timeline-marker {
-    left: calc(0.5rem - (0.75rem / 2) + 0.375rem);
-  }
+    #modal-overlay>#modal-dynamic-content {
+        padding: 2rem 1.5rem;
+    }
+
+    .timeline-container {
+        padding-left: 0.5rem;
+    }
+
+    .timeline-item {
+        padding-left: 2rem;
+    }
+
+    .timeline-marker {
+        left: calc(0.5rem - (0.75rem / 2) + 0.375rem);
+    }
+
+    .font-size-controls {
+        display: none;
+    }
 }
 
 
@@ -1294,13 +1305,13 @@ html.high-contrast #reset-accessibility:hover {
     }
 
     .btn {
-         padding: 0.65rem 1.2rem;
-         font-size: 0.95em;
+        padding: 0.65rem 1.2rem;
+        font-size: 0.95em;
     }
 
     .btn-sm {
-         padding: 0.4rem 0.8rem;
-         font-size: 0.8em;
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8em;
     }
 
     .text-xl {
@@ -1324,8 +1335,8 @@ html.high-contrast #reset-accessibility:hover {
     }
 
     #nav-links-mobile a.nav-link {
-         font-size: 1.1rem;
-         padding: 0.9rem 1rem;
+        font-size: 1.1rem;
+        padding: 0.9rem 1rem;
     }
 
     fieldset {
@@ -1337,13 +1348,17 @@ html.high-contrast #reset-accessibility:hover {
         margin-bottom: 1rem;
     }
 
-     #modal-overlay>#modal-dynamic-content {
-        padding: 1.5rem 0.75rem;
+    #modal-overlay>#modal-dynamic-content {
+        padding: 1.75rem 1rem;
     }
 
     #modal-title-content {
-         font-size: 1.75rem;
-         margin-bottom: 1.5rem;
+        font-size: 1.75rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .font-size-controls {
+        display: none;
     }
 
 }
@@ -1352,12 +1367,18 @@ html.high-contrast #reset-accessibility:hover {
     #nav-links-desktop {
         display: none;
     }
+
     .text-2xl {
         display: flex;
     }
+
     #nav-links-mobile.hidden {
-      display: none;
+        display: none;
     }
-    #nav-links-mobile:not(.hidden) {
+
+    #nav-links-mobile:not(.hidden) {}
+
+    .font-size-controls {
+        display: none;
     }
 }
