@@ -184,6 +184,7 @@ body {
     font-family: 'Exo 2', sans-serif;
     background-color: var(--bg-color-primary);
     color: var(--text-color-base);
+    overflow: hidden;
     position: relative;
 }
 
@@ -1267,7 +1268,7 @@ html.high-contrast #reset-accessibility:hover {
     }
 
     #modal-overlay>#modal-dynamic-content {
-        padding: 2rem 1.5rem;
+        padding: 1.5rem 1rem;
     }
 
     .timeline-container {
@@ -1349,7 +1350,7 @@ html.high-contrast #reset-accessibility:hover {
     }
 
     #modal-overlay>#modal-dynamic-content {
-        padding: 1.75rem 1rem;
+        padding: 1.5rem 0.75rem;
     }
 
     #modal-title-content {
